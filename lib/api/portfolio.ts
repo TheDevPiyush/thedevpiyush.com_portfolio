@@ -12,9 +12,8 @@ import type {
 
 const API_BASE = "/api"
 
-// Generic API fetch function
 async function apiRequest<T>(endpoint: string): Promise<T> {
-  const response = await fetch(`${API_BASE}${endpoint}`)
+  const response = await fetch(`${API_BASE}${endpoint}`, { cache: "no-store", next: { revalidate: 0 } })
 
   if (!response.ok) {
     throw new Error(`API request failed: ${response.statusText}`)
@@ -23,7 +22,6 @@ async function apiRequest<T>(endpoint: string): Promise<T> {
   return response.json()
 }
 
-// Portfolio data endpoints
 export async function fetchPortfolioData(): Promise<PortfolioData | null> {
   try {
     return await apiRequest<PortfolioData>("/portfolio")

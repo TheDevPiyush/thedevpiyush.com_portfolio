@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import CodeBlock3D from "./code-block-3d"
 
 interface HomePageProps {
   data: {
@@ -85,7 +86,7 @@ export function HomePage({ data }: HomePageProps) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))', color: 'rgb(var(--color-text-primary))' }}>
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-20 lg:pt-32 lg:pb-32">
+      <section id="home" className="pt-14 pb-20 lg:pt-24 lg:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -93,11 +94,12 @@ export function HomePage({ data }: HomePageProps) {
                 <div className="space-y-2">
                   <p style={{ color: 'rgb(var(--color-primary-light))' }} className="font-medium">Hello, I'm</p>
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>{personal.name}</h1>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold" style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold" style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                     {personal.title}
                   </h2>
                 </div>
-                <p className="text-xl leading-relaxed max-w-2xl" style={{ color: 'rgb(var(--color-text-secondary))' }}>{personal.bio}</p>
+                <p className="text-base leading-relaxed max-w-2xl" style={{ color: 'rgb(var(--color-text-secondary))' }}>{personal.bio}
+                </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -130,18 +132,7 @@ export function HomePage({ data }: HomePageProps) {
               </div>
             </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 rounded-3xl blur-3xl" style={{ background: 'var(--gradient-primary)', opacity: 0.2 }} />
-              <div className="relative aspect-square rounded-3xl p-8 backdrop-blur-sm" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.5)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
-                <Image
-                  src={personal.image || "https://avatars.githubusercontent.com/thedevpiyush"}
-                  alt={personal.name}
-                  width={500}
-                  height={500}
-                  className="rounded-2xl object-cover w-full h-full"
-                />
-              </div>
-            </div>
+            <CodeBlock3D personal={personal} skills={skills} stats={stats} />
           </div>
         </div>
       </section>

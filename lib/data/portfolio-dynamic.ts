@@ -101,12 +101,17 @@ export function transformPortfolioData(data: PortfolioData) {
 }
 
 function formatPeriod(startDate: string, endDate?: string, isCurrent?: boolean): string {
-  const start = new Date(startDate).getFullYear()
+  const start = new Date(startDate);
+  const startYear = start.getFullYear();
+  const startMonth = start.toLocaleDateString('en-US', { month: 'short' });
 
   if (isCurrent || !endDate) {
-    return `${start} - Present`
+    return `${startMonth} ${startYear} - Present`;
   }
 
-  const end = new Date(endDate).getFullYear()
-  return `${start} - ${end}`
+  const end = new Date(endDate);
+  const endYear = end.getFullYear();
+  const endMonth = end.toLocaleDateString('en-US', { month: 'short' }); 
+
+  return `${startMonth} ${startYear} - ${endMonth} ${endYear}`;
 }

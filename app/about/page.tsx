@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { getPortfolioData } from "@/lib/data/portfolio"
 import type { Skill, Experience, Education, Certification } from "@/lib/data/portfolio"
+import CodeBlock3D from "@/components/code-block-3d"
 
 export default async function AboutPage() {
   const portfolioData = await getPortfolioData()
@@ -38,8 +39,8 @@ export default async function AboutPage() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
                 <div className="space-y-6">
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>About Me</h1>
-                  <p className="text-xl leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>{personal.about_me}</p>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>About Me</h1>
+                  <p className="text-base leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>{personal.about_me}</p>
                 </div>
 
                 <div className="space-y-4">
@@ -58,18 +59,7 @@ export default async function AboutPage() {
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="absolute inset-0 rounded-3xl blur-3xl" style={{ background: 'var(--gradient-primary)', opacity: 0.2 }} />
-                <div className="relative aspect-[4/5] rounded-3xl p-8 backdrop-blur-sm" style={{ background: 'linear-gradient(to bottom right, rgba(var(--color-bg-tertiary), 0.5), rgba(var(--color-bg-secondary), 0.5))', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
-                  <Image
-                    src={personal.image || "/placeholder.svg?height=600&width=480"}
-                    alt={`${personal.name} working`}
-                    width={480}
-                    height={600}
-                    className="rounded-2xl object-cover w-full h-full"
-                  />
-                </div>
-              </div>
+              <CodeBlock3D personal={personal} skills={skills} stats={stats} />
             </div>
           </div>
         </section>

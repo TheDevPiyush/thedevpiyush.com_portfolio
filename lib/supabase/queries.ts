@@ -79,7 +79,6 @@ export async function getExperiences(): Promise<Experience[]> {
 }
 
 export async function getEducation(): Promise<Education | null> {
-  // Fix: Use maybeSingle() instead of single() to handle no rows gracefully
   const { data, error } = await supabase.from("education").select("*").eq("is_active", true).maybeSingle()
 
   if (error) {
@@ -117,7 +116,6 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getFeaturedBlogPost(): Promise<BlogPost | null> {
-  // Fix: Use maybeSingle() instead of single() to handle no rows gracefully
   const { data, error } = await supabase
     .from("blog_posts")
     .select("*")
@@ -179,7 +177,6 @@ export async function getPortfolioData(): Promise<PortfolioData | null> {
         getPortfolioStats(),
       ])
 
-    // Fix: Check if required data exists, if not return null
     if (!personal || !education) {
       console.error("Missing required data")
       return null
@@ -202,7 +199,6 @@ export async function getPortfolioData(): Promise<PortfolioData | null> {
   }
 }
 
-// Utility function to increment blog post view count
 export async function incrementBlogPostViews(postId: string): Promise<void> {
   const { error } = await supabase.rpc("increment_blog_views", { post_id: postId })
 
