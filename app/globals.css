@@ -53,9 +53,12 @@
     }
     body {
         @apply bg-background text-foreground;
-        font-family: var(--font-jetbrains-mono), "Courier New", monospace;
+        font-family: var(--font-hellix), "Courier New", monospace;
         overflow-x: hidden;
         /* Prevent horizontal scroll */
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
 
