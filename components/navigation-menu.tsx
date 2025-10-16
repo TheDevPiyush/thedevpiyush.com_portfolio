@@ -56,10 +56,16 @@ export function NavigationMenu() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white"
+                className="group relative border-slate-700 text-slate-300 hover:text-white overflow-hidden bg-slate-900"
               >
-                <Terminal className="w-4 h-4 mr-2" />
-                Terminal Mode
+                {/* Moving glass effect animation */}
+                <div className="absolute inset-0 rounded-md bg-gradient-to-r from-white/5 via-white/10 via-white/5 to-white/10 bg-[length:200%_100%] animate-[border-flow_3s_ease-in-out_infinite] opacity-100 z-10"></div>
+                
+                {/* Content */}
+                <div className="relative z-20 flex items-center">
+                  <Terminal className="w-4 h-4 mr-2" />
+                  Terminal Mode
+                </div>
               </Button>
             </Link>
           </div>
@@ -100,10 +106,16 @@ export function NavigationMenu() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full border-slate-700 text-slate-300 hover:bg-slate-800"
+                    className="group relative w-full border-slate-700 text-slate-300 hover:text-white overflow-hidden bg-slate-900"
                   >
-                    <Terminal className="w-4 h-4 mr-2" />
-                    Terminal Mode
+                    {/* Moving glass effect animation */}
+                    <div className="absolute inset-0 rounded-md bg-gradient-to-r from-white/5 via-white/10 via-white/5 to-white/10 bg-[length:200%_100%] animate-[border-flow_3s_ease-in-out_infinite] opacity-100 z-10"></div>
+                    
+                    {/* Content */}
+                    <div className="relative z-20 flex items-center">
+                      <Terminal className="w-4 h-4 mr-2" />
+                      Terminal Mode
+                    </div>
                   </Button>
                 </Link>
               </div>

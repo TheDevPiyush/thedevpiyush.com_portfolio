@@ -86,7 +86,7 @@ export function HomePage({ data }: HomePageProps) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))', color: 'rgb(var(--color-text-primary))' }}>
       {/* Hero Section */}
-      <section id="home" className="pt-14 pb-20 lg:pt-24 lg:pb-24">
+      <section id="home" className="pt-16 pb-20 lg:pt-24 lg:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">

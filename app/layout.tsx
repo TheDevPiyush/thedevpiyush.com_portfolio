@@ -1,14 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import Providers from "@/lib/providers/provider"
+import localFont from "next/font/local";
 
-// Initialize the JetBrains Mono font
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-jetbrains-mono",
+const myFont = localFont({
+  src: "./../public/fonts/Hellix-Regular.ttf",
+  display: 'swap',
+  variable: "--font-hellix",
 })
 
 export const metadata: Metadata = {
@@ -88,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={jetbrainsMono.variable}>
+    <html lang="en" className={`${myFont.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -96,7 +95,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="bg-black text-green-400 font-mono antialiased">
+      <body className={`bg-black text-green-400 antialiased ${myFont.variable}`}>
         <Providers>
           {children}
         </Providers>
