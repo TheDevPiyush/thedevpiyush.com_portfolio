@@ -1,26 +1,20 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const googleDocUrl =
-    "https://docs.google.com/document/d/1Cij4dF4ypgcdA3MEenqk1BkI3_nM2hqJ5uHoEm0bzqk/export?format=pdf";
+  const googleDocUrl = `https://docs.google.com/document/d/1Cij4dF4ypgcdA3MEenqk1BkI3_nM2hqJ5uHoEm0bzqk/export?format=pdf&t=${Date.now()}`;
 
-  const res = await fetch(googleDocUrl, {
+  const response = await fetch(googleDocUrl, {
     cache: "no-store",
-    headers: {
-      "Cache-Control": "no-cache, no-store, must-revalidate",
-      Pragma: "no-cache",
-      Expires: "0",
-    },
   });
 
-  const blob = await res.blob();
-  const arrayBuffer = await blob.arrayBuffer();
+  const blob = await response.blob();
+  const buffer = Buffer.from(await blob.arrayBuffer());
 
-  return new NextResponse(arrayBuffer, {
+  return new NextResponse(buffer, {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": 'attachment; filename="Piyush_Choudhary_Resume.pdf"',
-      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
       Pragma: "no-cache",
       Expires: "0",
     },
