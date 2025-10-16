@@ -1,27 +1,28 @@
-import { NextResponse } from 'next/server';
-
-const GOOGLE_DOC_PDF_URL = 'https://docs.google.com/document/d/1Cij4dF4ypgcdA3MEenqk1BkI3_nM2hqJ5uHoEm0bzqk/export?format=pdf';
+import { NextResponse } from "next/server";
 
 export async function GET() {
-  try {
-    const res = await fetch(GOOGLE_DOC_PDF_URL);
+  const googleDocUrl =
+    "https://docs.google.com/document/d/1Cij4dF4ypgcdA3MEenqk1BkI3_nM2hqJ5uHoEm0bzqk/export?format=pdf";
 
-    if (!res.ok) {
-      throw new Error('Failed to fetch the latest resume PDF');
-    }
+  const res = await fetch(googleDocUrl, {
+    cache: "no-store",
+    headers: {
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    },
+  });
 
-    const blob = await res.blob();
+  const blob = await res.blob();
+  const arrayBuffer = await blob.arrayBuffer();
 
-    return new Response(blob, {
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="Piyush_Choudhary_Resume.pdf"',
-        // optional: cache for 1 hour
-        'Cache-Control': 'public, max-age=3600',
-      },
-    });
-  } catch (err) {
-    console.error('Resume download failed:', err);
-    return NextResponse.json({ error: 'Could not fetch resume' }, { status: 500 });
-  }
+  return new NextResponse(arrayBuffer, {
+    headers: {
+      "Content-Type": "application/pdf",
+      "Content-Disposition": 'attachment; filename="Piyush_Choudhary_Resume.pdf"',
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    },
+  });
 }
