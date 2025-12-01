@@ -2,7 +2,7 @@ import Image from "next/image"
 import { MapPin, Calendar, Coffee, Code, Heart, Award } from "lucide-react"
 import { NavigationMenu } from "@/components/navigation-menu"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getPortfolioData } from "@/lib/data/portfolio"
 import type { Skill, Experience, Education, Certification } from "@/lib/data/portfolio"
 import CodeBlock3D from "@/components/code-block-3d"
@@ -88,31 +88,45 @@ export default async function AboutPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {([...new Set(skills.map((skill: Skill) => skill.category))] as string[]).map((category: string, index: number) => (
-                <Card key={`${category}-${index}`} className="overflow-hidden rounded-lg backdrop-blur-sm" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
-                  <CardContent className="p-6 rounded-lg">
-                    <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgb(var(--color-text-primary))' }}>{category}</h3>
-                    <div className="space-y-3">
-                      {skills
-                        .filter((skill: Skill) => skill.category === category)
-                        .map((skill: Skill) => (
-                          <div key={skill.name} className="space-y-2">
-                            <div className="flex justify-between items-center">
-                              <span className="text-sm" style={{ color: 'rgb(var(--color-text-secondary))' }}>{skill.name}</span>
-                              <span className="text-xs" style={{ color: 'rgb(var(--color-text-tertiary))' }}>{skill.level}%</span>
-                            </div>
-                            <div className="w-full rounded-full h-2" style={{ backgroundColor: 'rgb(var(--color-bg-quaternary))' }}>
-                              <div
-                                className="h-2 rounded-full transition-all duration-300"
-                                style={{ width: `${skill.level}%`, background: 'var(--gradient-primary)' }}
+              {([...new Set(skills.map((skill: Skill) => skill.category))] as string[]).map((category) => {
+                const categorySkills = skills.filter((skill: Skill) => skill.category === category)
+
+                return (
+                  <Card
+                    key={category}
+                    className="group backdrop-blur-sm cursor-pointer h-full flex flex-col rounded-2xl border-0 transition-all duration-300 hover:bg-gray-300/10 hover:shadow-lg/40 bg-gray-400/5 select-none"
+                  >
+                    <CardHeader className="pb-2">
+                      <CardTitle
+                        className="text-base pb-2 font-semibold flex items-center justify-between transform transition-all duration-300"
+                        style={{ color: 'rgb(var(--color-text-primary))' }}
+                      >
+                        <span>{category}</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-1 flex-1">
+                      <div className="space-y-2.5">
+                        {categorySkills.slice(0, 6).map((skill: Skill) => (
+                          <div
+                            key={skill.name}
+                            className="flex items-center justify-between text-sm"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span
+                                className="inline-block w-1.5 h-1.5 rounded-full"
+                                style={{ backgroundColor: 'rgb(var(--color-primary-light))' }}
                               />
+                              <span style={{ color: 'rgb(var(--color-text-secondary))' }}>
+                                {skill.name}
+                              </span>
                             </div>
                           </div>
                         ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
           </div>
         </section>

@@ -192,7 +192,7 @@ export function HomePage({ data }: HomePageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[...new Set(skills.map((skill) => skill.category))].map((category) => {
               const categorySkills = skills
                 .filter((skill) => skill.category === category)
@@ -205,7 +205,7 @@ export function HomePage({ data }: HomePageProps) {
                 >
                   <CardHeader className="pb-2">
                     <CardTitle
-                      className="text-base pb-2 font-semibold flex items-center justify-between transform transition-all duration-300 group-hover:text-lg"
+                      className="text-base pb-2 font-semibold flex items-center justify-between transform transition-all duration-300"
                       style={{ color: 'rgb(var(--color-text-primary))' }}
                     >
                       <span>{category}</span>
