@@ -2,16 +2,12 @@ import { getPortfolioData as getPortfolioDataFromSupabase } from "../supabase/qu
 import type { PortfolioData } from "../supabase/types"
 
 export async function getPortfolioDataCached(): Promise<PortfolioData | null> {
-  // Add cache control to prevent aggressive caching
   const data = await getPortfolioDataFromSupabase()
-
-  // Force fresh data by adding a small delay (helps with Vercel caching)
   await new Promise(resolve => setTimeout(resolve, 100))
 
   return data
 }
 
-// Transform database data to match the existing interface
 export function transformPortfolioData(data: PortfolioData) {
   return {
     personal: {
@@ -39,6 +35,7 @@ export function transformPortfolioData(data: PortfolioData) {
       name: skill.name,
       level: skill.level,
       category: skill.category,
+      display_order:skill.display_order
     })),
     projects: data.projects.map((project) => ({
       id: project.id,

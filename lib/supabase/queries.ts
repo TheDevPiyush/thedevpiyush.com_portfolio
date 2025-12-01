@@ -29,7 +29,6 @@ export async function getSkills(): Promise<Skill[]> {
     .from("skills")
     .select("*")
     .eq("is_active", true)
-    .order("category")
     .order("display_order")
 
   if (error) {

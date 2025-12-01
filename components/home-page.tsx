@@ -30,6 +30,7 @@ interface HomePageProps {
       name: string
       level: number
       category: string
+      display_order: number
     }>
     projects: Array<{
       id: string
@@ -109,7 +110,7 @@ export function HomePage({ data }: HomePageProps) {
                   style={{ background: 'var(--gradient-secondary)', color: 'rgb(var(--color-text-primary))' }}
                   className="hover:opacity-90"
                 >
-                  <Link href={`mailto:${personal.email}`}>
+                  <Link href={`/contact`}>
                     <Mail className="w-5 h-5 mr-2" />
                     Get In Touch
                   </Link>
@@ -167,7 +168,7 @@ export function HomePage({ data }: HomePageProps) {
                   "Continuously learning and exploring new technologies while mentoring others and contributing to the developer community.",
               },
             ].map((item, index) => (
-              <Card key={index} className="backdrop-blur-sm" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
+              <Card key={index} className="backdrop-blur-sm text-center" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
                 <CardHeader>
                   <div className="text-4xl mb-4">{item.icon}</div>
                   <CardTitle style={{ color: 'rgb(var(--color-text-primary))' }}>{item.title}</CardTitle>
@@ -191,35 +192,48 @@ export function HomePage({ data }: HomePageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...new Set(skills.map((skill) => skill.category))].map((category) => (
-              <Card key={category} className="backdrop-blur-sm" style={{ backgroundColor: 'rgba(var(--color-bg-tertiary), 0.3)', border: '1px solid rgba(var(--color-border-primary), 0.5)' }}>
-                <CardHeader>
-                  <CardTitle className="text-lg" style={{ color: 'rgb(var(--color-text-primary))' }}>{category}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {skills
-                      .filter((skill) => skill.category === category)
-                      .slice(0, 4)
-                      .map((skill) => (
-                        <div key={skill.name} className="flex items-center justify-between">
-                          <span className="text-sm" style={{ color: 'rgb(var(--color-text-secondary))' }}>{skill.name.split(" ")[0]}</span>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-16 rounded-full h-2" style={{ backgroundColor: 'rgb(var(--color-bg-quaternary))' }}>
-                              <div
-                                className="h-2 rounded-full"
-                                style={{ width: `${skill.level}%`, background: 'var(--gradient-primary)' }}
-                              />
-                            </div>
-                            <span className="text-xs" style={{ color: 'rgb(var(--color-text-tertiary))' }}>{skill.level}%</span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...new Set(skills.map((skill) => skill.category))].map((category) => {
+              const categorySkills = skills
+                .filter((skill) => skill.category === category)
+                .sort((a, b) => a.display_order - b.display_order)
+
+              return (
+                <Card
+                  key={category}
+                  className="group backdrop-blur-sm cursor-pointer h-full flex flex-col rounded-2xl border-0 transition-all duration-300 hover:bg-gray-300/10 hover:shadow-lg/40 bg-gray-400/5 select-none"
+                >
+                  <CardHeader className="pb-2">
+                    <CardTitle
+                      className="text-base pb-2 font-semibold flex items-center justify-between transform transition-all duration-300 group-hover:text-lg"
+                      style={{ color: 'rgb(var(--color-text-primary))' }}
+                    >
+                      <span>{category}</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-1 flex-1">
+                    <div className="space-y-2.5">
+                      {categorySkills.slice(0, 6).map((skill) => (
+                        <div
+                          key={skill.name}
+                          className="flex items-center justify-between text-sm"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span
+                              className="inline-block w-1.5 h-1.5 rounded-full"
+                              style={{ backgroundColor: 'rgb(var(--color-primary-light))' }}
+                            />
+                            <span style={{ color: 'rgb(var(--color-text-secondary))' }}>
+                              {skill.name}
+                            </span>
                           </div>
                         </div>
                       ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
