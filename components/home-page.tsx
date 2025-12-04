@@ -504,7 +504,7 @@ export function HomePage({ data }: HomePageProps) {
 
               <div className="space-y-4">
                 <Button asChild size="lg" className="w-full hover:opacity-90" style={{ background: 'var(--gradient-secondary)', color: 'rgb(var(--color-text-primary))' }}>
-                  <Link href="mailto:piyushdev.developer@gmail.com" className="flex items-center justify-center">
+                  <Link href={`mailto:${personal.email}`} className="flex items-center justify-center">
                     <Mail className="w-5 h-5 mr-2" />
                     Send Message
                   </Link>
