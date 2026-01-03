@@ -12,10 +12,10 @@ const myFont = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "TheDevPiyush - Full-Stack & Blockchain Developer Portfolio",
+    default: "TheDevPiyush - Full-Stack Developer || Portfolio",
     template: "%s | TheDevPiyush"
   },
-  description: "Portfolio of Piyush Choudhary, a passionate Full-Stack & Blockchain Developer. Explore my projects, blog posts, and technical expertise in modern web development.",
+  description: "Portfolio of Piyush Choudhary, a passionate Full-Stack Developer. Explore my projects, blog posts, and technical expertise in modern web development.",
   keywords: [
     "Piyush Choudhary",
     "Piyush",
@@ -48,14 +48,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://thedevpiyush.com',
     siteName: 'TheDevPiyush',
-    title: 'TheDevPiyush - Full-Stack & Blockchain Developer Portfolio',
+    title: 'TheDevPiyush - Full-Stack Portfolio',
     description: 'Portfolio of Piyush Choudhary, a passionate Full-Stack & Blockchain Developer. Explore my projects, blog posts, and technical expertise.',
     images: [
       {
         url: 'https://thedevpiyush.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'TheDevPiyush - Full-Stack & Blockchain Developer Portfolio',
+        alt: 'TheDevPiyush - Full-Stack Portfolio',
       }
     ],
   },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@thedevpiyush',
     creator: '@thedevpiyush',
-    title: 'TheDevPiyush - Full-Stack & Blockchain Developer Portfolio',
+    title: 'TheDevPiyush - Full-Stack Portfolio',
     description: 'Portfolio of Piyush Choudhary, a passionate Full-Stack & Blockchain Developer.',
     images: ['https://thedevpiyush.com/og-image.jpg'],
   },
