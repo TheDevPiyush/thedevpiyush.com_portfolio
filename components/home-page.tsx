@@ -520,6 +520,24 @@ export function HomePage({ data }: HomePageProps) {
           </div>
         </div>
       </section>
+
+      <footer
+        className="py-6 border-t"
+        style={{ borderColor: "rgba(var(--color-border-primary), 0.5)", backgroundColor: "rgba(var(--color-bg-secondary), 0.3)" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 text-sm">
+          <span style={{ color: "rgb(var(--color-text-tertiary))" }}>
+            © {new Date().getFullYear()} TheDevPiyush. All rights reserved.
+          </span>
+          <Link
+            href="/privacy-policy"
+            className="underline underline-offset-4 hover:opacity-80"
+            style={{ color: "rgb(var(--color-primary-light))" }}
+          >
+            Privacy Policy
+          </Link>
+        </div>
+      </footer>
     </div>
   )
 }

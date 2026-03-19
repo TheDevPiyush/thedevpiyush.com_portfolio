@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { jwtDecode } from "jwt-decode"
 import { supabase } from "@/lib/supabase/client"
+import { revalidatePath } from "next/cache"
 
 export async function POST(request: NextRequest) {
     const token = request.headers.get("authorization")?.replace("Bearer ", "")
@@ -35,6 +36,11 @@ export async function POST(request: NextRequest) {
 
     if (blogError) {
         return NextResponse.json({ error: blogError.message }, { status: 500 })
+    }
+
+    revalidatePath("/blog")
+    if (blog?.url) {
+        revalidatePath(`/blog/${blog.url}`)
     }
 
     return NextResponse.json({ message: "Blog posted successfully", blog })

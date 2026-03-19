@@ -42,6 +42,9 @@ export interface Project {
   demo_url?: string
   image_url?: string
   is_featured: boolean
+  is_sellable?: boolean
+  price_inr?: number
+  download_file_path?: string | null
   category: string
   display_order: number
   is_active: boolean

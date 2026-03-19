@@ -41,6 +41,9 @@ export interface Project {
   }
   featured: boolean
   category: string
+  is_sellable?: boolean
+  price_inr?: number
+  download_file_path?: string | null
 }
 
 export interface Experience {

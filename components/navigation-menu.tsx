@@ -21,14 +21,14 @@ export function NavigationMenu() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed top-0 w-full bg-slate-950/70 backdrop-blur-xl border-b border-slate-800/50 z-50">
+    <nav className="fixed top-0 select-none w-full bg-slate-950/70 backdrop-blur-xl border-b border-slate-800/50 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
             {/* <div className="w-8 h-8 bg-gradient-to-r rounded-full from-violet-500 to-purple-500 flex items-center justify-center">
               <span className="text-white font-bold text-sm">PC</span>
             </div> */}
-            <span className="font-bold text-xl text-white">Piyush Choudhary</span>
+            <span className="font-bold text-xl text-white">TheDevPiyush</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -52,6 +52,11 @@ export function NavigationMenu() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
+            <Link href="/signin" className="flex items-center">
+              <Button variant="outline" size="sm" className="border-slate-700 text-slate-300 hover:text-white bg-slate-900">
+                Sign In
+              </Button>
+            </Link>
             <Link href="/terminal" className="flex items-center">
               <Button
                 variant="outline"
@@ -102,6 +107,15 @@ export function NavigationMenu() {
                 </Link>
               ))}
               <div className="px-3 py-2 space-y-2">
+                <Link href="/signin">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="group relative w-full border-slate-700 text-slate-300 hover:text-white overflow-hidden bg-slate-900"
+                  >
+                    <div className="relative z-20 flex items-center">Sign In</div>
+                  </Button>
+                </Link>
                 <Link href="/terminal">
                   <Button
                     variant="outline"

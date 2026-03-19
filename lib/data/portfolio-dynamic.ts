@@ -52,6 +52,9 @@ export function transformPortfolioData(data: PortfolioData) {
         demo: project.demo_url,
       },
       featured: project.is_featured,
+      is_sellable: project.is_sellable,
+      price_inr: project.price_inr,
+      download_file_path: project.download_file_path,
       category: project.category,
     })),
     experience: data.experience.map((exp) => ({

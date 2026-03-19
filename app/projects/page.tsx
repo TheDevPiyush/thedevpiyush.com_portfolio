@@ -7,6 +7,11 @@ import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/c
 import { Badge } from "@/components/ui/badge"
 import { getPortfolioData } from "@/lib/data/portfolio"
 import type { Project } from "@/lib/data/portfolio"
+import Script from "next/script"
+import { BuyProjectButton } from "@/components/buy-project-button"
+
+export const dynamic = "force-dynamic"
+export const revalidate = 0
 
 export default async function ProjectsPage() {
   const portfolioData = await getPortfolioData()
@@ -33,6 +38,7 @@ export default async function ProjectsPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(var(--color-bg-primary))' }}>
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
       <NavigationMenu />
 
       <div className="pt-16">
@@ -112,6 +118,12 @@ export default async function ProjectsPage() {
                     </div>}
 
                     <div className="flex space-x-4">
+                      <BuyProjectButton
+                        projectId={project.id}
+                        projectTitle={project.title}
+                        priceInr={project.price_inr}
+                        isSellable={project.is_sellable}
+                      />
                       {project?.links?.github && (
                         <Button asChild variant="outline" style={{ border: '1px solid rgb(var(--color-border-primary))', color: 'rgb(var(--color-text-secondary))' }} className="hover:bg-opacity-80">
                           <Link target="_blank" href={project.links.github} className="flex items-center">
@@ -182,6 +194,12 @@ export default async function ProjectsPage() {
                           ))}
                         </div>
                         <div className="flex space-x-3 pt-2">
+                          <BuyProjectButton
+                            projectId={project.id}
+                            projectTitle={project.title}
+                            priceInr={project.price_inr}
+                            isSellable={project.is_sellable}
+                          />
                           {project.links.github && (
                             <Button variant="ghost" size="sm" className="p-0 hover:opacity-80" style={{ color: 'rgb(var(--color-text-tertiary))' }}>
                               <Github className="w-4 h-4 mr-2" />
