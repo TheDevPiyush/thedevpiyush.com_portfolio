@@ -1,13 +1,15 @@
 import { NavigationMenu } from "@/components/navigation-menu"
 import { HomePage } from "@/components/home-page"
 import { getPortfolioData } from "@/lib/data/portfolio"
+import { unstable_noStore as noStore } from "next/cache"
 
 // Force revalidation every 60 seconds (1 minute)
-export const revalidate = 60
+export const dynamic = "force-dynamic"
+export const revalidate = 0
 
 export default async function UIHomePage() {
+  noStore()
   const portfolioData = await getPortfolioData()
-  console.log(portfolioData)
   
   if (portfolioData.error || !portfolioData.data) {
     return (

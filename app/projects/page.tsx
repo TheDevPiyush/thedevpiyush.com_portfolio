@@ -9,11 +9,13 @@ import { getPortfolioData } from "@/lib/data/portfolio"
 import type { Project } from "@/lib/data/portfolio"
 import Script from "next/script"
 import { BuyProjectButton } from "@/components/buy-project-button"
+import { unstable_noStore as noStore } from "next/cache"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
 
 export default async function ProjectsPage() {
+  noStore()
   const portfolioData = await getPortfolioData()
 
   if (portfolioData.error || !portfolioData.data) {

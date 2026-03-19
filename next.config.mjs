@@ -33,6 +33,27 @@ const nextConfig = {
                     value: 'no-cache, no-store, must-revalidate',
                 }, ],
             },
+            {
+                source: '/',
+                headers: [{
+                    key: 'Cache-Control',
+                    value: 'no-store, no-cache, must-revalidate, max-age=0',
+                }, ],
+            },
+            {
+                source: '/home',
+                headers: [{
+                    key: 'Cache-Control',
+                    value: 'no-store, no-cache, must-revalidate, max-age=0',
+                }, ],
+            },
+            {
+                source: '/projects/:path*',
+                headers: [{
+                    key: 'Cache-Control',
+                    value: 'no-store, no-cache, must-revalidate, max-age=0',
+                }, ],
+            },
         ]
     },
 }

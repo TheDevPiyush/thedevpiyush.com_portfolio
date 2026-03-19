@@ -1,8 +1,10 @@
 import { NavigationMenu } from "@/components/navigation-menu"
 import { HomePage } from "@/components/home-page"
 import { getPortfolioData } from "@/lib/data/portfolio"
+import { unstable_noStore as noStore } from "next/cache"
 
 export default async function Page() {
+  noStore()
   const portfolioData = await getPortfolioData()
 
   if (portfolioData.error || !portfolioData.data) {
