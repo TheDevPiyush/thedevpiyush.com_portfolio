@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function ProjectUploadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -81,43 +82,138 @@ export function ProjectUploadForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 max-w-2xl">
-      <div className="space-y-2">
-        <Label>Project title</Label>
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} required />
-      </div>
-      <div className="space-y-2">
-        <Label>Short description</Label>
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
-      </div>
-      <div className="space-y-2">
-        <Label>Long description</Label>
-        <Textarea value={longDescription} onChange={(e) => setLongDescription(e.target.value)} required />
-      </div>
-      <div className="space-y-2">
-        <Label>Tech stack (comma-separated)</Label>
-        <Input value={techStack} onChange={(e) => setTechStack(e.target.value)} required />
-      </div>
-      <div className="space-y-2">
-        <Label>Features (comma-separated)</Label>
-        <Input value={features} onChange={(e) => setFeatures(e.target.value)} required />
-      </div>
-      <div className="space-y-2">
-        <Label>Price (INR)</Label>
-        <Input type="number" value={priceInr} onChange={(e) => setPriceInr(e.target.value)} required min="1" />
-      </div>
-      <div className="space-y-2">
-        <Label>Image URL</Label>
-        <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
-      </div>
-      <div className="space-y-2">
-        <Label>Project ZIP</Label>
-        <Input type="file" accept=".zip" onChange={(e) => setZipFile(e.target.files?.[0] || null)} required />
-      </div>
+    <Card
+      className="backdrop-blur-sm"
+      style={{
+        backgroundColor: "rgba(var(--color-bg-tertiary), 0.3)",
+        border: "1px solid rgba(var(--color-border-primary), 0.5)",
+      }}
+    >
+      <CardHeader>
+        <CardTitle style={{ color: "rgb(var(--color-text-primary))" }}>Project Details</CardTitle>
+        <CardDescription style={{ color: "rgb(var(--color-text-tertiary))" }}>
+          Fill all fields to publish a paid project.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Project title</Label>
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Short description</Label>
+            <Textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Long description</Label>
+            <Textarea
+              value={longDescription}
+              onChange={(e) => setLongDescription(e.target.value)}
+              required
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Tech stack (comma-separated)</Label>
+            <Input
+              value={techStack}
+              onChange={(e) => setTechStack(e.target.value)}
+              required
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Features (comma-separated)</Label>
+            <Input
+              value={features}
+              onChange={(e) => setFeatures(e.target.value)}
+              required
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Price (INR)</Label>
+            <Input
+              type="number"
+              value={priceInr}
+              onChange={(e) => setPriceInr(e.target.value)}
+              required
+              min="1"
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Image URL</Label>
+            <Input
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label style={{ color: "rgb(var(--color-text-primary))" }}>Project ZIP</Label>
+            <Input
+              type="file"
+              accept=".zip"
+              onChange={(e) => setZipFile(e.target.files?.[0] || null)}
+              required
+              style={{
+                backgroundColor: "rgb(var(--color-bg-secondary))",
+                borderColor: "rgb(var(--color-border-primary))",
+                color: "rgb(var(--color-text-primary))",
+              }}
+            />
+          </div>
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Uploading..." : "Upload Paid Project"}
-      </Button>
-    </form>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full hover:opacity-90"
+            style={{ background: "var(--gradient-secondary)", color: "rgb(var(--color-text-primary))" }}
+          >
+            {isSubmitting ? "Uploading..." : "Upload Paid Project"}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }

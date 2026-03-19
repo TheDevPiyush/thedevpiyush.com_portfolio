@@ -49,7 +49,10 @@ export default async function ProjectsPage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold" style={{ color: 'rgb(var(--color-text-primary))' }}>My Projects</h1>
               <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'rgb(var(--color-text-secondary))' }}>
                 A collection of projects that showcase my skills in full-stack development, from concept to deployment.
-                Each project represents a unique challenge and learning experience.
+                Each project represents a unique challenge and learning experience. <br></br>
+                <strong>
+                  You can also buy selected projects directly.
+                </strong>
               </p>
             </div>
           </div>

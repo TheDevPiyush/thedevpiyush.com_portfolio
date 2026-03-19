@@ -34,7 +34,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid project price" }, { status: 400 })
     }
 
-    const receipt = `proj_${project.id}_${Date.now()}`
+    // Razorpay receipt max length is 40 chars.
+    const shortProjectId = String(project.id).replace(/-/g, "").slice(0, 12)
+    const shortTs = Date.now().toString().slice(-10)
+    const receipt = `p_${shortProjectId}_${shortTs}`
     const order = await createRazorpayOrder({
       amountInPaise,
       receipt,

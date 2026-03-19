@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { NavigationMenu } from "@/components/navigation-menu"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import Image from "next/image"
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -47,14 +48,22 @@ export default function SignInPage() {
             Continue with Google to buy and download paid projects.
           </p>
 
-          <Button className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
+          <Button
+            className="w-full hover:opacity-90"
+            style={{ background: "var(--gradient-secondary)", color: "rgb(var(--color-text-primary))" }}
+            onClick={handleGoogleSignIn}
+            disabled={isLoading}
+          >
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                 Redirecting...
               </>
             ) : (
-              "Continue with Google"
+              <>
+                <Image src="/google-logo.png" alt="Google" width={20} height={20} className="mr-2" />
+                Continue with Google
+              </>
             )}
           </Button>
         </div>
