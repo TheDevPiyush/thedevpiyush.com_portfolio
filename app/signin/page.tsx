@@ -14,7 +14,10 @@ export default function SignInPage() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      const redirectTo = `${window.location.origin}/`
+      // Prefer a canonical site URL in production to avoid tunnel/subdomain callbacks.
+      const canonicalSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "")
+      const origin = window.location.origin.replace(/\/$/, "")
+      const redirectTo = `${canonicalSiteUrl || origin}/`
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: { redirectTo },
