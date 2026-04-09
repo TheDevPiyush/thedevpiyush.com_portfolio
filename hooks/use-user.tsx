@@ -30,7 +30,7 @@ export default function useUser() {
                 setUser(data?.data[0]);
                 toast.success("User registered successfully")
             } else {
-                toast.error("Failed to register user")
+                toast.error("Something went wrong! Kindly Refresh the app.")
             }
         }
     }

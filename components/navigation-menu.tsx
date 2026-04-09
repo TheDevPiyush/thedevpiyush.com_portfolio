@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, Terminal, Home, User, Code, Briefcase, BookOpen, Mail, FileText } from "lucide-react"
+import { Menu, X, Terminal, Home, User, Briefcase, BookOpen, Mail, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useUserStore } from "@/lib/useStore"
@@ -35,6 +35,7 @@ export function NavigationMenu() {
   const router = useRouter()
   const email = useUserStore((state) => state.email)
   const isAdmin = useUserStore((state) => Boolean(state.isAdmin))
+  const isAuthLoading = useUserStore((state) => state.isAuthLoading)
   const clearUser = useUserStore((state) => state.clearUser)
   const userInitial = email?.trim()?.charAt(0)?.toUpperCase()
   const isLoggedIn = Boolean(email?.trim())
@@ -79,7 +80,12 @@ export function NavigationMenu() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            {isLoggedIn ? (
+            {isAuthLoading ? (
+              <div className="flex items-center border border-slate-700 text-slate-300 bg-slate-900 px-4 py-2 rounded-md">
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Logging you in...
+              </div>
+            ) : isLoggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button
@@ -186,7 +192,12 @@ export function NavigationMenu() {
                 </Link>
               ))}
               <div className="px-3 py-2 space-y-2">
-                {isLoggedIn ? (
+                {isAuthLoading ? (
+                  <div className="w-full flex items-center justify-center py-2 text-slate-300">
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Logging you in...
+                  </div>
+                ) : isLoggedIn ? (
                   <div className="w-full space-y-2">
                     <div className="w-full flex items-center justify-center py-2">
                       <div

@@ -128,6 +128,8 @@ export default async function ProjectsPage() {
                         projectTitle={project.title}
                         priceInr={project.price_inr}
                         isSellable={project.is_sellable}
+                        setupGuideFilePath={project.setup_guide_file_path}
+                        screenshotUrls={project.screenshot_urls}
                       />
                       {project?.links?.github && (
                         <Button asChild variant="outline" style={{ border: '1px solid rgb(var(--color-border-primary))', color: 'rgb(var(--color-text-secondary))' }} className="hover:bg-opacity-80">
@@ -168,7 +170,7 @@ export default async function ProjectsPage() {
         {/* Other Projects */}
         {otherProjects.length > 0 &&
           <section className="py-20" style={{ backgroundColor: 'rgba(var(--color-bg-secondary), 0.3)' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
               <div className="mb-16">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: 'rgb(var(--color-text-primary))' }}>Other Projects</h2>
                 <p style={{ color: 'rgb(var(--color-text-secondary))' }}>
@@ -204,6 +206,8 @@ export default async function ProjectsPage() {
                             projectTitle={project.title}
                             priceInr={project.price_inr}
                             isSellable={project.is_sellable}
+                            setupGuideFilePath={project.setup_guide_file_path}
+                            screenshotUrls={project.screenshot_urls}
                           />
                           {project.links.github && (
                             <Button variant="ghost" size="sm" className="p-0 hover:opacity-80" style={{ color: 'rgb(var(--color-text-tertiary))' }}>

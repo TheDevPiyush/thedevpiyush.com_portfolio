@@ -44,6 +44,8 @@ export interface Project {
   is_sellable?: boolean
   price_inr?: number
   download_file_path?: string | null
+  setup_guide_file_path?: string | null
+  screenshot_urls?: string[] | null
 }
 
 export interface Experience {

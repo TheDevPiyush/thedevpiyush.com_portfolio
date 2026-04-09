@@ -149,6 +149,8 @@ CREATE TABLE IF NOT EXISTS public.projects (
   is_sellable boolean DEFAULT false,
   price_inr numeric,
   download_file_path text,
+  setup_guide_file_path text,
+  screenshot_urls text[],
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
   CONSTRAINT projects_pkey PRIMARY KEY (id)

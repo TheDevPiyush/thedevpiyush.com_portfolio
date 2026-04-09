@@ -36,13 +36,13 @@ export default async function AdminProjectsPage() {
     <div className="min-h-screen bg-[rgb(var(--color-bg-primary))]">
       <NavigationMenu />
       <div className="pt-24 px-6 pb-10">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2" style={{ color: "rgb(var(--color-text-primary))" }}>
-              Upload Paid Project
+              Manage Paid Projects
             </h1>
             <p style={{ color: "rgb(var(--color-text-secondary))" }}>
-              Add a new sellable project and upload its ZIP file.
+              Create and edit sellable projects, including ZIP, setup guide, and project images.
             </p>
           </div>
           <ProjectUploadForm />
