@@ -217,7 +217,7 @@ export function ProjectUploadForm() {
       <CardHeader>
         <CardTitle style={{ color: "rgb(var(--color-text-primary))" }}>Project Details</CardTitle>
         <CardDescription style={{ color: "rgb(var(--color-text-tertiary))" }}>
-          Create new projects or edit existing projects, including replacing ZIP/PDF/images.
+          Create new projects or edit existing projects, including replacing ZIP/Markdown/images.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -446,11 +446,11 @@ export function ProjectUploadForm() {
           </div>
           <div className="space-y-2">
             <Label className="font-semibold" style={{ color: "rgb(var(--color-text-primary))" }}>
-              Setup guide PDF {mode === "edit" ? "(optional to replace)" : "(optional)"}
+              Setup guide Markdown (.md) {mode === "edit" ? "(optional to replace)" : "(optional)"}
             </Label>
             <Input
               type="file"
-              accept=".pdf,application/pdf"
+              accept=".md,.markdown,text/markdown,text/plain"
               onChange={(e) => setSetupGuideFile(e.target.files?.[0] || null)}
               style={{
                 backgroundColor: "rgb(var(--color-bg-secondary))",

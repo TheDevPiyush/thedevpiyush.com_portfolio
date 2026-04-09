@@ -23,15 +23,16 @@ export async function GET(
 
     const { data, error } = await supabaseServer.storage
       .from(setupBucket)
-      .createSignedUrl(project.setup_guide_file_path, 600)
+      .download(project.setup_guide_file_path)
 
-    if (error || !data?.signedUrl) {
-      return NextResponse.json({ error: error?.message || "Failed to create setup guide URL" }, { status: 500 })
+    if (error || !data) {
+      return NextResponse.json({ error: error?.message || "Failed to fetch setup guide" }, { status: 500 })
     }
 
+    const markdown = await data.text()
+
     return NextResponse.json({
-      setupGuideUrl: data.signedUrl,
-      expiresInSeconds: 600,
+      markdown,
     })
   } catch (error) {
     return NextResponse.json(

@@ -1,8 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
-     :root {
+    :root {
         /* Primary Theme Colors */
         --color-primary: 139 92 246;
         /* violet-500 */
@@ -48,9 +49,11 @@
         --gradient-primary: linear-gradient(to right, rgb(139 92 246), rgb(168 85 247));
         --gradient-secondary: linear-gradient(to right, rgb(124 58 237), rgb(147 51 234));
     }
+
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground;
         font-family: var(--font-hellix), "Courier New", monospace;
@@ -74,10 +77,12 @@
 }
 
 @keyframes blink {
+
     0%,
     50% {
         opacity: 1;
     }
+
     51%,
     100% {
         opacity: 0;
@@ -88,9 +93,11 @@
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -116,6 +123,147 @@
     background: #16a34a;
 }
 
+/* Themed horizontal preview scrollbar */
+.preview-scroll {
+    scrollbar-width: "10px";
+    scrollbar-color: rgb(var(--color-primary)) rgba(var(--color-bg-tertiary), 0.7);
+}
+
+.preview-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.preview-scroll::-webkit-scrollbar-track {
+    background: rgba(var(--color-bg-tertiary), 0.7);
+    border-radius: 999px;
+}
+
+.preview-scroll::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-primary));
+    border-radius: 999px;
+}
+
+.preview-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-primary-light));
+}
+
+/* Setup guide markdown viewer styles */
+.setup-guide-content {
+    color: rgb(var(--color-text-secondary));
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.setup-guide-content h1,
+.setup-guide-content h2,
+.setup-guide-content h3,
+.setup-guide-content h4 {
+    color: rgb(var(--color-text-primary));
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 1.25rem;
+    margin-bottom: 0.65rem;
+}
+
+.setup-guide-content h1 {
+    font-size: 1.5rem;
+}
+
+.setup-guide-content h2 {
+    font-size: 1.3rem;
+}
+
+.setup-guide-content h3 {
+    font-size: 1.15rem;
+}
+
+.setup-guide-content p {
+    margin: 0.6rem 0;
+}
+
+.setup-guide-content ul,
+.setup-guide-content ol {
+    margin: 0.6rem 0 0.8rem 1.2rem;
+}
+
+.setup-guide-content li {
+    margin: 0.25rem 0;
+}
+
+.setup-guide-content a {
+    color: rgb(var(--color-primary-light));
+    text-decoration: underline;
+}
+
+.setup-guide-content blockquote {
+    margin: 0.75rem 0;
+    padding: 0.6rem 0.85rem;
+    border-left: 3px solid rgb(var(--color-primary));
+    background: rgba(var(--color-bg-tertiary), 0.35);
+    border-radius: 0.35rem;
+}
+
+.setup-guide-content hr {
+    border: 0;
+    border-top: 1px solid rgba(var(--color-border-primary), 0.7);
+    margin: 1rem 0;
+}
+
+.setup-guide-content .inline-code {
+    background: rgba(var(--color-bg-tertiary), 0.7);
+    color: rgb(var(--color-text-primary));
+    border: 1px solid rgba(var(--color-border-primary), 0.8);
+    border-radius: 0.3rem;
+    padding: 0.12rem 0.35rem;
+    font-size: 0.85rem;
+}
+
+.setup-guide-content .code-block-wrap {
+    margin: 0.9rem 0;
+    border: 1px solid rgba(var(--color-border-primary), 0.8);
+    border-radius: 0.55rem;
+    overflow: hidden;
+}
+
+.setup-guide-content .code-block-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.6rem;
+    background: rgba(var(--color-bg-tertiary), 0.7);
+    color: rgb(var(--color-text-tertiary));
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.setup-guide-content .code-block-pre {
+    margin: 0;
+    padding: 0.8rem;
+    overflow-x: auto;
+    background: rgba(var(--color-bg-primary), 0.85);
+    color: rgb(var(--color-text-primary));
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.setup-guide-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+}
+
+.setup-guide-content th,
+.setup-guide-content td {
+    border: 1px solid rgba(var(--color-border-primary), 0.75);
+    padding: 0.45rem 0.55rem;
+}
+
+.setup-guide-content th {
+    color: rgb(var(--color-text-primary));
+    background: rgba(var(--color-bg-tertiary), 0.4);
+}
+
 
 /* Mobile optimizations */
 
@@ -123,11 +271,13 @@
     body {
         font-size: 12px;
     }
+
     /* Ensure no horizontal overflow */
     * {
         max-width: 100vw;
         box-sizing: border-box;
     }
+
     /* Better touch targets */
     input {
         font-size: 16px;
@@ -149,9 +299,10 @@
 /* Hide scrollbar on mobile for cleaner look */
 
 @media (max-width: 640px) {
-     ::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         display: none;
     }
+
     * {
         -ms-overflow-style: none;
         scrollbar-width: none;

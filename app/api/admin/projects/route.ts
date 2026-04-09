@@ -75,18 +75,18 @@ async function uploadSetupGuideFile(
   timestamp: number,
 ) {
   const normalizedName = setupGuideFile.name.toLowerCase()
-  const isPdfMime = setupGuideFile.type === "application/pdf"
-  const isPdfName = normalizedName.endsWith(".pdf")
-  if (!isPdfMime && !isPdfName) {
-    throw new Error("setupGuideFile must be a PDF")
+  const isMarkdownMime = setupGuideFile.type === "text/markdown" || setupGuideFile.type === "text/plain"
+  const isMarkdownName = normalizedName.endsWith(".md") || normalizedName.endsWith(".markdown")
+  if (!isMarkdownMime && !isMarkdownName) {
+    throw new Error("setupGuideFile must be a Markdown (.md) file")
   }
 
-  const sanitizedPdfName = setupGuideFile.name.replace(/[^a-zA-Z0-9_.-]/g, "_")
-  const setupGuidePath = `${projectId}/setup-guide/${timestamp}-${sanitizedPdfName}`
+  const sanitizedMdName = setupGuideFile.name.replace(/[^a-zA-Z0-9_.-]/g, "_")
+  const setupGuidePath = `${projectId}/setup-guide/${timestamp}-${sanitizedMdName}`
   const setupBuffer = Buffer.from(await setupGuideFile.arrayBuffer())
   const { error } = await supabaseServer.storage
     .from(setupBucket)
-    .upload(setupGuidePath, setupBuffer, { contentType: "application/pdf", upsert: false })
+    .upload(setupGuidePath, setupBuffer, { contentType: "text/markdown; charset=utf-8", upsert: false })
 
   if (error) {
     throw new Error(error.message)
