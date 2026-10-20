@@ -83,11 +83,22 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'caret-blink': {
+  				'0%,70%,100%': { opacity: '1' },
+  				'20%,50%': { opacity: '0' }
+  			},
+  			shake: {
+  				'0%,100%': { transform: 'translateX(0)' },
+  				'20%,60%': { transform: 'translateX(-6px)' },
+  				'40%,80%': { transform: 'translateX(6px)' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'caret-blink': 'caret-blink 1.25s ease-out infinite',
+  			shake: 'shake 0.4s ease-in-out'
   		}
   	}
   },

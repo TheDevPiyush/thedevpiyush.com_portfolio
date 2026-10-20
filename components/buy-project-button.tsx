@@ -60,7 +60,7 @@ export function BuyProjectButton({
   const handleDownload = async () => {
     if (!useUserStore.getState().id) {
       toast.error("Please sign in first")
-      router.push("/signin")
+      router.push("/signin?next=/projects")
       return
     }
 
@@ -99,7 +99,7 @@ export function BuyProjectButton({
 
     if (!useUserStore.getState().id) {
       toast.error("Please sign in first")
-      router.push("/signin")
+      router.push("/signin?next=/projects")
       return
     }
 
