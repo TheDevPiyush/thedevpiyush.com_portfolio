@@ -76,6 +76,21 @@
     display: none;
 }
 
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.blog-content a {
+    color: rgb(96 165 250);
+    text-decoration: underline;
+}
+
+.blog-content p {
+    margin-bottom: 1rem;
+}
+
 @keyframes blink {
 
     0%,

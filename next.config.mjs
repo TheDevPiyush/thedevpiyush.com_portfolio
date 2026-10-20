@@ -7,9 +7,9 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
     experimental: {
-        webpackMemoryOptimizations: true,
         cpus: 1,
     },
+    productionBrowserSourceMaps: false,
     images: {
         remotePatterns: [{
                 protocol: "https",
