@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
-import { getPersonalInfo } from "@/lib/supabase/queries"
+import { getCachedPersonalInfo } from "@/lib/data/cached"
 
 export async function GET() {
   try {
-    const data = await getPersonalInfo()
+    const data = await getCachedPersonalInfo()
 
     if (!data) {
       return NextResponse.json({ error: "Personal info not found" }, { status: 404 })

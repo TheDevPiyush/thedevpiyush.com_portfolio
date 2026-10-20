@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
-import { getEducation } from "@/lib/supabase/queries"
+import { getCachedEducation } from "@/lib/data/cached"
 
 export async function GET() {
   try {
-    const data = await getEducation()
+    const data = await getCachedEducation()
 
     if (!data) {
       return NextResponse.json({ error: "Education data not found" }, { status: 404 })

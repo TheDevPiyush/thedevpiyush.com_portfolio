@@ -14,44 +14,12 @@ const nextConfig = {
             })),
         ].filter(Boolean),
     },
-    // Add headers to prevent aggressive caching
+    // Pages are cached by tag (lib/data/cached.ts); only the JSON API opts out of CDN caching.
     async headers() {
         return [{
-                source: '/blog/:path*',
-                headers: [{
-                    key: 'Cache-Control',
-                    value: 'public, s-maxage=60, stale-while-revalidate=300',
-                }, ],
-            },
-            {
-                source: '/api/:path*',
-                headers: [{
-                    key: 'Cache-Control',
-                    value: 'no-cache, no-store, must-revalidate',
-                }, ],
-            },
-            {
-                source: '/',
-                headers: [{
-                    key: 'Cache-Control',
-                    value: 'no-store, no-cache, must-revalidate, max-age=0',
-                }, ],
-            },
-            {
-                source: '/home',
-                headers: [{
-                    key: 'Cache-Control',
-                    value: 'no-store, no-cache, must-revalidate, max-age=0',
-                }, ],
-            },
-            {
-                source: '/projects/:path*',
-                headers: [{
-                    key: 'Cache-Control',
-                    value: 'no-store, no-cache, must-revalidate, max-age=0',
-                }, ],
-            },
-        ]
+            source: '/api/:path*',
+            headers: [{ key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' }],
+        }]
     },
 }
 

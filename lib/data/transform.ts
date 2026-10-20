@@ -1,13 +1,6 @@
-import { getPortfolioData as getPortfolioDataFromSupabase } from "../supabase/queries"
 import type { PortfolioData } from "../supabase/types"
 
-export async function getPortfolioDataCached(): Promise<PortfolioData | null> {
-  const data = await getPortfolioDataFromSupabase()
-  await new Promise(resolve => setTimeout(resolve, 100))
-
-  return data
-}
-
+// Pure DB-row → view-model mapping, shared by server pages and the terminal (client).
 export function transformPortfolioData(data: PortfolioData) {
   return {
     personal: {

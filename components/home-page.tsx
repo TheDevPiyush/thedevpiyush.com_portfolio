@@ -5,80 +5,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import CodeBlock3D from "./code-block-3d"
+import type { PortfolioViewModel } from "@/lib/data/portfolio"
 
 interface HomePageProps {
-  data: {
-    personal: {
-      name: string
-      title: string
-      location: string
-      email: string
-      phone: string
-      bio: string
-      philosophy: string
-      interests: string[]
-      working_at: string
-      image: string
-      social: {
-        github: string
-        linkedin: string
-        twitter: string
-        discord: string
-      }
-    }
-    skills: Array<{
-      name: string
-      level: number
-      category: string
-      display_order: number
-    }>
-    projects: Array<{
-      id: string
-      title: string
-      description: string
-      longDescription: string
-      techStack: string[]
-      image_url: string
-      features: string[]
-      stats: {
-        [key: string]: string
-      }
-      links: {
-        github?: string
-        live?: string
-        demo?: string
-      }
-      featured: boolean
-      category: string
-    }>
-    experience: Array<{
-      id: string
-      title: string
-      company: string
-      location: string
-      period: string
-      description: string
-      technologies: string[]
-      achievements: string[]
-    }>
-    blog: Array<{
-      id: string
-      title: string
-      excerpt: string
-      publishDate: string
-      readTime: string
-      tags: string[]
-      image_url: string
-      url: string
-      featured?: boolean
-      trending?: boolean
-      popular?: boolean
-    }>
-    stats: {
-      experience: string
-      [key: string]: string
-    }
-  }
+  data: PortfolioViewModel
 }
 
 export function HomePage({ data }: HomePageProps) {

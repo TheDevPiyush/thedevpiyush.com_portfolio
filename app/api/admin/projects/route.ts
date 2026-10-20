@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/auth/server-auth"
 import { supabaseServer } from "@/lib/supabase/server"
 import { getProjectFilesBucket } from "@/lib/supabase/storage"
-import { revalidatePath } from "next/cache"
+import { revalidateTag } from "next/cache"
+import { CACHE_TAGS } from "@/lib/data/cache-tags"
 import crypto from "crypto"
 
 function toBoolean(value: FormDataEntryValue | null): boolean {
@@ -226,8 +227,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: insertError.message }, { status: 500 })
     }
 
-    revalidatePath("/projects")
-    revalidatePath("/home")
+    revalidateTag(CACHE_TAGS.projects)
 
     return NextResponse.json({ message: "Project uploaded successfully", project: data })
   } catch (error) {
@@ -365,8 +365,7 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: updateError.message }, { status: 500 })
     }
 
-    revalidatePath("/projects")
-    revalidatePath("/home")
+    revalidateTag(CACHE_TAGS.projects)
 
     return NextResponse.json({ message: "Project updated successfully", project: updated })
   } catch (error) {

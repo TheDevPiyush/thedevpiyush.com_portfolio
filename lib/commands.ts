@@ -6,7 +6,7 @@ import {
   formatBlog,
   formatContact,
 } from "./formatters/terminal-formatters"
-import { getPortfolioData } from "./data/portfolio"
+import { getPortfolioDataClient as getPortfolioData } from "./data/portfolio-client"
 
 export interface Command {
   name: string

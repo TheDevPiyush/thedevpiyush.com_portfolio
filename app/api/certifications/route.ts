@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
-import { getCertifications } from "@/lib/supabase/queries"
+import { getCachedCertifications } from "@/lib/data/cached"
 
 export async function GET() {
   try {
-    const data = await getCertifications()
+    const data = await getCachedCertifications()
     return NextResponse.json(data)
   } catch (error) {
     console.error("Error fetching certifications:", error)

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { verifyRazorpayWebhookSignature } from "@/lib/payments/razorpay"
 import { supabaseServer } from "@/lib/supabase/server"
-import { revalidatePath } from "next/cache"
 
 export async function POST(request: NextRequest) {
   const rawBody = await request.text()
@@ -46,8 +45,6 @@ export async function POST(request: NextRequest) {
       if (updateError) {
         return NextResponse.json({ error: updateError.message }, { status: 500 })
       }
-
-      revalidatePath("/projects")
     }
 
     return NextResponse.json({ ok: true })

@@ -1,14 +1,28 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google"
 import "./globals.css"
 import Providers from "@/lib/providers/provider"
-import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/theme-provider"
 
-const myFont = localFont({
-  src: "./../public/fonts/Hellix-Regular.ttf",
-  display: 'swap',
-  variable: "--font-hellix",
+const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" })
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
 })
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
+}
 
 export const metadata: Metadata = {
   title: {
@@ -87,18 +101,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${myFont.variable}`}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className={`bg-black text-green-400 antialiased preview-scroll ${myFont.variable}`}>
-        <Providers>
-          {children}
-        </Providers>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`} suppressHydrationWarning>
+      <body className="preview-scroll">
+        {/* Dark is forced until Phase 2 rebuilds the pages on the new tokens; then switch to defaultTheme="system". */}
+        <ThemeProvider attribute="class" forcedTheme="dark" defaultTheme="dark" disableTransitionOnChange>
+          <Providers>
+            {children}
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )

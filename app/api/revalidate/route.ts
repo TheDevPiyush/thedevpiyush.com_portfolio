@@ -1,10 +1,13 @@
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
+import { ALL_CACHE_TAGS, type CacheTag } from '@/lib/data/cache-tags'
 
+// Manual cache purge, e.g. after editing rows directly in Supabase.
+// Body: { token, tag?: CacheTag, path?: string }. With neither tag nor path, purges every data tag.
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { path, token } = body
+        const { path, tag, token } = body
 
         // Reject everything when REVALIDATION_TOKEN is unset, so a missing token can't match.
         const expected = process.env.REVALIDATION_TOKEN
@@ -12,16 +15,15 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: 'Invalid token' }, { status: 401 })
         }
 
-        // Revalidate specific paths
-        if (path) {
+        if (tag) {
+            if (!ALL_CACHE_TAGS.includes(tag)) {
+                return NextResponse.json({ message: `Unknown tag. Use one of: ${ALL_CACHE_TAGS.join(', ')}` }, { status: 400 })
+            }
+            revalidateTag(tag as CacheTag)
+        } else if (path) {
             revalidatePath(path)
         } else {
-            // Revalidate all blog-related paths
-            revalidatePath('/blog')
-            revalidatePath('/home')
-            revalidatePath('/about')
-            revalidatePath('/projects')
-            revalidatePath('/contact')
+            ALL_CACHE_TAGS.forEach((cacheTag) => revalidateTag(cacheTag))
         }
 
         return NextResponse.json({
@@ -36,10 +38,3 @@ export async function POST(request: NextRequest) {
         }, { status: 500 })
     }
 }
-
-export async function GET() {
-    return NextResponse.json({
-        message: 'Revalidation endpoint is working',
-        timestamp: Date.now()
-    })
-} 

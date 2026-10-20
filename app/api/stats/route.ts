@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
-import { getPortfolioStats } from "@/lib/supabase/queries"
+import { getCachedPortfolioStats } from "@/lib/data/cached"
 
 export async function GET() {
   try {
-    const data = await getPortfolioStats()
+    const data = await getCachedPortfolioStats()
     return NextResponse.json(data)
   } catch (error) {
     console.error("Error fetching portfolio stats:", error)

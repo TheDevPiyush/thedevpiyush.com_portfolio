@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { revalidatePath } from "next/cache"
+import { revalidateTag } from "next/cache"
+import { CACHE_TAGS } from "@/lib/data/cache-tags"
 import { z } from "zod"
 import { requireAdmin } from "@/lib/auth/server-auth"
 import { supabaseServer } from "@/lib/supabase/server"
@@ -38,10 +39,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: blogError.message }, { status: 500 })
     }
 
-    revalidatePath("/blog")
-    if (blog?.url) {
-        revalidatePath(`/blog/${blog.url}`)
-    }
+    revalidateTag(CACHE_TAGS.posts)
 
     return NextResponse.json({ message: "Blog posted successfully", blog })
 }
