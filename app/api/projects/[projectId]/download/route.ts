@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getUserIdFromAuthHeader } from "@/lib/auth/server-auth"
+import { getAuthUser } from "@/lib/auth/server-auth"
 import { supabaseServer } from "@/lib/supabase/server"
+import { createProjectFileSignedUrl } from "@/lib/supabase/storage"
 
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ projectId: string }> },
 ) {
   try {
-    const userId = getUserIdFromAuthHeader(request.headers.get("authorization"))
-    if (!userId) {
+    const authUser = await getAuthUser(request)
+    if (!authUser) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
+    const userId = authUser.id
 
     const { projectId } = await params
 
@@ -38,17 +40,13 @@ export async function POST(
       return NextResponse.json({ error: "Download is not available for this project" }, { status: 400 })
     }
 
-    const bucket = process.env.SUPABASE_PROJECTS_BUCKET || "projects"
-    const { data, error } = await supabaseServer.storage
-      .from(bucket)
-      .createSignedUrl(project.download_file_path, 120)
-
-    if (error || !data?.signedUrl) {
-      return NextResponse.json({ error: error?.message || "Failed to create signed URL" }, { status: 500 })
+    const signedUrl = await createProjectFileSignedUrl(project.download_file_path, 120)
+    if (!signedUrl) {
+      return NextResponse.json({ error: "Failed to create signed URL" }, { status: 500 })
     }
 
     return NextResponse.json({
-      downloadUrl: data.signedUrl,
+      downloadUrl: signedUrl,
       expiresInSeconds: 120,
     })
   } catch (error) {

@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createRazorpayOrder, getRazorpayConfig } from "@/lib/payments/razorpay"
-import { getUserIdFromAuthHeader } from "@/lib/auth/server-auth"
+import { ensureUser, getAuthUser } from "@/lib/auth/server-auth"
 import { supabaseServer } from "@/lib/supabase/server"
 
 export async function POST(request: NextRequest) {
   try {
-    const userId = getUserIdFromAuthHeader(request.headers.get("authorization"))
-    if (!userId) {
+    const authUser = await getAuthUser(request)
+    if (!authUser) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
+    const userId = authUser.id
+    // project_purchases.user_id references users.id, so make sure the row exists.
+    await ensureUser(userId, authUser.email)
 
     const { projectId } = await request.json()
     if (!projectId) {

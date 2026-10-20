@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useRef, useState } from "react"
-import Cookies from "js-cookie"
+import { useUserStore } from "@/lib/useStore"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import ReactMarkdown from "react-markdown"
@@ -58,8 +58,7 @@ export function BuyProjectButton({
   }, [stage, formattedPrice])
 
   const handleDownload = async () => {
-    const token = Cookies.get("token")
-    if (!token) {
+    if (!useUserStore.getState().id) {
       toast.error("Please sign in first")
       router.push("/signin")
       return
@@ -68,7 +67,6 @@ export function BuyProjectButton({
     setStage("preparing-download")
     const response = await fetch(`/api/projects/${projectId}/download`, {
       method: "POST",
-      headers: { authorization: `Bearer ${token}` },
     })
     const data = await response.json()
 
@@ -99,8 +97,7 @@ export function BuyProjectButton({
       return
     }
 
-    const token = Cookies.get("token")
-    if (!token) {
+    if (!useUserStore.getState().id) {
       toast.error("Please sign in first")
       router.push("/signin")
       return
@@ -112,7 +109,6 @@ export function BuyProjectButton({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ projectId }),
       })

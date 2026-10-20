@@ -3,38 +3,18 @@ import { toast } from 'sonner';
 
 export default function useUser() {
     const { setUser } = useUserStore()
-    const getOrRegisterUser = async (email: string, id: string) => {
-        const response = await fetch("/api/get-user", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ id: id })
-        })
+
+    // Loads the verified profile for the current session (the server creates it on first sign-in).
+    const loadUser = async () => {
+        const response = await fetch("/api/me", { cache: "no-store" })
 
         if (response.ok) {
             const data = await response.json()
-            setUser(data?.data[0]);
-        }
-
-        else {
-            const response = await fetch("/api/register-user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email: email, id: id })
-            })
-            if (response.ok) {
-                const data = await response.json()
-                setUser(data?.data[0]);
-                toast.success("User registered successfully")
-            } else {
-                toast.error("Something went wrong! Kindly Refresh the app.")
-            }
+            setUser(data.user)
+        } else if (response.status !== 401) {
+            toast.error("Something went wrong! Kindly Refresh the app.")
         }
     }
 
-    return { getOrRegisterUser }
+    return { loadUser }
 }
-

@@ -54,7 +54,6 @@ export function transformPortfolioData(data: PortfolioData) {
       featured: project.is_featured,
       is_sellable: project.is_sellable,
       price_inr: project.price_inr,
-      download_file_path: project.download_file_path,
       setup_guide_file_path: project.setup_guide_file_path,
       screenshot_urls: project.screenshot_urls,
       category: project.category,

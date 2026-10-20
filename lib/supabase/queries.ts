@@ -39,8 +39,16 @@ export async function getSkills(): Promise<Skill[]> {
   return data || []
 }
 
+// Every public project column except download_file_path, which must stay server-only.
+const PUBLIC_PROJECT_COLUMNS =
+  "id,title,description,long_description,tech_stack,features,stats,github_url,live_url,demo_url,image_url,is_featured,category,display_order,is_active,is_sellable,price_inr,setup_guide_file_path,screenshot_urls,created_at,updated_at"
+
 export async function getProjects(): Promise<Project[]> {
-  const { data, error } = await supabase.from("projects").select("*").eq("is_active", true).order("display_order")
+  const { data, error } = await supabase
+    .from("projects")
+    .select(PUBLIC_PROJECT_COLUMNS)
+    .eq("is_active", true)
+    .order("display_order")
 
   if (error) {
     console.error("Error fetching projects:", error)
@@ -53,7 +61,7 @@ export async function getProjects(): Promise<Project[]> {
 export async function getFeaturedProjects(): Promise<Project[]> {
   const { data, error } = await supabase
     .from("projects")
-    .select("*")
+    .select(PUBLIC_PROJECT_COLUMNS)
     .eq("is_active", true)
     .eq("is_featured", true)
     .order("display_order")

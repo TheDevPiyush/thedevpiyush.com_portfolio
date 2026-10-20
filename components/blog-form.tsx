@@ -14,7 +14,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator"
 import { X, Plus, Save, Loader2 } from "lucide-react"
 import { toast } from "sonner"
-import Cookies from 'js-cookie'
 import { Editor } from 'primereact/editor';
 
 const blogFormSchema = z.object({
@@ -87,12 +86,10 @@ export function BlogForm() {
     const onSubmit = async (data: BlogFormData) => {
         setIsSubmitting(true)
         try {
-            const token = Cookies.get("token");
             const response = await fetch("/api/postblog", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(data),
             })

@@ -6,8 +6,9 @@ export async function POST(request: NextRequest) {
         const body = await request.json()
         const { path, token } = body
 
-        // Verify the request is authorized (you can add your own token)
-        if (token !== process.env.REVALIDATION_TOKEN) {
+        // Reject everything when REVALIDATION_TOKEN is unset, so a missing token can't match.
+        const expected = process.env.REVALIDATION_TOKEN
+        if (!expected || typeof token !== 'string' || token !== expected) {
             return NextResponse.json({ message: 'Invalid token' }, { status: 401 })
         }
 

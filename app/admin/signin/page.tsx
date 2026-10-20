@@ -6,8 +6,7 @@ import { Input } from "@/components/ui/input"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"
 import { ArrowLeft, Mail, Shield, Terminal, Loader2 } from "lucide-react"
 import { toast } from "sonner"
-import { supabase } from "@/lib/supabase/client"
-import Cookies from 'js-cookie'
+import { supabaseBrowser as supabase } from "@/lib/supabase/browser"
 import { useRouter } from '@bprogress/next/app';
 import useUser from "@/hooks/use-user"
 
@@ -17,7 +16,7 @@ export default function AdminSignInPage() {
     const [showOTP, setShowOTP] = useState(false)
     const [isSendingOTP, setIsSendingOTP] = useState(false)
     const [isVerifyingOTP, setIsVerifyingOTP] = useState(false)
-    const { getOrRegisterUser } = useUser();
+    const { loadUser } = useUser();
     const router = useRouter();
 
     const handleSendOTP = async () => {
@@ -51,8 +50,7 @@ export default function AdminSignInPage() {
 
         if (data) {
             toast.success("OTP verified successfully!")
-            Cookies.set("token", data?.session?.access_token || "", { expires: 1 })
-            getOrRegisterUser(email, data?.user?.id as string);
+            await loadUser();
             router.push("/");
         }
         setIsVerifyingOTP(false)

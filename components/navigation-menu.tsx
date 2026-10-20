@@ -7,8 +7,7 @@ import { Menu, X, Terminal, Home, User, Briefcase, BookOpen, Mail, Loader2 } fro
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useUserStore } from "@/lib/useStore"
-import Cookies from "js-cookie"
-import { supabase } from "@/lib/supabase/client"
+import { supabaseBrowser as supabase } from "@/lib/supabase/browser"
 import { toast } from "sonner"
 import {
   DropdownMenu,
@@ -41,7 +40,6 @@ export function NavigationMenu() {
   const isLoggedIn = Boolean(email?.trim())
 
   const handleLogout = async () => {
-    Cookies.remove("token")
     await supabase.auth.signOut()
     clearUser()
     toast.success("Logged out successfully")

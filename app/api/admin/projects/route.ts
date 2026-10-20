@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { ensureAdmin, getUserIdFromAuthHeader } from "@/lib/auth/server-auth"
+import { requireAdmin } from "@/lib/auth/server-auth"
 import { supabaseServer } from "@/lib/supabase/server"
+import { getProjectFilesBucket } from "@/lib/supabase/storage"
 import { revalidatePath } from "next/cache"
 import crypto from "crypto"
 
@@ -9,14 +10,9 @@ function toBoolean(value: FormDataEntryValue | null): boolean {
 }
 
 async function ensureAdminFromRequest(request: NextRequest) {
-  const userId = getUserIdFromAuthHeader(request.headers.get("authorization"))
-  if (!userId) {
+  const admin = await requireAdmin(request)
+  if (!admin) {
     return { error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }) }
-  }
-
-  const isAdmin = await ensureAdmin(userId)
-  if (!isAdmin) {
-    return { error: NextResponse.json({ error: "Forbidden" }, { status: 403 }) }
   }
 
   return { error: null }
@@ -53,7 +49,9 @@ async function uploadFileAndGetPublicUrl(params: {
   return { storagePath, publicUrl: data.publicUrl }
 }
 
-async function uploadZipFile(bucket: string, projectId: string, zipFile: File, timestamp: number) {
+// Paid ZIPs go to the private bucket and are only reachable through signed URLs.
+async function uploadZipFile(projectId: string, zipFile: File, timestamp: number) {
+  const bucket = getProjectFilesBucket()
   const sanitizedName = zipFile.name.replace(/[^a-zA-Z0-9_.-]/g, "_")
   const storagePath = `${projectId}/${timestamp}-${sanitizedName}`
   const buffer = Buffer.from(await zipFile.arrayBuffer())
@@ -168,7 +166,7 @@ export async function POST(request: NextRequest) {
     let setupGuidePath: string | null = null
 
     try {
-      storagePath = await uploadZipFile(bucket, projectId, zipFile, timestamp)
+      storagePath = await uploadZipFile(projectId, zipFile, timestamp)
       const imageUpload = await uploadFileAndGetPublicUrl({
         bucket,
         projectId,
@@ -307,7 +305,7 @@ export async function PATCH(request: NextRequest) {
 
     try {
       if (zipFile instanceof File && zipFile.name) {
-        updatePayload.download_file_path = await uploadZipFile(bucket, projectId, zipFile, timestamp)
+        updatePayload.download_file_path = await uploadZipFile(projectId, zipFile, timestamp)
       }
       if (setupGuideFile instanceof File && setupGuideFile.name) {
         updatePayload.setup_guide_file_path = await uploadSetupGuideFile(setupBucket, projectId, setupGuideFile, timestamp)

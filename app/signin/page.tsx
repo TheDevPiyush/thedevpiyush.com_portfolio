@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { supabase } from "@/lib/supabase/client"
+import { supabaseBrowser as supabase } from "@/lib/supabase/browser"
 import { Button } from "@/components/ui/button"
 import { NavigationMenu } from "@/components/navigation-menu"
 import { Loader2 } from "lucide-react"

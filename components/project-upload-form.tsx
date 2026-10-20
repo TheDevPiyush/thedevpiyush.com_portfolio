@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import Cookies from "js-cookie"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -56,14 +55,10 @@ export function ProjectUploadForm() {
   )
 
   useEffect(() => {
-    const token = Cookies.get("token")
-    if (!token) return
     ;(async () => {
       try {
         setIsLoadingProjects(true)
-        const response = await fetch("/api/admin/projects", {
-          headers: { authorization: `Bearer ${token}` },
-        })
+        const response = await fetch("/api/admin/projects")
         const data = await response.json()
         if (!response.ok) {
           toast.error(data.error || "Failed to fetch projects")
@@ -134,12 +129,6 @@ export function ProjectUploadForm() {
       return
     }
 
-    const token = Cookies.get("token")
-    if (!token) {
-      toast.error("You must be signed in as admin")
-      return
-    }
-
     try {
       setIsSubmitting(true)
 
@@ -175,7 +164,6 @@ export function ProjectUploadForm() {
 
       const response = await fetch("/api/admin/projects", {
         method: mode === "create" ? "POST" : "PATCH",
-        headers: { authorization: `Bearer ${token}` },
         body: form,
       })
       const data = await response.json()
@@ -186,9 +174,7 @@ export function ProjectUploadForm() {
       }
 
       toast.success(mode === "create" ? "Project uploaded successfully" : "Project updated successfully")
-      const latestProjectsResponse = await fetch("/api/admin/projects", {
-        headers: { authorization: `Bearer ${token}` },
-      })
+      const latestProjectsResponse = await fetch("/api/admin/projects")
       const latestProjectsData = await latestProjectsResponse.json()
       if (latestProjectsResponse.ok) {
         setProjects(latestProjectsData.projects || [])

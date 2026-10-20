@@ -54,6 +54,7 @@ export function verifyRazorpayWebhookSignature(rawBody: string, signature: strin
   const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET
   if (!webhookSecret || !signature) return false
 
-  const generated = crypto.createHmac("sha256", webhookSecret).update(rawBody).digest("hex")
-  return generated === signature
+  const generated = Buffer.from(crypto.createHmac("sha256", webhookSecret).update(rawBody).digest("hex"))
+  const received = Buffer.from(signature)
+  return generated.length === received.length && crypto.timingSafeEqual(generated, received)
 }

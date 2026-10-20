@@ -7,14 +7,15 @@ import { getPortfolioData } from "@/lib/data/portfolio"
 import type { BlogPost } from "@/lib/data/portfolio"
 import type { Metadata } from "next"
 import Link from "next/link"
+import { sanitizeBlogHtml } from "@/lib/sanitize"
 
 // Force revalidation every 60 seconds (1 minute)
 export const revalidate = 60
 
 interface BlogPostPageProps {
-    params: {
+    params: Promise<{
         blogid: string
-    }
+    }>
 }
 
 // Generate static params for all blog posts at build time
@@ -37,6 +38,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for each blog post
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+    const { blogid } = await params
     try {
         const portfolioData = await getPortfolioData()
 
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             }
         }
 
-        const post = portfolioData.data.blog.find((p: BlogPost) => p.url === params.blogid)
+        const post = portfolioData.data.blog.find((p: BlogPost) => p.url === blogid)
 
         if (!post) {
             return {
@@ -124,6 +126,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+    const { blogid } = await params
     const portfolioData = await getPortfolioData()
 
     if (portfolioData.error || !portfolioData.data) {
@@ -143,7 +146,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     }
 
     const { blog } = portfolioData.data
-    const post = blog.find((p: BlogPost) => p.url === params.blogid)
+    const post = blog.find((p: BlogPost) => p.url === blogid)
 
     if (!post) {
         return (
@@ -267,7 +270,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <div
                             className="blog-content prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed"
                             itemProp="articleBody"
-                            dangerouslySetInnerHTML={{ __html: post.content || "" }}
+                            dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content || "") }}
                         />
 
                         {/* Footer */}

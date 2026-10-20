@@ -1,27 +1,27 @@
-import { jwtDecode } from "jwt-decode"
 import { supabaseServer } from "@/lib/supabase/server"
+import { createSupabaseServerClient } from "@/lib/supabase/ssr"
 
-interface JwtPayload {
-  sub: string
-  email?: string
+export interface AuthUser {
+  id: string
+  email: string | null
 }
 
 function getBearerToken(authorizationHeader: string | null): string | null {
-  if (!authorizationHeader) return null
-  if (!authorizationHeader.startsWith("Bearer ")) return null
-  return authorizationHeader.replace("Bearer ", "").trim()
+  if (!authorizationHeader?.startsWith("Bearer ")) return null
+  return authorizationHeader.slice("Bearer ".length).trim() || null
 }
 
-export function getUserIdFromAuthHeader(authorizationHeader: string | null): string | null {
-  const token = getBearerToken(authorizationHeader)
-  if (!token) return null
+// Returns the signed-in user only after Supabase has verified the token (signature + expiry).
+// Accepts an `Authorization: Bearer` header, otherwise falls back to the session cookies.
+export async function getAuthUser(request?: Request): Promise<AuthUser | null> {
+  const token = getBearerToken(request?.headers.get("authorization") ?? null)
 
-  try {
-    const decoded = jwtDecode<JwtPayload>(token)
-    return decoded.sub || null
-  } catch {
-    return null
-  }
+  const { data, error } = token
+    ? await supabaseServer.auth.getUser(token)
+    : await (await createSupabaseServerClient()).auth.getUser()
+
+  if (error || !data.user) return null
+  return { id: data.user.id, email: data.user.email ?? null }
 }
 
 export async function ensureUser(userId: string, email?: string | null) {
@@ -40,4 +40,11 @@ export async function ensureAdmin(userId: string): Promise<boolean> {
   const { data, error } = await supabaseServer.from("users").select("isAdmin").eq("id", userId).maybeSingle()
   if (error || !data) return false
   return Boolean(data.isAdmin)
+}
+
+// Verified admin user, or null. Use in admin pages, route handlers and server actions.
+export async function requireAdmin(request?: Request): Promise<AuthUser | null> {
+  const user = await getAuthUser(request)
+  if (!user) return null
+  return (await ensureAdmin(user.id)) ? user : null
 }
