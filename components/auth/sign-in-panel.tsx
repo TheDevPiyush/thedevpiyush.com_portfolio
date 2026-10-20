@@ -144,11 +144,11 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
       {/* Soft accent glow behind the card */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-x-10 -top-16 h-56 rounded-full bg-[rgb(var(--color-primary)/0.18)] blur-3xl"
+        className="pointer-events-none absolute -inset-x-10 -top-16 h-56 rounded-full bg-brand/20 blur-3xl"
       />
 
-      <div className="relative overflow-hidden rounded-2xl border border-[rgb(var(--color-border-primary)/0.7)] bg-[rgb(var(--color-bg-secondary)/0.75)] shadow-2xl shadow-black/40 backdrop-blur-xl">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgb(var(--color-primary-light)/0.7)] to-transparent" />
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-card/75 shadow-2xl shadow-black/5 dark:shadow-black/40 backdrop-blur-xl">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-brand/70 to-transparent" />
 
         <div className="px-6 py-8 sm:px-8">
           {isSignedIn ? (
@@ -157,23 +157,23 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
             <>
               {/* Header */}
               <div className="mb-7 text-center">
-                <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-[rgb(var(--color-border-primary)/0.8)] bg-[rgb(var(--color-bg-tertiary)/0.6)]">
+                <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted">
                   {step === "email" ? (
-                    <Mail className="h-5 w-5 text-[rgb(var(--color-primary-light))]" />
+                    <Mail className="h-5 w-5 text-brand" />
                   ) : (
-                    <CheckCircle2 className="h-5 w-5 text-[rgb(var(--color-primary-light))]" />
+                    <CheckCircle2 className="h-5 w-5 text-brand" />
                   )}
                 </div>
-                <h1 className="text-2xl font-semibold tracking-tight text-[rgb(var(--color-text-primary))]">
+                <h1 className="text-2xl font-semibold tracking-tight text-foreground">
                   {step === "email" ? title : "Check your inbox"}
                 </h1>
-                <p className="mt-2 text-sm leading-relaxed text-[rgb(var(--color-text-tertiary))]">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {step === "email" ? (
                     description
                   ) : (
                     <>
                       We sent a {OTP_LENGTH}-digit code to{" "}
-                      <span className="font-medium text-[rgb(var(--color-text-primary))]">{email}</span>
+                      <span className="font-medium text-foreground">{email}</span>
                     </>
                   )}
                 </p>
@@ -197,16 +197,16 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
                         type="button"
                         onClick={signInWithGoogle}
                         disabled={isBusy}
-                        className="group flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-white text-sm font-medium text-slate-900 shadow-sm transition-all hover:bg-slate-100 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-primary-light))] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-secondary))] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="group flex h-11 w-full items-center justify-center gap-3 rounded-xl border border-border bg-white text-sm font-medium text-zinc-900 shadow-sm transition-all hover:bg-zinc-100 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {isGoogleLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
                         {isGoogleLoading ? "Redirecting to Google…" : "Continue with Google"}
                       </button>
 
-                      <div className="flex items-center gap-3 text-xs uppercase tracking-wider text-[rgb(var(--color-text-muted))]">
-                        <span className="h-px flex-1 bg-[rgb(var(--color-border-primary)/0.8)]" />
+                      <div className="flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
+                        <span className="h-px flex-1 bg-border" />
                         or use email
-                        <span className="h-px flex-1 bg-[rgb(var(--color-border-primary)/0.8)]" />
+                        <span className="h-px flex-1 bg-border" />
                       </div>
                     </>
                   )}
@@ -216,7 +216,7 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
                       Email address
                     </label>
                     <div className="relative">
-                      <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[rgb(var(--color-text-muted))]" />
+                      <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input
                         ref={emailInputRef}
                         id="signin-email"
@@ -231,7 +231,7 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
                           if (error) setError("")
                         }}
                         disabled={isBusy}
-                        className="h-11 w-full rounded-xl border border-[rgb(var(--color-border-secondary)/0.7)] bg-[rgb(var(--color-bg-primary)/0.6)] pl-10 pr-3 text-sm text-[rgb(var(--color-text-primary))] placeholder:text-[rgb(var(--color-text-muted))] transition-colors focus:border-[rgb(var(--color-primary-light))] focus:outline-none focus:ring-4 focus:ring-[rgb(var(--color-primary)/0.2)] disabled:opacity-60"
+                        className="h-11 w-full rounded-xl border border-border bg-background pl-10 pr-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/20 disabled:opacity-60"
                       />
                     </div>
                     <PrimaryButton type="submit" disabled={!isEmailValid || isBusy}>
@@ -274,7 +274,7 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
                             key={index}
                             index={index}
                             className={cn(
-                              "h-12 w-11 rounded-xl border border-[rgb(var(--color-border-secondary)/0.8)] bg-[rgb(var(--color-bg-primary)/0.6)] text-lg font-semibold text-[rgb(var(--color-text-primary))] ring-offset-0 first:rounded-xl first:border last:rounded-xl sm:h-14 sm:w-12",
+                              "h-12 w-11 rounded-xl border border-border bg-background text-lg font-semibold text-foreground ring-offset-0 first:rounded-xl first:border last:rounded-xl sm:h-14 sm:w-12",
                               error && "border-red-500/60",
                             )}
                           />
@@ -303,7 +303,7 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
                       type="button"
                       onClick={backToEmail}
                       disabled={isVerifying}
-                      className="inline-flex items-center gap-1.5 text-[rgb(var(--color-text-tertiary))] transition-colors hover:text-[rgb(var(--color-text-primary))] disabled:opacity-50"
+                      className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
                     >
                       <ArrowLeft className="h-3.5 w-3.5" />
                       Change email
@@ -313,13 +313,13 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
                       onClick={sendCode}
                       disabled={cooldown > 0 || isBusy}
                       aria-live="polite"
-                      className="font-medium text-[rgb(var(--color-primary-light))] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:text-[rgb(var(--color-text-muted))] disabled:hover:opacity-100"
+                      className="font-medium text-brand transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:text-muted-foreground disabled:hover:opacity-100"
                     >
                       {isSending ? "Sending…" : cooldown > 0 ? `Resend in 0:${String(cooldown).padStart(2, "0")}` : "Resend code"}
                     </button>
                   </div>
 
-                  <p className="text-center text-xs text-[rgb(var(--color-text-muted))]">
+                  <p className="text-center text-xs text-muted-foreground">
                     Can&apos;t find it? Check your spam folder. Codes expire after a few minutes.
                   </p>
                 </div>
@@ -329,9 +329,9 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
         </div>
       </div>
 
-      <p className="mt-6 text-center text-xs text-[rgb(var(--color-text-muted))]">
+      <p className="mt-6 text-center text-xs text-muted-foreground">
         By continuing you agree to the{" "}
-        <a href="/privacy-policy" className="underline underline-offset-2 hover:text-[rgb(var(--color-text-secondary))]">
+        <a href="/privacy-policy" className="underline underline-offset-2 hover:text-muted-foreground">
           privacy policy
         </a>
         .
@@ -343,11 +343,11 @@ export function SignInPanel({ title, description, nextPath, showGoogle = true, i
 function SignedInState({ email, onContinue, onSignOut }: { email: string; onContinue: () => void; onSignOut: () => void }) {
   return (
     <div className="text-center animate-in fade-in-0 duration-300">
-      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[rgb(var(--color-primary)/0.15)] text-lg font-semibold text-[rgb(var(--color-primary-light))]">
+      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand/15 text-lg font-semibold text-brand">
         {email.charAt(0).toUpperCase()}
       </div>
-      <h1 className="text-xl font-semibold text-[rgb(var(--color-text-primary))]">You&apos;re signed in</h1>
-      <p className="mt-1 text-sm text-[rgb(var(--color-text-tertiary))]">{email}</p>
+      <h1 className="text-xl font-semibold text-foreground">You&apos;re signed in</h1>
+      <p className="mt-1 text-sm text-muted-foreground">{email}</p>
       <div className="mt-6 space-y-3">
         <PrimaryButton type="button" onClick={onContinue}>
           Continue
@@ -356,7 +356,7 @@ function SignedInState({ email, onContinue, onSignOut }: { email: string; onCont
         <button
           type="button"
           onClick={onSignOut}
-          className="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-tertiary))] transition-colors hover:text-[rgb(var(--color-text-primary))]"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <LogOut className="h-3.5 w-3.5" />
           Use a different account
@@ -371,7 +371,7 @@ function PrimaryButton({ className, ...props }: React.ButtonHTMLAttributes<HTMLB
     <button
       {...props}
       className={cn(
-        "group flex h-11 w-full items-center justify-center gap-2 rounded-xl text-sm font-medium text-white shadow-lg shadow-[rgb(var(--color-primary)/0.25)] transition-all [background:var(--gradient-secondary)] hover:brightness-110 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-primary-light))] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-secondary))] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:brightness-100",
+        "group flex h-11 w-full items-center justify-center gap-2 rounded-xl text-sm font-medium text-brand-foreground shadow-lg shadow-brand/25 transition-all bg-brand hover:brightness-110 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:brightness-100",
         className,
       )}
     />

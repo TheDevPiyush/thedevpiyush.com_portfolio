@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { requireAdmin } from "@/lib/auth/server-auth"
 import { BlogForm } from "@/components/blog-form"
-import { NavigationMenu } from "@/components/navigation-menu"
+import { AdminBar } from "@/components/admin/admin-bar"
 
 export default async function AdminPage() {
     if (!(await requireAdmin())) {
@@ -10,7 +10,7 @@ export default async function AdminPage() {
 
     return (
         <div className="min-h-screen bg-[rgb(var(--color-bg-primary))]">
-            <NavigationMenu />
+            <AdminBar />
             <BlogForm />
         </div>
     )

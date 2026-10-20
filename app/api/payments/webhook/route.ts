@@ -47,6 +47,18 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    if (eventType === "payment.failed") {
+      const orderId = event?.payload?.payment?.entity?.order_id
+      // Only an unpaid order can fail; a later successful retry on the same order still marks it paid.
+      if (orderId) {
+        await supabaseServer
+          .from("project_purchases")
+          .update({ status: "failed" })
+          .eq("razorpay_order_id", orderId)
+          .eq("status", "created")
+      }
+    }
+
     return NextResponse.json({ ok: true })
   } catch (error) {
     return NextResponse.json(

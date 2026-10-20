@@ -3,6 +3,8 @@ import { createRazorpayOrder, getRazorpayConfig } from "@/lib/payments/razorpay"
 import { ensureUser, getAuthUser } from "@/lib/auth/server-auth"
 import { supabaseServer } from "@/lib/supabase/server"
 
+const ORDER_REUSE_WINDOW_MS = 6 * 60 * 60 * 1000
+
 export async function POST(request: NextRequest) {
   try {
     const authUser = await getAuthUser(request)
@@ -37,6 +39,38 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid project price" }, { status: 400 })
     }
 
+    const { keyId } = getRazorpayConfig()
+
+    // Idempotency: never charge twice for the same project, and reuse an unpaid order from the last
+    // few hours (same price) instead of opening a new one on every click.
+    const { data: existing } = await supabaseServer
+      .from("project_purchases")
+      .select("status,razorpay_order_id,amount_inr,created_at")
+      .eq("user_id", userId)
+      .eq("project_id", project.id)
+      .in("status", ["paid", "created"])
+      .order("created_at", { ascending: false })
+
+    if (existing?.some((purchase) => purchase.status === "paid")) {
+      return NextResponse.json({ alreadyPurchased: true, projectTitle: project.title })
+    }
+
+    const reusable = existing?.find(
+      (purchase) =>
+        purchase.razorpay_order_id &&
+        Number(purchase.amount_inr) === Number(project.price_inr) &&
+        Date.now() - new Date(purchase.created_at).getTime() < ORDER_REUSE_WINDOW_MS,
+    )
+    if (reusable) {
+      return NextResponse.json({
+        keyId,
+        orderId: reusable.razorpay_order_id,
+        amount: amountInPaise,
+        currency: "INR",
+        projectTitle: project.title,
+      })
+    }
+
     // Razorpay receipt max length is 40 chars.
     const shortProjectId = String(project.id).replace(/-/g, "").slice(0, 12)
     const shortTs = Date.now().toString().slice(-10)
@@ -62,7 +96,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: insertError.message }, { status: 500 })
     }
 
-    const { keyId } = getRazorpayConfig()
     return NextResponse.json({
       keyId,
       orderId: order.id,

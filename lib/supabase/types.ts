@@ -147,5 +147,5 @@ export interface PortfolioData {
   certifications: Certification[]
   blog: BlogPost[]
   interests: Interest[]
-  stats: Record<string, string>
+  stats: PortfolioStat[]
 }

@@ -97,6 +97,14 @@ const config: Config = {
   				'0%,70%,100%': { opacity: '1' },
   				'20%,50%': { opacity: '0' }
   			},
+  			'fade-up': {
+  				from: { opacity: '0', transform: 'translateY(16px)', filter: 'blur(6px)' },
+  				to: { opacity: '1', transform: 'none', filter: 'none' }
+  			},
+  			rise: {
+  				from: { opacity: '0', transform: 'translateY(110%)' },
+  				to: { opacity: '1', transform: 'none' }
+  			},
   			shake: {
   				'0%,100%': { transform: 'translateX(0)' },
   				'20%,60%': { transform: 'translateX(-6px)' },
@@ -107,7 +115,10 @@ const config: Config = {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'caret-blink': 'caret-blink 1.25s ease-out infinite',
-  			shake: 'shake 0.4s ease-in-out'
+  			shake: 'shake 0.4s ease-in-out',
+  			// CSS (not JS) so above-the-fold content animates on first paint, before hydration.
+  			'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
+  			rise: 'rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both'
   		}
   	}
   },

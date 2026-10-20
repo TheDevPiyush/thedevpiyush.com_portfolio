@@ -14,6 +14,9 @@ const nextConfig = {
             })),
         ].filter(Boolean),
     },
+    async redirects() {
+        return [{ source: '/home', destination: '/', permanent: true }]
+    },
     // Pages are cached by tag (lib/data/cached.ts); only the JSON API opts out of CDN caching.
     async headers() {
         return [{

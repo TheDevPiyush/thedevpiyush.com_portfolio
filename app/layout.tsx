@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "TheDevPiyush - Full-Stack Developer || Portfolio",
+    default: "Piyush Choudhary · Full-Stack Developer",
     template: "%s | TheDevPiyush"
   },
   description: "Portfolio of Piyush Choudhary, a passionate Full-Stack Developer. Explore my projects, blog posts, and technical expertise in modern web development.",
@@ -54,9 +54,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL('https://thedevpiyush.com'),
-  alternates: {
-    canonical: 'https://thedevpiyush.com',
-  },
+  // Each page sets its own canonical; a root-level one would mark every page as a duplicate of home.
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -64,14 +62,6 @@ export const metadata: Metadata = {
     siteName: 'TheDevPiyush',
     title: 'TheDevPiyush - Full-Stack Portfolio',
     description: 'Portfolio of Piyush Choudhary, a passionate Full-Stack & Blockchain Developer. Explore my projects, blog posts, and technical expertise.',
-    images: [
-      {
-        url: 'https://thedevpiyush.com/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'TheDevPiyush - Full-Stack Portfolio',
-      }
-    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -79,7 +69,6 @@ export const metadata: Metadata = {
     creator: '@thedevpiyush',
     title: 'TheDevPiyush - Full-Stack Portfolio',
     description: 'Portfolio of Piyush Choudhary, a passionate Full-Stack & Blockchain Developer.',
-    images: ['https://thedevpiyush.com/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -102,9 +91,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`} suppressHydrationWarning>
-      <body className="preview-scroll">
-        {/* Dark is forced until Phase 2 rebuilds the pages on the new tokens; then switch to defaultTheme="system". */}
-        <ThemeProvider attribute="class" forcedTheme="dark" defaultTheme="dark" disableTransitionOnChange>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Providers>
             {children}
           </Providers>

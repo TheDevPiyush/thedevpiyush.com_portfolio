@@ -95,14 +95,13 @@ export async function getInterests(): Promise<Interest[]> {
   )
 }
 
-export async function getPortfolioStats(): Promise<Record<string, string>> {
-  const rows: PortfolioStat[] =
+export async function getPortfolioStats(): Promise<PortfolioStat[]> {
+  return (
     unwrap(
       "portfolio stats",
       await supabase.from("portfolio_stats").select("*").eq("is_active", true).order("display_order"),
     ) ?? []
-
-  return Object.fromEntries(rows.map((stat) => [stat.stat_key, stat.stat_value]))
+  )
 }
 
 export async function getPortfolioData(): Promise<PortfolioData | null> {

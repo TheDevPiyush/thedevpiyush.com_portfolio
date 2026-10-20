@@ -35,3 +35,11 @@ export const getPortfolioData = cache(async (): Promise<PortfolioState> => {
     }
   }
 })
+
+// For pages that can't render without data. Throwing lets the route's error.tsx handle it, and during
+// ISR revalidation Next keeps serving the last good page instead of caching an error page.
+export async function requirePortfolioData(): Promise<PortfolioViewModel> {
+  const { data, error } = await getPortfolioData()
+  if (!data) throw new Error(error ?? "Failed to load portfolio data")
+  return data
+}

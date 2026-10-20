@@ -58,3 +58,11 @@ export function verifyRazorpayWebhookSignature(rawBody: string, signature: strin
   const received = Buffer.from(signature)
   return generated.length === received.length && crypto.timingSafeEqual(generated, received)
 }
+
+// Checkout success handler signature: HMAC-SHA256 of "order_id|payment_id" with the key secret.
+export function verifyRazorpayPaymentSignature(orderId: string, paymentId: string, signature: string): boolean {
+  const { keySecret } = getRazorpayConfig()
+  const generated = Buffer.from(crypto.createHmac("sha256", keySecret).update(`${orderId}|${paymentId}`).digest("hex"))
+  const received = Buffer.from(signature)
+  return generated.length === received.length && crypto.timingSafeEqual(generated, received)
+}

@@ -2,7 +2,7 @@
 
 import { ProgressProvider } from '@bprogress/next/app';
 import { useEffect } from 'react';
-import { Toaster } from 'sonner';
+import { Toaster } from '@/components/ui/sonner';
 import { supabaseBrowser } from '../supabase/browser';
 import useUser from '@/hooks/use-user';
 import { useUserStore } from '../useStore';
@@ -35,13 +35,13 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <ProgressProvider
-            height="4px"
-            color="rgb(var(--color-primary))"
+            height="2px"
+            color="hsl(var(--brand))"
             options={{ showSpinner: false }}
             shallowRouting
         >
             {children}
-            <Toaster />
+            <Toaster position="bottom-center" />
         </ProgressProvider>
     );
 };

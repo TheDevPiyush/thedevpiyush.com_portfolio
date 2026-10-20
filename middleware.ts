@@ -34,6 +34,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Account pages need a session too; the page re-checks it server-side.
+  if (pathname === "/purchases" && !user) {
+    const url = request.nextUrl.clone()
+    url.pathname = "/signin"
+    url.search = ""
+    url.searchParams.set("next", pathname)
+    return NextResponse.redirect(url)
+  }
+
   return response
 }
 

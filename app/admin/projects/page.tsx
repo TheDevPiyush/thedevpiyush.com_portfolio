@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { requireAdmin } from "@/lib/auth/server-auth"
-import { NavigationMenu } from "@/components/navigation-menu"
+import { AdminBar } from "@/components/admin/admin-bar"
 import { ProjectUploadForm } from "@/components/project-upload-form"
 
 export default async function AdminProjectsPage() {
@@ -10,7 +10,7 @@ export default async function AdminProjectsPage() {
 
   return (
     <div className="min-h-screen bg-[rgb(var(--color-bg-primary))]">
-      <NavigationMenu />
+      <AdminBar />
       <div className="pt-24 px-6 pb-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">

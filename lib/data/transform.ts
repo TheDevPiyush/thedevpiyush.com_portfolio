@@ -90,8 +90,19 @@ export function transformPortfolioData(data: PortfolioData) {
       trending: post.is_trending,
       popular: post.is_popular,
     })),
-    stats: data.stats,
+    stats: Object.fromEntries(data.stats.map((stat) => [stat.stat_key, stat.stat_value])) as Record<string, string>,
+    statList: data.stats.map((stat) => ({
+      key: stat.stat_key,
+      value: stat.stat_value,
+      label: stat.display_name || humanize(stat.stat_key),
+    })),
   }
+}
+
+// "linesOfCode" -> "Lines of code"
+function humanize(key: string) {
+  const words = key.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").toLowerCase()
+  return words.charAt(0).toUpperCase() + words.slice(1)
 }
 
 function formatPeriod(startDate: string, endDate?: string, isCurrent?: boolean): string {
