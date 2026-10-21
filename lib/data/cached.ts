@@ -22,6 +22,7 @@ export const getCachedEducation = cached(queries.getEducation, "education", CACH
 export const getCachedCertifications = cached(queries.getCertifications, "certifications", CACHE_TAGS.certifications)
 export const getCachedBlogPosts = cached(queries.getBlogPosts, "blog_posts", CACHE_TAGS.posts, POSTS_REVALIDATE_SECONDS)
 export const getCachedInterests = cached(queries.getInterests, "interests", CACHE_TAGS.interests)
+export const getCachedSiteSettings = cached(queries.getSiteSettings, "site_settings", CACHE_TAGS.settings)
 export const getCachedPortfolioStats = cached(queries.getPortfolioStats, "portfolio_stats", CACHE_TAGS.stats)
 
 export async function getCachedFeaturedProjects() {
@@ -33,7 +34,7 @@ export async function getCachedFeaturedBlogPost() {
 }
 
 export async function getCachedPortfolioData(): Promise<PortfolioData | null> {
-  const [personal, skills, projects, experience, education, certifications, blog, interests, stats] = await Promise.all([
+  const [personal, skills, projects, experience, education, certifications, blog, interests, stats, settings] = await Promise.all([
     getCachedPersonalInfo(),
     getCachedSkills(),
     getCachedProjects(),
@@ -43,9 +44,10 @@ export async function getCachedPortfolioData(): Promise<PortfolioData | null> {
     getCachedBlogPosts(),
     getCachedInterests(),
     getCachedPortfolioStats(),
+    getCachedSiteSettings(),
   ])
 
-  if (!personal || !education) return null
+  if (!personal) return null
 
-  return { personal, skills, projects, experience, education, certifications, blog, interests, stats }
+  return { personal, skills, projects, experience, education, certifications, blog, interests, stats, settings }
 }

@@ -4,9 +4,7 @@ import { rehypePlugins, remarkPlugins } from "@/lib/blog/markdown"
 import { sanitizeBlogHtml } from "@/lib/sanitize"
 import { cn } from "@/lib/utils"
 import { CodeBlock } from "./code-block"
-
-const PROSE =
-  "post-body prose prose-lg max-w-none dark:prose-invert prose-headings:scroll-mt-28 prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight prose-h2:text-4xl prose-h3:text-2xl prose-a:text-brand prose-a:underline-offset-4 prose-img:rounded-2xl prose-img:border prose-blockquote:border-l-brand prose-blockquote:font-serif prose-blockquote:text-2xl prose-blockquote:font-normal prose-blockquote:not-italic"
+import { PROSE } from "./prose"
 
 // react-markdown passes the hast node to every component; it must not reach the DOM.
 const components: Components = {

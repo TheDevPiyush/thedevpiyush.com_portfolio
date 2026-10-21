@@ -81,48 +81,48 @@ export function CommandMenu({ data }: { data: SiteChromeData | null }) {
           <Command.List className="max-h-[min(60vh,420px)] overflow-y-auto overscroll-contain p-2">
             <Command.Empty className="py-10 text-center text-sm text-muted-foreground">No results found.</Command.Empty>
 
-            <Group heading="Pages">
-              <Item icon={<Home />} onSelect={go("/")}>Home</Item>
-              <Item icon={<User />} onSelect={go("/about")}>About</Item>
-              <Item icon={<Briefcase />} onSelect={go("/projects")}>Work</Item>
-              <Item icon={<Newspaper />} onSelect={go("/blog")}>Writing</Item>
-              <Item icon={<Mail />} onSelect={go("/contact")}>Contact</Item>
-              <Item icon={<FileText />} onSelect={go("/resume")}>Resume</Item>
-              <Item icon={<Terminal />} onSelect={go("/terminal")} keywords={["cli", "shell"]}>
+            <CommandGroup heading="Pages">
+              <CommandItem icon={<Home />} onSelect={go("/")}>Home</CommandItem>
+              <CommandItem icon={<User />} onSelect={go("/about")}>About</CommandItem>
+              <CommandItem icon={<Briefcase />} onSelect={go("/projects")}>Work</CommandItem>
+              <CommandItem icon={<Newspaper />} onSelect={go("/blog")}>Writing</CommandItem>
+              <CommandItem icon={<Mail />} onSelect={go("/contact")}>Contact</CommandItem>
+              <CommandItem icon={<FileText />} onSelect={go("/resume")}>Resume</CommandItem>
+              <CommandItem icon={<Terminal />} onSelect={go("/terminal")} keywords={["cli", "shell"]}>
                 Open terminal
-              </Item>
+              </CommandItem>
               {isSignedIn ? (
-                <Item icon={<Package />} onSelect={go("/purchases")}>My purchases</Item>
+                <CommandItem icon={<Package />} onSelect={go("/purchases")}>My purchases</CommandItem>
               ) : (
-                <Item icon={<LogIn />} onSelect={go("/signin?next=/purchases")} keywords={["login", "account"]}>
+                <CommandItem icon={<LogIn />} onSelect={go("/signin?next=/purchases")} keywords={["login", "account"]}>
                   Sign in
-                </Item>
+                </CommandItem>
               )}
-            </Group>
+            </CommandGroup>
 
             {!!data?.projects.length && (
-              <Group heading="Projects">
+              <CommandGroup heading="Projects">
                 {data.projects.map((project) => (
-                  <Item key={project.id} icon={<Briefcase />} onSelect={go(`/projects#project-${project.id}`)}>
+                  <CommandItem key={project.id} icon={<Briefcase />} onSelect={go(`/projects#project-${project.id}`)}>
                     {project.title}
-                  </Item>
+                  </CommandItem>
                 ))}
-              </Group>
+              </CommandGroup>
             )}
 
             {!!data?.posts.length && (
-              <Group heading="Writing">
+              <CommandGroup heading="Writing">
                 {data.posts.map((post) => (
-                  <Item key={post.slug} icon={<PenLine />} onSelect={go(`/blog/${post.slug}`)}>
+                  <CommandItem key={post.slug} icon={<PenLine />} onSelect={go(`/blog/${post.slug}`)}>
                     {post.title}
-                  </Item>
+                  </CommandItem>
                 ))}
-              </Group>
+              </CommandGroup>
             )}
 
-            <Group heading="Actions">
+            <CommandGroup heading="Actions">
               {data?.email && (
-                <Item
+                <CommandItem
                   icon={<AtSign />}
                   keywords={["email", "mail"]}
                   onSelect={run(async () => {
@@ -131,28 +131,28 @@ export function CommandMenu({ data }: { data: SiteChromeData | null }) {
                   })}
                 >
                   Copy email address
-                </Item>
+                </CommandItem>
               )}
-              <Item icon={<FileText />} onSelect={run(() => window.location.assign("/api/resume?download=1"))}>
+              <CommandItem icon={<FileText />} onSelect={run(() => window.location.assign("/api/resume?download=1"))}>
                 Download resume
-              </Item>
-              <Item icon={<Sun />} onSelect={run(() => setTheme("light"))} keywords={["theme"]}>Light theme</Item>
-              <Item icon={<Moon />} onSelect={run(() => setTheme("dark"))} keywords={["theme"]}>Dark theme</Item>
-              <Item icon={<Laptop />} onSelect={run(() => setTheme("system"))} keywords={["theme"]}>System theme</Item>
-            </Group>
+              </CommandItem>
+              <CommandItem icon={<Sun />} onSelect={run(() => setTheme("light"))} keywords={["theme"]}>Light theme</CommandItem>
+              <CommandItem icon={<Moon />} onSelect={run(() => setTheme("dark"))} keywords={["theme"]}>Dark theme</CommandItem>
+              <CommandItem icon={<Laptop />} onSelect={run(() => setTheme("system"))} keywords={["theme"]}>System theme</CommandItem>
+            </CommandGroup>
 
             {data && (data.social.github || data.social.linkedin || data.social.twitter) && (
-              <Group heading="Elsewhere">
+              <CommandGroup heading="Elsewhere">
                 {data.social.github && (
-                  <Item icon={<Github />} external onSelect={openExternal(data.social.github)}>GitHub</Item>
+                  <CommandItem icon={<Github />} external onSelect={openExternal(data.social.github)}>GitHub</CommandItem>
                 )}
                 {data.social.linkedin && (
-                  <Item icon={<Linkedin />} external onSelect={openExternal(data.social.linkedin)}>LinkedIn</Item>
+                  <CommandItem icon={<Linkedin />} external onSelect={openExternal(data.social.linkedin)}>LinkedIn</CommandItem>
                 )}
                 {data.social.twitter && (
-                  <Item icon={<Twitter />} external onSelect={openExternal(data.social.twitter)}>X (Twitter)</Item>
+                  <CommandItem icon={<Twitter />} external onSelect={openExternal(data.social.twitter)}>X (Twitter)</CommandItem>
                 )}
-              </Group>
+              </CommandGroup>
             )}
           </Command.List>
           <div className="flex items-center justify-between border-t px-4 py-2.5 text-[11px] text-muted-foreground">
@@ -167,7 +167,7 @@ export function CommandMenu({ data }: { data: SiteChromeData | null }) {
   )
 }
 
-function Group({ heading, children }: { heading: string; children: ReactNode }) {
+export function CommandGroup({ heading, children }: { heading: string; children: ReactNode }) {
   return (
     <Command.Group
       heading={heading}
@@ -178,7 +178,7 @@ function Group({ heading, children }: { heading: string; children: ReactNode }) 
   )
 }
 
-function Item({
+export function CommandItem({
   icon,
   children,
   onSelect,

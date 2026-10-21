@@ -23,6 +23,12 @@ export default function PrivacyPolicyPage() {
             your IP address is stored alongside the message; the IP address itself is never stored.
           </p>
           <p>
+            To understand which pages are read, each page view records the page address, the referring website, your
+            country (from the hosting provider) and your device type. No cookies are set for this and no IP address is
+            stored: visits are counted with a one-way hash that changes every day, so they can&apos;t be linked across
+            days or back to you. Browsers sending Do Not Track or Global Privacy Control are not counted.
+          </p>
+          <p>
             Payments are processed through Razorpay. I do not store full card or banking details on this website. Please
             review Razorpay&apos;s policies for payment-specific data handling.
           </p>

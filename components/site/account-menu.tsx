@@ -53,15 +53,15 @@ export function AccountMenu() {
         {isAdmin && (
           <>
             <DropdownMenuItem asChild>
-              <Link href="/admin/postblog">
+              <Link href="/admin/posts/new">
                 <PenLine className="mr-2 h-4 w-4" />
                 Write a post
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/admin/projects">
+              <Link href="/admin">
                 <LayoutDashboard className="mr-2 h-4 w-4" />
-                Manage projects
+                Admin dashboard
               </Link>
             </DropdownMenuItem>
           </>

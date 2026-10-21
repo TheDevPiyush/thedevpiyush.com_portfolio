@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { requirePortfolioData } from "@/lib/data/portfolio"
+import { getCachedSiteSettings } from "@/lib/data/cached"
 import { Section } from "@/components/site/section"
 import { Hero } from "@/components/sections/hero"
 import { SelectedWork } from "@/components/sections/selected-work"
@@ -11,15 +12,22 @@ import { SkillsGrid } from "@/components/sections/skills-grid"
 import { WritingList } from "@/components/sections/writing-list"
 import { ContactCta } from "@/components/sections/contact-cta"
 
-export const metadata: Metadata = { alternates: { canonical: "/" } }
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getCachedSiteSettings()
+  return {
+    description: settings.seo.description,
+    openGraph: { description: settings.seo.description },
+    alternates: { canonical: "/" },
+  }
+}
 
 export default async function HomePage() {
-  const { personal, projects, experience, skills, blog, statList } = await requirePortfolioData()
+  const { personal, projects, experience, skills, blog, statList, settings } = await requirePortfolioData()
   const selected = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)].slice(0, 4)
 
   return (
     <>
-      <Hero personal={personal} />
+      <Hero personal={personal} availability={settings.availability} />
 
       {selected.length > 0 && (
         <Section

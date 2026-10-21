@@ -1,3 +1,5 @@
+import type { SiteSettings } from "@/lib/settings"
+
 export interface PersonalInfo {
   id: string
   name: string
@@ -9,6 +11,8 @@ export interface PersonalInfo {
   bio: string
   about_me: string
   philosophy: string
+  /** About page story; paragraphs separated by blank lines (added in 0004_admin.sql). */
+  story?: string | null
   image?: string
   github_url: string
   linkedin_url: string
@@ -150,9 +154,10 @@ export interface PortfolioData {
   skills: Skill[]
   projects: Project[]
   experience: Experience[]
-  education: Education
+  education: Education[]
   certifications: Certification[]
   blog: BlogPost[]
   interests: Interest[]
   stats: PortfolioStat[]
+  settings: SiteSettings
 }

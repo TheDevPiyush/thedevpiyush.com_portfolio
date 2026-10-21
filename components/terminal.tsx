@@ -133,7 +133,7 @@ export function Terminal() {
 
         if (command.name === "admin-postblog" || command.aliases?.includes("admin-post-blog")) {
           if (typeof window !== "undefined") {
-            router.push("/admin/postblog");
+            router.push("/admin/posts/new");
             return
           }
         }

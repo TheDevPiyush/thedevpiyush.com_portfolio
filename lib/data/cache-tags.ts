@@ -9,6 +9,7 @@ export const CACHE_TAGS = {
   posts: "posts",
   interests: "interests",
   stats: "stats",
+  settings: "settings",
 } as const
 
 export type CacheTag = (typeof CACHE_TAGS)[keyof typeof CACHE_TAGS]

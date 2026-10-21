@@ -14,6 +14,10 @@ export function transformPortfolioData(data: PortfolioData) {
       bio: data.personal.bio,
       about_me: data.personal.about_me,
       philosophy: data.personal.philosophy,
+      story: (data.personal.story ?? "")
+        .split(/\n\s*\n/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean),
       image: data.personal.image,
       interests: data.interests.map((interest) =>
         interest.emoji ? `${interest.emoji} ${interest.interest}` : interest.interest,
@@ -62,15 +66,16 @@ export function transformPortfolioData(data: PortfolioData) {
       technologies: exp.technologies,
       achievements: exp.achievements,
     })),
-    education: {
-      degree: data.education.degree,
-      institution: data.education.institution,
-      period: formatPeriod(data.education.start_date, data.education.end_date),
-      gpa: data.education.gpa,
-      coursework: data.education.coursework,
-      activities: data.education.activities,
-      thesis: data.education.thesis,
-    },
+    education: data.education.map((entry) => ({
+      id: entry.id,
+      degree: entry.degree,
+      institution: entry.institution,
+      period: formatPeriod(entry.start_date, entry.end_date),
+      gpa: entry.gpa,
+      coursework: entry.coursework ?? [],
+      activities: entry.activities ?? [],
+      thesis: entry.thesis,
+    })),
     certifications: data.certifications.map((cert) => ({
       name: cert.name,
       issuer: cert.issuer,
@@ -78,6 +83,7 @@ export function transformPortfolioData(data: PortfolioData) {
       url: cert.credential_url,
     })),
     blog: data.blog.map(toBlogPost),
+    settings: data.settings,
     stats: Object.fromEntries(data.stats.map((stat) => [stat.stat_key, stat.stat_value])) as Record<string, string>,
     statList: data.stats.map((stat) => ({
       key: stat.stat_key,

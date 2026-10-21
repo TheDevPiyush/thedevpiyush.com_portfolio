@@ -232,7 +232,7 @@ Type 'contact' to get in touch! 🚀
 
 export function formatExperience(
   experiences: Experience[],
-  education: Education,
+  education: Education[],
   certifications: Certification[],
 ): string {
   const width = getTerminalWidth()
@@ -261,12 +261,16 @@ ${exp.achievements.map((achievement) => `│   ├── 🎯 ${achievement}`).j
 
   output += `‎\n🎓 EDUCATION
 ${"=".repeat(12)}
-‎\n[${education.period}] ${education.degree}
-${education.institution}
-├── Relevant Coursework: ${education.coursework.join(", ")}
-├── GPA: ${education.gpa}
-├── Activities: ${education.activities.join(", ")}
-└── Thesis: "${education.thesis}"
+${education
+  .map(
+    (entry) => `‎\n[${entry.period}] ${entry.degree}
+${entry.institution}
+├── Relevant Coursework: ${entry.coursework.join(", ")}
+├── GPA: ${entry.gpa}
+├── Activities: ${entry.activities.join(", ")}
+└── Thesis: "${entry.thesis}"`,
+  )
+  .join("\n")}
 
 ‎\n🏆 CERTIFICATIONS & ACHIEVEMENTS
 ${"=".repeat(32)}‎\n

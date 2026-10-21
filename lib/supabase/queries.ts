@@ -11,6 +11,7 @@ import type {
   PortfolioStat,
   PortfolioData,
 } from "./types"
+import { DEFAULT_SETTINGS, resolveSettings, type SiteSettings } from "@/lib/settings"
 
 // Raw public reads (anon key). They throw on failure so callers, and especially the cache
 // layer in lib/data/cached.ts, never store an error as an empty result.
@@ -52,17 +53,13 @@ export async function getExperiences(): Promise<Experience[]> {
   )
 }
 
-// Most recent active education entry (the table can hold several).
-export async function getEducation(): Promise<Education | null> {
-  return unwrap(
-    "education",
-    await supabase
-      .from("education")
-      .select("*")
-      .eq("is_active", true)
-      .order("start_date", { ascending: false })
-      .limit(1)
-      .maybeSingle(),
+// Newest first; the About page shows every active entry.
+export async function getEducation(): Promise<Education[]> {
+  return (
+    unwrap(
+      "education",
+      await supabase.from("education").select("*").eq("is_active", true).order("start_date", { ascending: false }),
+    ) ?? []
   )
 }
 
@@ -110,8 +107,19 @@ export async function getPortfolioStats(): Promise<PortfolioStat[]> {
   )
 }
 
+// Missing table (0004_admin.sql not run yet) or a failed read falls back to defaults rather than
+// taking the whole site down.
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const { data, error } = await supabase.from("site_settings").select("key,value")
+  if (error) {
+    console.warn("Using default site settings:", error.message)
+    return DEFAULT_SETTINGS
+  }
+  return resolveSettings(data ?? [])
+}
+
 export async function getPortfolioData(): Promise<PortfolioData | null> {
-  const [personal, skills, projects, experience, education, certifications, blog, interests, stats] = await Promise.all([
+  const [personal, skills, projects, experience, education, certifications, blog, interests, stats, settings] = await Promise.all([
     getPersonalInfo(),
     getSkills(),
     getProjects(),
@@ -121,9 +129,10 @@ export async function getPortfolioData(): Promise<PortfolioData | null> {
     getBlogPosts(),
     getInterests(),
     getPortfolioStats(),
+    getSiteSettings(),
   ])
 
-  if (!personal || !education) return null
+  if (!personal) return null
 
-  return { personal, skills, projects, experience, education, certifications, blog, interests, stats }
+  return { personal, skills, projects, experience, education, certifications, blog, interests, stats, settings }
 }

@@ -4,7 +4,7 @@ import { SignInPanel } from "@/components/auth/sign-in-panel"
 import { safeNextPath } from "@/lib/auth/safe-next"
 
 export const metadata: Metadata = {
-  title: "Admin sign in - TheDevPiyush",
+  title: "Sign in",
   robots: { index: false, follow: false },
 }
 
@@ -20,7 +20,7 @@ export default async function AdminSignInPage({ searchParams }: AdminSignInPageP
       <SignInPanel
         title="Admin portal"
         description="Enter your admin email and we'll send you a one-time code."
-        nextPath={safeNextPath(next, "/admin/projects")}
+        nextPath={safeNextPath(next, "/admin")}
         showGoogle={false}
       />
     </AuthShell>

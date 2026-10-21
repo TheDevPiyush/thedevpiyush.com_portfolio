@@ -9,7 +9,7 @@ export type Skill = PortfolioViewModel["skills"][number]
 export type Project = PortfolioViewModel["projects"][number]
 export type Experience = PortfolioViewModel["experience"][number]
 export type BlogPost = PortfolioViewModel["blog"][number]
-export type Education = PortfolioViewModel["education"]
+export type Education = PortfolioViewModel["education"][number]
 export type Certification = PortfolioViewModel["certifications"][number]
 
 export interface PortfolioState {

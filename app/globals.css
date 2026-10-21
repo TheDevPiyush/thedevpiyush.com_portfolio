@@ -80,31 +80,6 @@
         --sidebar-ring: 263 70% 66%;
     }
 
-    /* LEGACY: RGB-triplet palette still used by the two admin forms (blog-form, project-upload-form).
-       Delete with them in the Phase 4 admin rebuild. Use as rgb(var(--x) / a). */
-    :root {
-        --color-primary: 139 92 246;
-        --color-primary-light: 167 139 250;
-        --color-primary-dark: 124 58 237;
-        --color-secondary: 168 85 247;
-        --color-secondary-light: 196 181 253;
-        --color-secondary-dark: 147 51 234;
-        --color-bg-primary: 2 6 23;
-        --color-bg-secondary: 15 23 42;
-        --color-bg-tertiary: 30 41 59;
-        --color-bg-quaternary: 51 65 85;
-        --color-text-primary: 255 255 255;
-        --color-text-secondary: 203 213 225;
-        --color-text-tertiary: 148 163 184;
-        --color-text-muted: 100 116 139;
-        --color-border-primary: 51 65 85;
-        --color-border-secondary: 71 85 105;
-        --color-accent-primary: 139 92 246;
-        --color-accent-secondary: 168 85 247;
-        --gradient-primary: linear-gradient(to right, rgb(139 92 246), rgb(168 85 247));
-        --gradient-secondary: linear-gradient(to right, rgb(124 58 237), rgb(147 51 234));
-    }
-
     * {
         @apply border-border;
     }

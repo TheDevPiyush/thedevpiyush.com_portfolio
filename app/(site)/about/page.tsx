@@ -14,12 +14,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 }
 
-// TODO(phase 4): editable from the admin panel (site_settings).
-const STORY = [
-  "I got into coding back in class 9, when my school computer teacher introduced us to Java. That first look at code really stuck with me. Then during the 2020 lockdown I finally got my first PC and started exploring languages and frameworks on my own.",
-  "Lockdown gave me the time (and patience) to really dive in. For me, programming isn't just about writing code. It feels more like art: the place where creativity and logic meet, and that's what keeps me hooked.",
-]
-
 export default async function AboutPage() {
   const { personal, experience, skills, education, certifications, stats } = await requirePortfolioData()
   const firstName = personal.name.split(" ")[0]
@@ -71,9 +65,9 @@ export default async function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="space-y-8">
-            <h2 className="font-serif text-4xl tracking-tight sm:text-5xl">My story</h2>
+            {personal.story.length > 0 && <h2 className="font-serif text-4xl tracking-tight sm:text-5xl">My story</h2>}
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
-              {STORY.map((paragraph) => (
+              {personal.story.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
@@ -98,37 +92,45 @@ export default async function AboutPage() {
         </Section>
       )}
 
-      <Section index="03" eyebrow="Education" title="Learning, formally and otherwise">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Reveal className="space-y-5 rounded-3xl border p-6 sm:p-8">
-            <p className="font-mono text-xs text-muted-foreground">{education.period}</p>
-            <div className="space-y-1">
-              <h3 className="text-xl font-medium tracking-tight">{education.degree}</h3>
-              <p className="font-serif text-xl italic text-muted-foreground">{education.institution}</p>
-            </div>
-            {education.gpa && <p className="text-sm text-muted-foreground">GPA {education.gpa}</p>}
-            {education.coursework.length > 0 && (
-              <ul className="flex flex-wrap gap-1.5">
-                {education.coursework.map((course) => (
-                  <li key={course} className="rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground">
-                    {course}
-                  </li>
+      {(education.length > 0 || certifications.length > 0) && (
+        <Section index="03" eyebrow="Education" title="Learning, formally and otherwise">
+          <div className="grid gap-6 lg:grid-cols-2">
+            {education.length > 0 && (
+              <Reveal as="ul" stagger={0.08} className="space-y-6">
+                {education.map((entry) => (
+                  <RevealItem as="li" key={entry.id} className="space-y-5 rounded-3xl border p-6 sm:p-8">
+                    <p className="font-mono text-xs text-muted-foreground">{entry.period}</p>
+                    <div className="space-y-1">
+                      <h3 className="text-xl font-medium tracking-tight">{entry.degree}</h3>
+                      <p className="font-serif text-xl italic text-muted-foreground">{entry.institution}</p>
+                    </div>
+                    {entry.gpa && <p className="text-sm text-muted-foreground">GPA {entry.gpa}</p>}
+                    {entry.coursework.length > 0 && (
+                      <ul className="flex flex-wrap gap-1.5">
+                        {entry.coursework.map((course) => (
+                          <li key={course} className="rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground">
+                            {course}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </RevealItem>
                 ))}
-              </ul>
+              </Reveal>
             )}
-          </Reveal>
 
-          {certifications.length > 0 && (
-            <Reveal as="ul" stagger={0.06} className="divide-y overflow-hidden rounded-3xl border">
-              {certifications.map((cert) => (
-                <RevealItem as="li" key={`${cert.name}-${cert.issuer}`}>
-                  <CertificationRow cert={cert} />
-                </RevealItem>
-              ))}
-            </Reveal>
-          )}
-        </div>
-      </Section>
+            {certifications.length > 0 && (
+              <Reveal as="ul" stagger={0.06} className="h-fit divide-y overflow-hidden rounded-3xl border">
+                {certifications.map((cert) => (
+                  <RevealItem as="li" key={`${cert.name}-${cert.issuer}`}>
+                    <CertificationRow cert={cert} />
+                  </RevealItem>
+                ))}
+              </Reveal>
+            )}
+          </div>
+        </Section>
+      )}
 
       {personal.interests.length > 0 && (
         <Section index="04" eyebrow="Off the clock" title="When I'm not coding">
