@@ -1,7 +1,7 @@
 import { Container } from "@/components/site/section"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export default function SiteLoading() {
+export default function PurchasesLoading() {
   return (
     <Container className="space-y-6 pb-24 pt-24" aria-busy="true" aria-label="Loading">
       <Skeleton className="h-3 w-32 rounded-full" />

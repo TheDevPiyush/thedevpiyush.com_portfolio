@@ -54,6 +54,9 @@ export function SiteFooter({ data }: { data: SiteChromeData | null }) {
           <Link href="/privacy-policy" className="transition-colors hover:text-foreground">
             Privacy
           </Link>
+          <a href="/rss.xml" className="transition-colors hover:text-foreground">
+            RSS
+          </a>
           <Link href="/signin?next=/purchases" className="transition-colors hover:text-foreground">
             Account
           </Link>

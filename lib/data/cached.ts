@@ -7,8 +7,11 @@ import { CACHE_TAGS } from "./cache-tags"
 // Admin writes purge entries by tag, so the time-based fallback can be long.
 const REVALIDATE_SECONDS = 60 * 60
 
-function cached<T>(fn: () => Promise<T>, key: string, tag: string) {
-  return unstable_cache(fn, ["portfolio", key], { tags: [tag], revalidate: REVALIDATE_SECONDS })
+// Posts re-check sooner so scheduled posts go live within a few minutes of their publish time.
+const POSTS_REVALIDATE_SECONDS = 5 * 60
+
+function cached<T>(fn: () => Promise<T>, key: string, tag: string, revalidate = REVALIDATE_SECONDS) {
+  return unstable_cache(fn, ["portfolio", key], { tags: [tag], revalidate })
 }
 
 export const getCachedPersonalInfo = cached(queries.getPersonalInfo, "personal_info", CACHE_TAGS.profile)
@@ -17,7 +20,7 @@ export const getCachedProjects = cached(queries.getProjects, "projects", CACHE_T
 export const getCachedExperiences = cached(queries.getExperiences, "experiences", CACHE_TAGS.experience)
 export const getCachedEducation = cached(queries.getEducation, "education", CACHE_TAGS.education)
 export const getCachedCertifications = cached(queries.getCertifications, "certifications", CACHE_TAGS.certifications)
-export const getCachedBlogPosts = cached(queries.getBlogPosts, "blog_posts", CACHE_TAGS.posts)
+export const getCachedBlogPosts = cached(queries.getBlogPosts, "blog_posts", CACHE_TAGS.posts, POSTS_REVALIDATE_SECONDS)
 export const getCachedInterests = cached(queries.getInterests, "interests", CACHE_TAGS.interests)
 export const getCachedPortfolioStats = cached(queries.getPortfolioStats, "portfolio_stats", CACHE_TAGS.stats)
 

@@ -18,7 +18,7 @@ export async function getSiteChromeData(): Promise<SiteChromeData | null> {
       twitter: data.personal.social.twitter || undefined,
     },
     projects: data.projects.map((project) => ({ id: project.id, title: project.title })),
-    posts: data.blog.map((post) => ({ title: post.title, url: post.url })),
+    posts: data.blog.map((post) => ({ title: post.title, slug: post.slug })),
   }
 }
 

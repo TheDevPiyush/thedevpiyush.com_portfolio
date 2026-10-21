@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { requirePortfolioData } from "@/lib/data/portfolio"
+import { ArrowRight, Rss } from "lucide-react"
 import { Container, PageHeader, Section } from "@/components/site/section"
 import { Reveal } from "@/components/motion/reveal"
-import { WritingList } from "@/components/sections/writing-list"
+import { BlogBrowser } from "@/components/blog/blog-browser"
+import { getPosts, getTags } from "@/lib/blog/posts"
 import { formatDate } from "@/lib/formatters/date"
 
 export const metadata: Metadata = {
@@ -14,10 +14,22 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 }
 
+// Matches the posts cache so scheduled posts appear within five minutes.
+export const revalidate = 300
+
 export default async function BlogPage() {
-  const { blog } = await requirePortfolioData()
-  const featured = blog.find((post) => post.featured) ?? blog[0]
-  const rest = blog.filter((post) => post !== featured)
+  const [posts, tags] = await Promise.all([getPosts(), getTags()])
+  const featured = posts.find((post) => post.featured) ?? posts[0]
+  // Only what the client-side search needs.
+  const browsable = posts.map(({ id, slug, title, excerpt, publishDate, readTime, tags }) => ({
+    id,
+    slug,
+    title,
+    excerpt,
+    publishDate,
+    readTime,
+    tags,
+  }))
 
   return (
     <>
@@ -35,7 +47,7 @@ export default async function BlogPage() {
         <Container className="border-t pt-16">
           <Reveal>
             <Link
-              href={`/blog/${featured.url}`}
+              href={`/blog/${featured.slug}`}
               className="group grid overflow-hidden rounded-3xl border bg-card transition-colors hover:border-foreground/20 lg:grid-cols-2"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-muted lg:aspect-auto">
@@ -70,9 +82,20 @@ export default async function BlogPage() {
         <Container className="border-t py-24 text-center text-muted-foreground">First post coming soon.</Container>
       )}
 
-      {rest.length > 0 && (
-        <Section eyebrow="Archive" title="All posts">
-          <WritingList posts={rest} />
+      {posts.length > 1 && (
+        <Section
+          eyebrow="Archive"
+          title="All posts"
+          action={
+            <a
+              href="/rss.xml"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Rss className="h-4 w-4" /> RSS feed
+            </a>
+          }
+        >
+          <BlogBrowser posts={browsable} tags={tags.map((tag) => tag.name)} />
         </Section>
       )}
     </>

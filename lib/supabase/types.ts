@@ -103,12 +103,19 @@ export interface BlogPost {
   id: string
   title: string
   excerpt: string
-  content?: string
+  /** Legacy HTML from the old editor; only rendered when content_md is empty. */
+  content?: string | null
+  /** Markdown source (added in 0003_blog.sql). */
+  content_md?: string | null
+  /** A post is live once is_published is true and publish_date has passed. */
   publish_date: string
   read_time: string
-  tags: string[]
+  tags: string[] | null
+  /** The post slug. */
   url?: string
   image_url?: string
+  seo_title?: string | null
+  seo_description?: string | null
   is_featured: boolean
   is_trending: boolean
   is_popular: boolean

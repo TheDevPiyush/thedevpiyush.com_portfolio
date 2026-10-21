@@ -75,11 +75,17 @@ export async function getCertifications(): Promise<Certification[]> {
   )
 }
 
+// Live posts only: scheduled posts (publish_date in the future) appear once their time passes.
 export async function getBlogPosts(): Promise<BlogPost[]> {
   return (
     unwrap(
       "blog posts",
-      await supabase.from("blog_posts").select("*").eq("is_published", true).order("publish_date", { ascending: false }),
+      await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("is_published", true)
+        .lte("publish_date", new Date().toISOString())
+        .order("publish_date", { ascending: false }),
     ) ?? []
   )
 }

@@ -113,7 +113,7 @@ export function CommandMenu({ data }: { data: SiteChromeData | null }) {
             {!!data?.posts.length && (
               <Group heading="Writing">
                 {data.posts.map((post) => (
-                  <Item key={post.url} icon={<PenLine />} onSelect={go(`/blog/${post.url}`)}>
+                  <Item key={post.slug} icon={<PenLine />} onSelect={go(`/blog/${post.slug}`)}>
                     {post.title}
                   </Item>
                 ))}

@@ -151,3 +151,86 @@ html.lenis body {
 .lenis [data-lenis-prevent-wheel] {
     overscroll-behavior: contain;
 }
+
+/* Blog post body (components/blog/post-body.tsx). Code is highlighted at build time by rehype-pretty-code. */
+.post-body .heading-anchor {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+.post-body .heading-anchor::after {
+    content: "#";
+    margin-left: 0.4em;
+    color: hsl(var(--muted-foreground));
+    opacity: 0;
+    transition: opacity 150ms;
+}
+
+.post-body .heading-anchor:hover::after,
+.post-body .heading-anchor:focus-visible::after {
+    opacity: 1;
+}
+
+.post-body :not(pre) > code {
+    @apply rounded-md border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] font-normal;
+}
+
+.post-body :not(pre) > code::before,
+.post-body :not(pre) > code::after {
+    content: none;
+}
+
+.post-body figure[data-rehype-pretty-code-figure] {
+    @apply my-8;
+}
+
+.post-body pre {
+    @apply my-8 overflow-x-auto rounded-2xl border bg-muted/40 px-0 py-4 text-[0.85rem] leading-relaxed text-foreground;
+}
+
+.post-body figure[data-rehype-pretty-code-figure] pre {
+    @apply my-0;
+}
+
+.post-body pre code {
+    @apply bg-transparent p-0 font-mono text-[inherit];
+}
+
+.post-body pre [data-line] {
+    @apply border-l-2 border-transparent px-5;
+}
+
+.post-body pre [data-highlighted-line] {
+    @apply border-brand bg-brand/10;
+}
+
+.post-body [data-highlighted-chars] {
+    @apply rounded bg-brand/15 px-1;
+}
+
+.post-body code[data-line-numbers] {
+    counter-reset: line;
+}
+
+.post-body code[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply mr-5 inline-block w-4 text-right text-muted-foreground/60;
+}
+
+.post-body figcaption[data-rehype-pretty-code-title] {
+    @apply rounded-t-2xl border border-b-0 bg-muted/60 px-5 py-2.5 font-mono text-xs text-muted-foreground;
+}
+
+.post-body figcaption[data-rehype-pretty-code-title] + div pre {
+    @apply rounded-t-none;
+}
+
+.post-body [data-rehype-pretty-code-figure] span[style] {
+    color: var(--shiki-light);
+}
+
+.dark .post-body [data-rehype-pretty-code-figure] span[style] {
+    color: var(--shiki-dark);
+}

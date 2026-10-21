@@ -1,4 +1,5 @@
 import type { PortfolioData } from "../supabase/types"
+import { toBlogPost } from "../blog/post"
 
 // Pure DB-row → view-model mapping, shared by server pages and the terminal (client).
 export function transformPortfolioData(data: PortfolioData) {
@@ -76,20 +77,7 @@ export function transformPortfolioData(data: PortfolioData) {
       year: new Date(cert.issue_date).getFullYear().toString(),
       url: cert.credential_url,
     })),
-    blog: data.blog.map((post) => ({
-      id: post.id,
-      title: post.title,
-      content: post.content,
-      excerpt: post.excerpt,
-      publishDate: post.publish_date,
-      readTime: post.read_time,
-      tags: post.tags,
-      url: post.url || post.id,
-      image_url: post.image_url,
-      featured: post.is_featured,
-      trending: post.is_trending,
-      popular: post.is_popular,
-    })),
+    blog: data.blog.map(toBlogPost),
     stats: Object.fromEntries(data.stats.map((stat) => [stat.stat_key, stat.stat_value])) as Record<string, string>,
     statList: data.stats.map((stat) => ({
       key: stat.stat_key,

@@ -16,7 +16,7 @@ export interface SiteChromeData {
   email: string
   social: { github?: string; linkedin?: string; twitter?: string }
   projects: { id: string; title: string }[]
-  posts: { title: string; url: string }[]
+  posts: { title: string; slug: string }[]
 }
 
 export function isActivePath(pathname: string, href: string) {
