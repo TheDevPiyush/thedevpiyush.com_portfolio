@@ -156,7 +156,7 @@ export function CommandMenu({ data }: { data: SiteChromeData | null }) {
             )}
           </Command.List>
           <div className="flex items-center justify-between border-t px-4 py-2.5 text-[11px] text-muted-foreground">
-            <span className="font-mono">thedevpiyush.com</span>
+            <span>thedevpiyush.com</span>
             <span className="flex items-center gap-1.5">
               <CornerDownLeft className="h-3 w-3" /> to select
             </span>
@@ -171,7 +171,7 @@ export function CommandGroup({ heading, children }: { heading: string; children:
   return (
     <Command.Group
       heading={heading}
-      className="mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.14em] [&_[cmdk-group-heading]]:text-muted-foreground"
+      className="mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.14em] [&_[cmdk-group-heading]]:text-muted-foreground"
     >
       {children}
     </Command.Group>

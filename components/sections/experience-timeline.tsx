@@ -28,7 +28,7 @@ export function ExperienceTimeline({ experience, detailed = false }: { experienc
             <div className="space-y-2">
               <h3 className="text-xl font-medium tracking-tight">
                 {exp.title} <span className="text-muted-foreground">at</span>{" "}
-                <span className="font-serif text-2xl italic">{exp.company}</span>
+                <span className="text-2xl">{exp.company}</span>
               </h3>
               <p className="max-w-2xl leading-relaxed text-muted-foreground">{exp.description}</p>
               {detailed && exp.achievements.length > 0 && (
@@ -51,7 +51,7 @@ export function ExperienceTimeline({ experience, detailed = false }: { experienc
                 </ul>
               )}
             </div>
-            <div className="order-first space-y-1 font-mono text-xs text-muted-foreground sm:order-none sm:text-right">
+            <div className="order-first space-y-1 text-xs text-muted-foreground sm:order-none sm:text-right">
               <p>{exp.period}</p>
               {exp.location && <p>{exp.location}</p>}
             </div>

@@ -31,10 +31,10 @@ export default async function PostPreviewPage({ params }: { params: Promise<{ id
         </Link>
       </div>
       <header className="mb-12 space-y-6">
-        <p className="font-mono text-xs text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           {formatDate(post.publishDate)} · {post.readTime}
         </p>
-        <h1 className="text-balance font-serif text-5xl leading-[1] tracking-tight sm:text-6xl">{post.title || "Untitled"}</h1>
+        <h1 className="text-balance text-5xl leading-[1] tracking-tight sm:text-6xl">{post.title || "Untitled"}</h1>
         {post.excerpt && <p className="text-xl leading-relaxed text-muted-foreground">{post.excerpt}</p>}
         {post.image_url && (
           // eslint-disable-next-line @next/next/no-img-element -- preview of any host

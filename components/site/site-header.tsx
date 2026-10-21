@@ -46,7 +46,7 @@ export function SiteHeader() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-full px-3 py-1.5 font-serif text-xl italic tracking-tight"
+          className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xl tracking-tight"
           aria-label="TheDevPiyush, home"
         >
           <span className="h-2 w-2 rounded-full bg-brand" aria-hidden />
@@ -126,12 +126,12 @@ export function SiteHeader() {
                       onClick={() => setMobileOpen(false)}
                       aria-current={isActivePath(pathname, link.href) ? "page" : undefined}
                       className={cn(
-                        "flex items-baseline justify-between rounded-xl px-3 py-3 font-serif text-3xl transition-colors",
+                        "flex items-baseline justify-between rounded-xl px-3 py-3 text-3xl transition-colors",
                         isActivePath(pathname, link.href) ? "text-foreground" : "text-muted-foreground",
                       )}
                     >
                       {link.name}
-                      <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
+                      <span className="text-xs text-muted-foreground">0{index + 1}</span>
                     </Link>
                   </motion.li>
                 ))}

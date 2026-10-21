@@ -89,7 +89,7 @@ export function BlogBrowser({ posts, tags }: { posts: BrowsablePost[]; tags: str
         )}
       </div>
 
-      <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground" aria-live="polite">
+      <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-muted-foreground" aria-live="polite">
         <span>
           {results.length} {results.length === 1 ? "post" : "posts"}
           {activeTag && <> · {activeTag}</>}

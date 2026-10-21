@@ -32,11 +32,11 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
               onPointerEnter={(event) => event.pointerType === "mouse" && setActive(project)}
               className="group grid grid-cols-[auto_1fr_auto] items-start gap-x-5 gap-y-4 py-8 sm:gap-x-8 sm:py-10 md:grid-cols-[3rem_1fr_14rem_auto] md:items-center"
             >
-              <span className="pt-2 font-mono text-xs text-muted-foreground md:pt-0">
+              <span className="pt-2 text-xs text-muted-foreground md:pt-0">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="min-w-0 space-y-2">
-                <h3 className="font-serif text-3xl leading-tight tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-1.5 sm:text-4xl">
+                <h3 className="text-3xl leading-tight tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-1.5 sm:text-4xl">
                   {project.title}
                 </h3>
                 <p className="line-clamp-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">

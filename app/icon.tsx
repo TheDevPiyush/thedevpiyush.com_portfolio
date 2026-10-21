@@ -1,9 +1,10 @@
 import { ImageResponse } from "next/og"
+import { loadOgFonts } from "@/lib/og"
 
 export const size = { width: 64, height: 64 }
 export const contentType = "image/png"
 
-export default function Icon() {
+export default async function Icon() {
   return new ImageResponse(
     (
       <div
@@ -17,14 +18,13 @@ export default function Icon() {
           background: "#09090b",
           color: "#fafafa",
           fontSize: 44,
-          fontStyle: "italic",
-          fontFamily: "Georgia, serif",
+          fontFamily: "Hellix",
         }}
       >
         p
         <div style={{ width: 9, height: 9, borderRadius: 9, background: "#a78bfa", marginLeft: 2, marginTop: 18 }} />
       </div>
     ),
-    size,
+    { ...size, fonts: await loadOgFonts() },
   )
 }

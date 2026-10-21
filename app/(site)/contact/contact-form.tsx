@@ -30,7 +30,7 @@ export function ContactForm() {
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
               <CheckCircle2 className="h-6 w-6" />
             </span>
-            <h2 className="font-serif text-4xl tracking-tight">Message sent.</h2>
+            <h2 className="text-4xl tracking-tight">Message sent.</h2>
             <p className="max-w-sm text-muted-foreground">
               Thanks for reaching out! I read every message and usually reply within a day.
             </p>

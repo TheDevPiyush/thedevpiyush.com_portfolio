@@ -31,7 +31,7 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
   const [copied, setCopied] = useState(false)
   return (
     <span className="not-prose my-4 block overflow-hidden rounded-xl border">
-      <span className="flex items-center justify-between border-b bg-muted/60 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+      <span className="flex items-center justify-between border-b bg-muted/60 px-4 py-2 text-[11px] uppercase tracking-wider text-muted-foreground">
         {language}
         <button
           type="button"

@@ -26,7 +26,7 @@ export default async function ContactPage() {
         eyebrow="Contact"
         title={
           <>
-            Let&apos;s talk. <span className="italic text-muted-foreground">Say hello.</span>
+            Let&apos;s talk. <span className="text-muted-foreground">Say hello.</span>
           </>
         }
         lede="Whether you have a project in mind, a role to fill, or just want to chat about tech, I'd love to hear from you."
@@ -35,7 +35,7 @@ export default async function ContactPage() {
       <Container className="grid gap-12 border-t pb-24 pt-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <Reveal className="space-y-10">
           <div className="space-y-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Email me directly</p>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Email me directly</p>
             <CopyEmail email={personal.email} />
           </div>
 
@@ -58,7 +58,7 @@ export default async function ContactPage() {
 
           {socials.length > 0 && (
             <div className="space-y-3">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Elsewhere</p>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Elsewhere</p>
               <ul className="space-y-1">
                 {socials.map((social) => (
                   <li key={social.label}>
@@ -66,7 +66,7 @@ export default async function ContactPage() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between rounded-xl py-2 font-serif text-2xl transition-colors hover:text-brand"
+                      className="group flex items-center justify-between rounded-xl py-2 text-2xl transition-colors hover:text-brand"
                     >
                       {social.label}
                       <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

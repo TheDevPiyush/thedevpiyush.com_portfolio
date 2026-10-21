@@ -6,13 +6,13 @@ interface TextRevealProps {
   /** Seconds before the first word starts. */
   delay?: number
   as?: "h1" | "h2" | "p" | "span"
-  /** Words from this index on are set in italic, e.g. the surname in the hero. */
-  italicFrom?: number
+  /** Words from this index on are set in the muted color, e.g. the surname in the hero. */
+  mutedFrom?: number
 }
 
 // Word-by-word rise for headlines, in CSS so it plays on first paint. Screen readers get the
 // whole string once via aria-label.
-export function TextReveal({ text, className, delay = 0, as: Component = "h1", italicFrom }: TextRevealProps) {
+export function TextReveal({ text, className, delay = 0, as: Component = "h1", mutedFrom }: TextRevealProps) {
   const words = text.split(" ")
 
   return (
@@ -22,7 +22,7 @@ export function TextReveal({ text, className, delay = 0, as: Component = "h1", i
           <span
             className={cn(
               "inline-block animate-rise motion-reduce:animate-none",
-              italicFrom !== undefined && index >= italicFrom && "italic",
+              mutedFrom !== undefined && index >= mutedFrom && "text-muted-foreground",
             )}
             style={{ animationDelay: `${delay + index * 0.07}s` }}
           >

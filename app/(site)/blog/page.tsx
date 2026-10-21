@@ -37,7 +37,7 @@ export default async function BlogPage() {
         eyebrow="Writing"
         title={
           <>
-            Notes & essays <span className="italic text-muted-foreground">on building software.</span>
+            Notes & essays <span className="text-muted-foreground">on building software.</span>
           </>
         }
         lede="Thoughts on web development, programming practices and lessons learned shipping real products."
@@ -63,12 +63,12 @@ export default async function BlogPage() {
                 )}
               </div>
               <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
-                <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                   <span className="text-brand">Featured</span>
                   <span className="h-px w-6 bg-border" aria-hidden />
                   {formatDate(featured.publishDate)} · {featured.readTime}
                 </p>
-                <h2 className="font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl">{featured.title}</h2>
+                <h2 className="text-4xl leading-[1.05] tracking-tight sm:text-5xl">{featured.title}</h2>
                 <p className="text-lg leading-relaxed text-muted-foreground">{featured.excerpt}</p>
                 <span className="inline-flex items-center gap-2 text-sm font-medium">
                   Read the post

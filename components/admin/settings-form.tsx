@@ -74,7 +74,7 @@ export function SettingsForm({ initial, workingAt }: { initial: SiteSettings; wo
           </div>
 
           <div className="rounded-xl border border-dashed p-4">
-            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Preview</p>
+            <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Preview</p>
             {availability.show ? (
               <span className="inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-xs text-muted-foreground">
                 <span className={cn("h-2 w-2 rounded-full", availability.status === "busy" ? "bg-amber-500" : "bg-emerald-500")} />

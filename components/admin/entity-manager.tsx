@@ -78,7 +78,7 @@ export function EntityManager({ entity, rows }: { entity: EntityKey; rows: Row[]
           <p className="truncate font-medium">{primary}</p>
           {secondary && <p className="truncate text-sm text-muted-foreground">{secondary}</p>}
         </button>
-        {meta && <span className="hidden shrink-0 font-mono text-xs text-muted-foreground sm:block">{meta}</span>}
+        {meta && <span className="hidden shrink-0 text-xs text-muted-foreground sm:block">{meta}</span>}
         {!row.is_active && <Badge variant="outline" className="hidden sm:inline-flex">Hidden</Badge>}
         <Switch
           checked={Boolean(row.is_active)}

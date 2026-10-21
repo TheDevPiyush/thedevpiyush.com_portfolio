@@ -15,7 +15,7 @@ export function SiteFooter({ data }: { data: SiteChromeData | null }) {
     <footer className="mt-12 border-t">
       <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
         <div className="space-y-4">
-          <p className="font-serif text-3xl italic tracking-tight">{data?.name ?? "Piyush Choudhary"}</p>
+          <p className="text-3xl tracking-tight">{data?.name ?? "Piyush Choudhary"}</p>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
             Full-stack developer building fast, well-crafted products on the web. Press{" "}
             <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd> to jump anywhere.
@@ -70,7 +70,7 @@ export function SiteFooter({ data }: { data: SiteChromeData | null }) {
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-4">
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
+      <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
       <ul className="space-y-2.5 text-sm">{children}</ul>
     </div>
   )

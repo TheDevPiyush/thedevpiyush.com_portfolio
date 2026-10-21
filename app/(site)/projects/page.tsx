@@ -21,7 +21,7 @@ export default async function ProjectsPage() {
         eyebrow="Work"
         title={
           <>
-            Selected projects, <span className="italic text-muted-foreground">start to ship.</span>
+            Selected projects, <span className="text-muted-foreground">start to ship.</span>
           </>
         }
         lede={

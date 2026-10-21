@@ -27,7 +27,7 @@ export default async function PostOpengraphImage({ params }: { params: Promise<{
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          fontFamily: "Geist",
+          fontFamily: "Hellix",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 26, color: "#a1a1aa" }}>
@@ -37,7 +37,6 @@ export default async function PostOpengraphImage({ params }: { params: Promise<{
         <div
           style={{
             display: "flex",
-            fontFamily: "Instrument Serif",
             fontSize: titleSize,
             lineHeight: 1.02,
             letterSpacing: -2,
@@ -61,6 +60,6 @@ export default async function PostOpengraphImage({ params }: { params: Promise<{
         </div>
       </div>
     ),
-    { ...size, fonts: await loadOgFonts(title, [label, meta, ...tags].join("")) },
+    { ...size, fonts: await loadOgFonts() },
   )
 }

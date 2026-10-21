@@ -185,8 +185,8 @@ export function BuyProjectButton({
       <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
         <DialogContent className="w-[94vw] max-w-4xl gap-6 overflow-hidden rounded-3xl p-0 sm:rounded-3xl">
           <DialogHeader className="space-y-2 px-6 pt-6 text-left sm:px-8 sm:pt-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Before you buy</p>
-            <DialogTitle className="font-serif text-3xl font-normal tracking-tight sm:text-4xl">{projectTitle}</DialogTitle>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Before you buy</p>
+            <DialogTitle className="text-3xl font-normal tracking-tight sm:text-4xl">{projectTitle}</DialogTitle>
             <DialogDescription className="text-base">
               Have a look at the screenshots and read the setup guide, so you know exactly what you&apos;ll be installing
               and configuring after purchase.
@@ -218,7 +218,7 @@ export function BuyProjectButton({
       <Dialog open={isGuideOpen} onOpenChange={setIsGuideOpen}>
         <DialogContent className="flex h-[88vh] w-[94vw] max-w-3xl flex-col gap-0 overflow-hidden rounded-3xl p-0 sm:rounded-3xl">
           <DialogHeader className="space-y-1 border-b px-6 py-5 text-left sm:px-8">
-            <DialogTitle className="font-serif text-2xl font-normal tracking-tight">Setup guide</DialogTitle>
+            <DialogTitle className="text-2xl font-normal tracking-tight">Setup guide</DialogTitle>
             <DialogDescription>{projectTitle}</DialogDescription>
           </DialogHeader>
           <div className="min-h-0 flex-1 overflow-y-auto px-6 py-6 sm:px-8" data-lenis-prevent>

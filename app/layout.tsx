@@ -1,19 +1,14 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google"
+import localFont from "next/font/local"
+import { Geist_Mono } from "next/font/google"
 import "./globals.css"
 import Providers from "@/lib/providers/provider"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+// Hellix is the site's typeface for all text. A monospace face is kept only for code, URLs and key hints.
+const sans = localFont({ src: "../public/fonts/Hellix-Regular.ttf", variable: "--font-sans", display: "swap" })
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" })
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-  display: "swap",
-})
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -90,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Providers>

@@ -1,3 +1,6 @@
+import { readFile } from "fs/promises"
+import { join } from "path"
+
 // Helpers for next/og share images.
 
 export const OG_SIZE = { width: 1200, height: 630 }
@@ -10,37 +13,14 @@ export const OG_BACKGROUND = {
   backgroundSize: "100% 100%, 64px 64px, 64px 64px",
 } as const
 
-// Fetches a Google Font subset with only the glyphs in `text`. Returns null when offline so the
-// image still renders with the default font.
-async function loadGoogleFont(family: string, text: string, style = "") {
-  try {
-    const params = new URLSearchParams({ family: `${family}${style}`, text })
-    const css = await (await fetch(`https://fonts.googleapis.com/css2?${params}`)).text()
-    const src = css.match(/src: url\((.+?)\) format\('(opentype|truetype)'\)/)?.[1]
-    if (!src) return null
-    const response = await fetch(src)
-    return response.ok ? await response.arrayBuffer() : null
-  } catch {
-    return null
-  }
-}
+type OgFont = { name: string; data: ArrayBuffer; style: "normal"; weight: 400 }
 
-type OgFont = { name: string; data: ArrayBuffer; style: "normal" | "italic"; weight: 400 }
+let hellix: Promise<ArrayBuffer> | null = null
 
-/**
- * Instrument Serif (regular + italic) for `serifText` and Geist for `sansText`, subset to those glyphs.
- * Custom fonts replace next/og's default font, so this returns undefined unless every font loaded.
- */
-export async function loadOgFonts(serifText: string, sansText: string): Promise<OgFont[] | undefined> {
-  const [regular, italic, sans] = await Promise.all([
-    loadGoogleFont("Instrument Serif", serifText),
-    loadGoogleFont("Instrument Serif", serifText, ":ital@1"),
-    loadGoogleFont("Geist", sansText),
-  ])
-  if (!regular || !italic || !sans) return undefined
-  return [
-    { name: "Instrument Serif", data: regular, style: "normal", weight: 400 },
-    { name: "Instrument Serif", data: italic, style: "italic", weight: 400 },
-    { name: "Geist", data: sans, style: "normal", weight: 400 },
-  ]
+/** Hellix, the site's typeface, read from the repo. Replaces next/og's default font. */
+export async function loadOgFonts(): Promise<OgFont[]> {
+  hellix ??= readFile(join(process.cwd(), "public/fonts/Hellix-Regular.ttf")).then((buffer) =>
+    buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength) as ArrayBuffer,
+  )
+  return [{ name: "Hellix", data: await hellix, style: "normal", weight: 400 }]
 }

@@ -69,7 +69,7 @@ export function TableOfContents({ headings }: { headings: TocHeading[] }) {
 
   return (
     <nav aria-label="On this page" className="relative border-l pl-5">
-      <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">On this page</p>
+      <p className="mb-4 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">On this page</p>
       <TocLinks headings={headings} active={active} />
     </nav>
   )
@@ -85,7 +85,7 @@ export function TableOfContentsDisclosure({ headings }: { headings: TocHeading[]
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between px-5 py-4 text-left font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+        className="flex w-full items-center justify-between px-5 py-4 text-left text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
       >
         On this page
         <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />

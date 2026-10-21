@@ -19,7 +19,7 @@ export function NoAccess({ email }: { email: string | null }) {
       <div className="max-w-sm space-y-6 text-center">
         <ShieldAlert className="mx-auto h-10 w-10 text-muted-foreground" />
         <div className="space-y-2">
-          <h1 className="font-serif text-4xl tracking-tight">No access</h1>
+          <h1 className="text-4xl tracking-tight">No access</h1>
           <p className="text-muted-foreground">
             {email ? <>You&apos;re signed in as {email}, which isn&apos;t an admin account.</> : "This account isn't an admin."}
           </p>

@@ -89,7 +89,7 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
           ) : (
-            <div className="flex h-full items-center justify-center font-serif text-4xl italic text-muted-foreground">
+            <div className="flex h-full items-center justify-center text-4xl text-muted-foreground">
               {project.title}
             </div>
           )}
@@ -97,12 +97,12 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
       </div>
 
       <div className="space-y-6">
-        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           <span className="text-brand">{String(index + 1).padStart(2, "0")}</span>
           <span className="h-px w-6 bg-border" aria-hidden />
           {project.featured ? "Featured" : categoryLabel(project.category || "project")}
         </div>
-        <h2 className="font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl">{project.title}</h2>
+        <h2 className="text-4xl leading-[1.05] tracking-tight sm:text-5xl">{project.title}</h2>
         <p className="text-lg leading-relaxed text-muted-foreground">{project.longDescription || project.description}</p>
 
         {project.features.length > 0 && (
@@ -120,7 +120,7 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-4">
             {stats.map(([key, value]) => (
               <div key={key} className="bg-background p-4">
-                <dd className="font-serif text-2xl">{value}</dd>
+                <dd className="text-2xl">{value}</dd>
                 <dt className="text-xs capitalize text-muted-foreground">{key}</dt>
               </div>
             ))}

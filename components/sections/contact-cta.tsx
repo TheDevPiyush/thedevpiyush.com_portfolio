@@ -14,8 +14,8 @@ export function ContactCta({ email, index }: { email: string; index?: string }) 
           <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand/20 blur-[100px]" />
           <div className="relative max-w-3xl space-y-8">
             <Eyebrow index={index}>Contact</Eyebrow>
-            <h2 className="font-serif text-5xl leading-[0.95] tracking-tight sm:text-7xl">
-              Have an idea? <span className="italic text-muted-foreground">Let&apos;s build it.</span>
+            <h2 className="text-5xl leading-[0.95] tracking-tight sm:text-7xl">
+              Have an idea? <span className="text-muted-foreground">Let&apos;s build it.</span>
             </h2>
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
               I&apos;m open to freelance projects, full-time roles and interesting collaborations. I usually reply within a day.

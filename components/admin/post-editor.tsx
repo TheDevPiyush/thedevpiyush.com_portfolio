@@ -320,7 +320,7 @@ export function PostEditor({ id: initialId, initial, updatedAt, legacyHtml, tagS
               placeholder="Post title"
               rows={1}
               aria-label="Title"
-              className="[field-sizing:content] w-full resize-none bg-transparent font-serif text-4xl leading-tight tracking-tight outline-none placeholder:text-muted-foreground/50 sm:text-5xl"
+              className="[field-sizing:content] w-full resize-none bg-transparent text-4xl leading-tight tracking-tight outline-none placeholder:text-muted-foreground/50 sm:text-5xl"
             />
             {errors.title && <p className="text-xs text-destructive">{errors.title.message}</p>}
           </div>
@@ -362,7 +362,7 @@ export function PostEditor({ id: initialId, initial, updatedAt, legacyHtml, tagS
                   </button>
                 ))}
               </div>
-              <span className="font-mono text-[11px] text-muted-foreground">
+              <span className="text-[11px] text-muted-foreground">
                 {words.toLocaleString("en-US")} words · {Math.max(1, Math.round(words / 220))} min read
               </span>
             </div>

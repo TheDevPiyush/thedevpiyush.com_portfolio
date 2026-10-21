@@ -5,7 +5,6 @@ export const alt = "Piyush Choudhary, full-stack developer"
 export const size = OG_SIZE
 export const contentType = "image/png"
 
-const NAME = "Piyush Choudhary"
 const SITE = "thedevpiyush.com"
 const TAGLINE = "Full-stack developer · Projects, writing & more"
 
@@ -20,7 +19,7 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          fontFamily: "Geist",
+          fontFamily: "Hellix",
           ...OG_BACKGROUND,
         }}
       >
@@ -29,13 +28,13 @@ export default async function OpengraphImage() {
           {SITE}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 120, fontFamily: "Instrument Serif", letterSpacing: -3, lineHeight: 0.95, display: "flex" }}>
-            Piyush&nbsp;<span style={{ fontStyle: "italic", color: "#d4d4d8" }}>Choudhary</span>
+          <div style={{ fontSize: 120, letterSpacing: -4, lineHeight: 0.95, display: "flex" }}>
+            Piyush&nbsp;<span style={{ color: "#a1a1aa" }}>Choudhary</span>
           </div>
           <div style={{ fontSize: 36, color: "#a1a1aa" }}>{TAGLINE}</div>
         </div>
       </div>
     ),
-    { ...size, fonts: await loadOgFonts(NAME, SITE + TAGLINE) },
+    { ...size, fonts: await loadOgFonts() },
   )
 }

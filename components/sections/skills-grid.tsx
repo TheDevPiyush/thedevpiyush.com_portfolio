@@ -12,7 +12,7 @@ export function SkillsGrid({ skills }: { skills: Skill[] }) {
     <Reveal as="ul" stagger={0.05} className="grid gap-px overflow-hidden rounded-3xl border bg-border sm:grid-cols-2 lg:grid-cols-3">
       {[...groups].map(([category, items]) => (
         <RevealItem as="li" key={category} className="space-y-4 bg-background p-6 sm:p-8">
-          <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{category}</h3>
+          <h3 className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{category}</h3>
           <ul className="flex flex-wrap gap-2">
             {items.map((skill) => (
               <li

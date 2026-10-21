@@ -110,7 +110,7 @@ export function AdminCommandMenu() {
             </CommandGroup>
           </Command.List>
           <div className="flex items-center justify-between border-t px-4 py-2.5 text-[11px] text-muted-foreground">
-            <span className="font-mono">admin</span>
+            <span>admin</span>
             <span className="flex items-center gap-1.5">
               <CornerDownLeft className="h-3 w-3" /> to select
             </span>

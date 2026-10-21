@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
     <>
       <PageHeader eyebrow="Legal" title="Privacy policy" lede="Effective date: March 20, 2026" />
       <Container className="max-w-3xl border-t pb-24 pt-12">
-        <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-serif prose-headings:font-normal">
+        <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-normal">
           <p>
             This website may collect basic information like your email address and account identifier when you sign in
             or contact me. This information is used only to operate the platform, provide purchases and downloads, and

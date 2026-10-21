@@ -17,7 +17,7 @@ export default function ResumePage() {
         eyebrow="Resume"
         title={
           <>
-            The one-page <span className="italic text-muted-foreground">version.</span>
+            The one-page <span className="text-muted-foreground">version.</span>
           </>
         }
         lede="Experience, skills and education at a glance. Always the latest copy."

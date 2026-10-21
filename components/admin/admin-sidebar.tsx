@@ -44,7 +44,7 @@ export function AdminSidebar({ email, unread }: { email: string | null; unread: 
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip="Dashboard">
               <Link href="/admin" onClick={() => isMobile && setOpenMobile(false)}>
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand font-serif text-lg italic text-brand-foreground">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand text-lg text-brand-foreground">
                   P
                 </span>
                 <span className="grid leading-tight">

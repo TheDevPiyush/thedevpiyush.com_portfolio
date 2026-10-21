@@ -40,7 +40,7 @@ export default async function TagPage({ params }: TagPageProps) {
         title={
           <>
             {tag.name}{" "}
-            <span className="italic text-muted-foreground">
+            <span className="text-muted-foreground">
               · {posts.length} {posts.length === 1 ? "post" : "posts"}
             </span>
           </>
@@ -51,7 +51,7 @@ export default async function TagPage({ params }: TagPageProps) {
         <WritingList posts={posts} />
 
         <div className="mt-16 space-y-5">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">All tags</p>
+          <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">All tags</p>
           <ul className="flex flex-wrap gap-1.5">
             {tags.map((entry) => (
               <li key={entry.slug}>

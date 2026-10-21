@@ -109,13 +109,13 @@ export default async function PostPage({ params }: PostPageProps) {
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
               All posts
             </Link>
-            <p className="font-mono text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               <time dateTime={new Date(post.publishDate).toISOString()}>{formatDate(post.publishDate)}</time>
               {" · "}
               {post.readTime}
               <ViewCounter slug={post.slug} />
             </p>
-            <h1 className="text-balance font-serif text-5xl leading-[1] tracking-tight sm:text-6xl">{post.title}</h1>
+            <h1 className="text-balance text-5xl leading-[1] tracking-tight sm:text-6xl">{post.title}</h1>
             <p className="text-pretty text-xl leading-relaxed text-muted-foreground">{post.excerpt}</p>
             {post.tags.length > 0 && <TagList tags={post.tags} />}
           </Reveal>
@@ -133,7 +133,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,44rem)_minmax(0,1fr)] xl:gap-12">
             <aside className="hidden xl:block">
               <div className="sticky top-28 flex flex-col items-end gap-3">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Share</p>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Share</p>
                 <ShareButtons url={url} title={post.title} className="flex-col" />
               </div>
             </aside>
@@ -151,8 +151,8 @@ export default async function PostPage({ params }: PostPageProps) {
                 {post.tags.length > 0 && <TagList tags={post.tags} />}
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-sm text-muted-foreground">
-                    Written by <span className="font-serif text-lg italic text-foreground">{AUTHOR}</span>
-                    {edited && <span className="block font-mono text-xs">Updated {formatDate(post.updatedAt)}</span>}
+                    Written by <span className="text-lg text-foreground">{AUTHOR}</span>
+                    {edited && <span className="block text-xs">Updated {formatDate(post.updatedAt)}</span>}
                   </p>
                   <ShareButtons url={url} title={post.title} />
                 </div>
@@ -212,7 +212,7 @@ function AdjacentPost({ post, direction }: { post: BlogPost; direction: "older" 
       href={`/blog/${post.slug}`}
       className={`group flex flex-col gap-3 rounded-2xl border p-6 transition-colors hover:border-foreground/20 hover:bg-muted/40 ${isNewer ? "sm:items-end sm:text-right" : ""}`}
     >
-      <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+      <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
         {!isNewer && <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />}
         {isNewer ? "Next post" : "Previous post"}
         {isNewer && <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />}

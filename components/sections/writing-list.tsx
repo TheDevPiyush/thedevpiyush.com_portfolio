@@ -16,7 +16,7 @@ export interface PostRowData {
 export function PostRow({ post }: { post: PostRowData }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group grid gap-2 py-6 sm:grid-cols-[8rem_1fr_auto] sm:items-baseline sm:gap-8">
-      <time dateTime={post.publishDate} className="font-mono text-xs text-muted-foreground">
+      <time dateTime={post.publishDate} className="text-xs text-muted-foreground">
         {formatDate(post.publishDate)}
       </time>
       <div className="space-y-1.5">

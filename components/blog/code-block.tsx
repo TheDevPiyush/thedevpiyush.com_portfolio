@@ -23,7 +23,7 @@ export function CodeBlock({ language, children }: { language?: string; children:
     <div ref={ref} className="group/code relative">
       <div className="absolute right-3 top-3 z-10 flex items-center gap-2">
         {language && language !== "plaintext" && (
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-opacity group-hover/code:opacity-0">
+          <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-opacity group-hover/code:opacity-0">
             {language}
           </span>
         )}

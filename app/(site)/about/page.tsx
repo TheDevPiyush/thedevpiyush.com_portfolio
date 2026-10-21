@@ -30,7 +30,7 @@ export default async function AboutPage() {
         eyebrow="About"
         title={
           <>
-            Hi, I&apos;m {firstName}. <span className="italic text-muted-foreground">I like building things.</span>
+            Hi, I&apos;m {firstName}. <span className="text-muted-foreground">I like building things.</span>
           </>
         }
         lede={personal.about_me.replace(/^["“]|["”]$/g, "")}
@@ -65,14 +65,14 @@ export default async function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="space-y-8">
-            {personal.story.length > 0 && <h2 className="font-serif text-4xl tracking-tight sm:text-5xl">My story</h2>}
+            {personal.story.length > 0 && <h2 className="text-4xl tracking-tight sm:text-5xl">My story</h2>}
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
               {personal.story.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
             {personal.philosophy && (
-              <blockquote className="border-l-2 border-brand pl-6 font-serif text-2xl italic leading-snug sm:text-3xl">
+              <blockquote className="border-l-2 border-brand pl-6 text-2xl leading-snug sm:text-3xl">
                 {personal.philosophy.replace(/^["“]|["”]$/g, "")}
               </blockquote>
             )}
@@ -99,10 +99,10 @@ export default async function AboutPage() {
               <Reveal as="ul" stagger={0.08} className="space-y-6">
                 {education.map((entry) => (
                   <RevealItem as="li" key={entry.id} className="space-y-5 rounded-3xl border p-6 sm:p-8">
-                    <p className="font-mono text-xs text-muted-foreground">{entry.period}</p>
+                    <p className="text-xs text-muted-foreground">{entry.period}</p>
                     <div className="space-y-1">
                       <h3 className="text-xl font-medium tracking-tight">{entry.degree}</h3>
-                      <p className="font-serif text-xl italic text-muted-foreground">{entry.institution}</p>
+                      <p className="text-xl text-muted-foreground">{entry.institution}</p>
                     </div>
                     {entry.gpa && <p className="text-sm text-muted-foreground">GPA {entry.gpa}</p>}
                     {entry.coursework.length > 0 && (

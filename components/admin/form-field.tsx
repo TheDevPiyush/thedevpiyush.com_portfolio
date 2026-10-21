@@ -25,7 +25,7 @@ export function FormField({
       <div className="flex items-baseline justify-between gap-3">
         <Label htmlFor={htmlFor}>{label}</Label>
         {counter && (
-          <span className={cn("font-mono text-[11px] text-muted-foreground", counter[0] > counter[1] && "text-amber-600 dark:text-amber-400")}>
+          <span className={cn("text-[11px] text-muted-foreground", counter[0] > counter[1] && "text-amber-600 dark:text-amber-400")}>
             {counter[0]}/{counter[1]}
           </span>
         )}

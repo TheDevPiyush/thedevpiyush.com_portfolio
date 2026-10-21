@@ -34,7 +34,7 @@ export function AboutSnapshot({ personal, stats }: AboutSnapshotProps) {
           <div className="flex flex-col justify-center space-y-10">
             {personal.philosophy && (
               <Reveal>
-                <blockquote className="font-serif text-4xl leading-[1.1] tracking-tight sm:text-5xl">
+                <blockquote className="text-4xl leading-[1.1] tracking-tight sm:text-5xl">
                   <span className="text-brand">&ldquo;</span>
                   {personal.philosophy.replace(/^["“]|["”]$/g, "")}
                   <span className="text-brand">&rdquo;</span>
@@ -64,7 +64,7 @@ export function AboutSnapshot({ personal, stats }: AboutSnapshotProps) {
           >
             {stats.slice(0, 6).map((stat) => (
               <RevealItem as="li" key={stat.key} className="space-y-2 bg-background p-6 sm:p-8">
-                <CountUp value={stat.value} className="block font-serif text-4xl tracking-tight sm:text-5xl" />
+                <CountUp value={stat.value} className="block text-4xl tracking-tight sm:text-5xl" />
                 <span className="block text-sm text-muted-foreground">{stat.label}</span>
               </RevealItem>
             ))}

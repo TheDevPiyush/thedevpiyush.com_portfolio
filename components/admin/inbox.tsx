@@ -185,7 +185,7 @@ export function InboxView({ messages: initial, initialId }: { messages: ContactM
               </div>
               <div className="flex-1 space-y-6 overflow-y-auto px-6 py-6">
                 <header className="space-y-3">
-                  <h2 className="font-serif text-3xl tracking-tight">{selected.subject || "(no subject)"}</h2>
+                  <h2 className="text-3xl tracking-tight">{selected.subject || "(no subject)"}</h2>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                     <span className="font-medium">{selected.name}</span>
                     <a href={`mailto:${selected.email}`} className="text-muted-foreground hover:text-foreground">

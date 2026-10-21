@@ -43,9 +43,9 @@ export function Hero({ personal, availability }: { personal: PersonalInfo; avail
 
         <TextReveal
           text={personal.name}
-          italicFrom={1}
+          mutedFrom={1}
           delay={0.1}
-          className="font-serif text-[clamp(3.5rem,12vw,9.5rem)] leading-[0.88] tracking-[-0.02em]"
+          className="text-[clamp(3.5rem,12vw,9.5rem)] leading-[0.88] tracking-[-0.02em]"
         />
 
         <Reveal immediate delay={0.45} className="mt-8 max-w-2xl space-y-8">
@@ -90,7 +90,7 @@ export function Hero({ personal, availability }: { personal: PersonalInfo; avail
         <Reveal immediate delay={0.9} className="absolute bottom-8 left-5 hidden sm:left-8 sm:block">
           <a
             href="#work"
-            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowDown className="h-3.5 w-3.5 animate-bounce motion-reduce:animate-none" />
             Scroll

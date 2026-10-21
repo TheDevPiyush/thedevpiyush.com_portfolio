@@ -9,8 +9,8 @@ export default function NotFound() {
     <SiteChrome>
       <Container className="flex min-h-[70vh] flex-col justify-center gap-8 py-24">
         <Eyebrow index="404">Page not found</Eyebrow>
-        <h1 className="max-w-3xl font-serif text-6xl leading-[0.9] tracking-tight sm:text-8xl">
-          Oh, you like to explore, <span className="italic text-muted-foreground">huh?</span>
+        <h1 className="max-w-3xl text-6xl leading-[0.9] tracking-tight sm:text-8xl">
+          Oh, you like to explore, <span className="text-muted-foreground">huh?</span>
         </h1>
         <p className="max-w-lg text-lg text-muted-foreground">
           This page doesn&apos;t exist, but plenty of others do. Try{" "}
