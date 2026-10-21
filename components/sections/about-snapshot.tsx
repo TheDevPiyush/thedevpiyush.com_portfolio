@@ -19,14 +19,20 @@ export function AboutSnapshot({ personal, stats }: AboutSnapshotProps) {
           <Reveal className="space-y-6">
             <Eyebrow index="02">About</Eyebrow>
             {personal.image && (
-              <div className="relative aspect-[4/5] max-w-sm overflow-hidden rounded-3xl border bg-muted">
-                <Image
-                  src={personal.image}
-                  alt={`Portrait of ${personal.name}`}
-                  fill
-                  sizes="(min-width: 1024px) 384px, 90vw"
-                  className="object-cover grayscale transition duration-700 hover:grayscale-0"
+              <div className="relative isolate max-w-sm">
+                <div
+                  aria-hidden
+                  className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand/30 via-brand-2/20 to-brand-3/20 blur-2xl"
                 />
+                <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border bg-muted">
+                  <Image
+                    src={personal.image}
+                    alt={`Portrait of ${personal.name}`}
+                    fill
+                    sizes="(min-width: 1024px) 384px, 90vw"
+                    className="object-cover grayscale transition duration-700 hover:grayscale-0"
+                  />
+                </div>
               </div>
             )}
           </Reveal>
@@ -60,11 +66,11 @@ export function AboutSnapshot({ personal, stats }: AboutSnapshotProps) {
           <Reveal
             as="ul"
             stagger={0.06}
-            className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border bg-border sm:grid-cols-3"
+            className="gradient-border mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl bg-border sm:grid-cols-3"
           >
             {stats.slice(0, 6).map((stat) => (
-              <RevealItem as="li" key={stat.key} className="space-y-2 bg-background p-6 sm:p-8">
-                <CountUp value={stat.value} className="block text-4xl tracking-tight sm:text-5xl" />
+              <RevealItem as="li" key={stat.key} className="space-y-2 bg-background p-6 transition-colors hover:bg-brand/[0.04] sm:p-8">
+                <CountUp value={stat.value} className="text-gradient block w-fit text-4xl tracking-tight sm:text-5xl" />
                 <span className="block text-sm text-muted-foreground">{stat.label}</span>
               </RevealItem>
             ))}

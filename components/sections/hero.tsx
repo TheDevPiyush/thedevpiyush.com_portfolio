@@ -26,7 +26,7 @@ export function Hero({ personal, availability }: { personal: PersonalInfo; avail
       <Container className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-center pb-24 pt-12">
         {availabilityLabel && (
           <Reveal immediate>
-            <p className="mb-8 inline-flex items-center gap-2.5 rounded-full border bg-background/60 px-3.5 py-1.5 text-xs text-muted-foreground backdrop-blur">
+            <p className="gradient-border mb-8 inline-flex items-center gap-2.5 rounded-full bg-background/60 px-3.5 py-1.5 text-xs text-foreground/80 shadow-sm shadow-brand/10 backdrop-blur">
               <span className="relative flex h-2 w-2">
                 <span
                   className={cn(
@@ -43,7 +43,7 @@ export function Hero({ personal, availability }: { personal: PersonalInfo; avail
 
         <TextReveal
           text={personal.name}
-          mutedFrom={1}
+          accentFrom={1}
           delay={0.1}
           className="text-[clamp(3.5rem,12vw,9.5rem)] leading-[0.88] tracking-[-0.02em]"
         />
@@ -101,13 +101,15 @@ export function Hero({ personal, availability }: { personal: PersonalInfo; avail
   )
 }
 
-// Faint grid fading out from the top, with a soft brand glow. Pure CSS, no images.
+// Grid fading out from the top, with slowly drifting violet / fuchsia / blue glows. Pure CSS.
 function HeroBackdrop() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0">
-      <div className="absolute inset-0 [background-image:linear-gradient(hsl(var(--border)/0.6)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.6)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
-      <div className="absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-brand/20 blur-[120px] dark:bg-brand/15" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background" />
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 [background-image:linear-gradient(hsl(var(--border)/0.7)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.7)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
+      <div className="absolute -top-32 right-[-8%] h-[560px] w-[560px] animate-aurora rounded-full bg-brand/30 blur-[120px] motion-reduce:animate-none dark:bg-brand/25" />
+      <div className="absolute right-[22%] top-[18%] h-[420px] w-[420px] animate-aurora rounded-full bg-brand-2/25 blur-[120px] [animation-delay:-6s] motion-reduce:animate-none dark:bg-brand-2/20" />
+      <div className="absolute -left-40 top-[35%] h-[460px] w-[460px] animate-aurora rounded-full bg-brand-3/20 blur-[130px] [animation-delay:-12s] motion-reduce:animate-none dark:bg-brand-3/15" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background" />
     </div>
   )
 }

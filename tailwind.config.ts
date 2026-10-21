@@ -17,6 +17,8 @@ const config: Config = {
   		colors: {
   			brand: {
   				DEFAULT: 'hsl(var(--brand))',
+  				'2': 'hsl(var(--brand-2))',
+  				'3': 'hsl(var(--brand-3))',
   				foreground: 'hsl(var(--brand-foreground))'
   			},
   			background: 'hsl(var(--background))',
@@ -104,6 +106,16 @@ const config: Config = {
   				from: { opacity: '0', transform: 'translateY(110%)' },
   				to: { opacity: '1', transform: 'none' }
   			},
+  			// Slow drift for the hero's colour glows.
+  			aurora: {
+  				'0%,100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
+  				'33%': { transform: 'translate3d(6%, -4%, 0) scale(1.08)' },
+  				'66%': { transform: 'translate3d(-5%, 5%, 0) scale(0.95)' }
+  			},
+  			'gradient-x': {
+  				'0%,100%': { backgroundPosition: '0% 50%' },
+  				'50%': { backgroundPosition: '100% 50%' }
+  			},
   			shake: {
   				'0%,100%': { transform: 'translateX(0)' },
   				'20%,60%': { transform: 'translateX(-6px)' },
@@ -117,7 +129,9 @@ const config: Config = {
   			shake: 'shake 0.4s ease-in-out',
   			// CSS (not JS) so above-the-fold content animates on first paint, before hydration.
   			'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
-  			rise: 'rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both'
+  			rise: 'rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both',
+  			aurora: 'aurora 18s ease-in-out infinite',
+  			'gradient-x': 'gradient-x 8s ease infinite'
   		}
   	}
   },

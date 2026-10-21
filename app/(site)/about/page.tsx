@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { ArrowUpRight, Briefcase, Clock, MapPin } from "lucide-react"
 import { requirePortfolioData } from "@/lib/data/portfolio"
-import { Container, PageHeader, Section } from "@/components/site/section"
+import { Accent, Container, PageHeader, Section } from "@/components/site/section"
 import { Reveal, RevealItem } from "@/components/motion/reveal"
 import { ExperienceTimeline } from "@/components/sections/experience-timeline"
 import { SkillsGrid } from "@/components/sections/skills-grid"
@@ -30,7 +30,7 @@ export default async function AboutPage() {
         eyebrow="About"
         title={
           <>
-            Hi, I&apos;m {firstName}. <span className="text-muted-foreground">I like building things.</span>
+            Hi, I&apos;m {firstName}. <span className="text-gradient">I like building things.</span>
           </>
         }
         lede={personal.about_me.replace(/^["“]|["”]$/g, "")}
@@ -81,19 +81,19 @@ export default async function AboutPage() {
       </Container>
 
       {experience.length > 0 && (
-        <Section index="01" eyebrow="Experience" title="The journey so far" lede="Roles that shaped how I build software.">
+        <Section index="01" eyebrow="Experience" title={<>The journey <Accent>so far</Accent></>} lede="Roles that shaped how I build software.">
           <ExperienceTimeline experience={experience} detailed />
         </Section>
       )}
 
       {skills.length > 0 && (
-        <Section index="02" eyebrow="Toolkit" title="Skills & technologies">
+        <Section index="02" eyebrow="Toolkit" title={<>Skills &amp; <Accent>technologies</Accent></>}>
           <SkillsGrid skills={skills} />
         </Section>
       )}
 
       {(education.length > 0 || certifications.length > 0) && (
-        <Section index="03" eyebrow="Education" title="Learning, formally and otherwise">
+        <Section index="03" eyebrow="Education" title={<>Learning, <Accent>formally and otherwise</Accent></>}>
           <div className="grid gap-6 lg:grid-cols-2">
             {education.length > 0 && (
               <Reveal as="ul" stagger={0.08} className="space-y-6">
@@ -133,10 +133,14 @@ export default async function AboutPage() {
       )}
 
       {personal.interests.length > 0 && (
-        <Section index="04" eyebrow="Off the clock" title="When I'm not coding">
+        <Section index="04" eyebrow="Off the clock" title={<>When I&apos;m <Accent>not coding</Accent></>}>
           <Reveal as="ul" stagger={0.05} className="flex flex-wrap gap-3">
             {personal.interests.map((interest) => (
-              <RevealItem as="li" key={interest} className="rounded-full border px-5 py-2.5 text-base">
+              <RevealItem
+                as="li"
+                key={interest}
+                className="rounded-full border border-brand/20 bg-gradient-to-r from-brand/[0.08] to-brand-2/[0.08] px-5 py-2.5 text-base transition-shadow hover:shadow-md hover:shadow-brand/15"
+              >
                 {interest}
               </RevealItem>
             ))}

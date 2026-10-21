@@ -6,12 +6,17 @@ export function Container({ children, className }: { children: ReactNode; classN
   return <div className={cn("mx-auto w-full max-w-6xl px-5 sm:px-8", className)}>{children}</div>
 }
 
-// Mono eyebrow ("01 — Selected work"), used above serif headings.
+/** The highlighted part of a heading, in the brand gradient. */
+export function Accent({ children }: { children: ReactNode }) {
+  return <span className="text-gradient">{children}</span>
+}
+
+// Small uppercase eyebrow ("01 — Selected work"), used above section headings.
 export function Eyebrow({ children, index, className }: { children: ReactNode; index?: string; className?: string }) {
   return (
     <p className={cn("flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground", className)}>
-      {index && <span className="text-brand">{index}</span>}
-      {index && <span className="h-px w-6 bg-border" aria-hidden />}
+      {index && <span className="text-gradient font-medium">{index}</span>}
+      {index && <span className="h-px w-8 bg-gradient-to-r from-brand to-brand-2/0" aria-hidden />}
       {children}
     </p>
   )
@@ -49,10 +54,15 @@ export function Section({ id, eyebrow, index, title, lede, action, children, cla
   )
 }
 
-// Big serif page title for top-level pages (About, Work, Writing, Contact…).
+// Large page title for top-level pages (About, Work, Writing, Contact…).
 export function PageHeader({ eyebrow, title, lede, children }: { eyebrow: string; title: ReactNode; lede?: ReactNode; children?: ReactNode }) {
   return (
-    <header className="pb-12 pt-16 sm:pb-16 sm:pt-24">
+    <header className="relative isolate pb-12 pt-16 sm:pb-16 sm:pt-24">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-24 -z-10 h-[520px] overflow-hidden">
+        <div className="absolute -top-24 right-[-5%] h-[420px] w-[420px] animate-aurora rounded-full bg-brand/20 blur-[110px] motion-reduce:animate-none" />
+        <div className="absolute left-[30%] top-0 h-[320px] w-[320px] animate-aurora rounded-full bg-brand-2/15 blur-[110px] [animation-delay:-9s] motion-reduce:animate-none" />
+        <div className="absolute inset-0 [background-image:linear-gradient(hsl(var(--border)/0.6)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.6)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_60%_70%_at_70%_0%,black,transparent)]" />
+      </div>
       <Container>
         <div className="max-w-3xl space-y-6">
           <Reveal immediate>

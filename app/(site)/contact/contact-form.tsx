@@ -16,7 +16,11 @@ export function ContactForm() {
   const values = state.status === "error" ? state.values ?? {} : {}
 
   return (
-    <div className="relative">
+    <div className="relative isolate">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] bg-gradient-to-br from-brand/20 via-brand-2/10 to-brand-3/15 blur-3xl"
+      />
       <AnimatePresence mode="wait" initial={false}>
         {state.status === "success" ? (
           <motion.div
@@ -24,7 +28,7 @@ export function ContactForm() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="flex min-h-[420px] flex-col items-start justify-center gap-5 rounded-3xl border bg-card p-8 sm:p-10"
+            className="gradient-border flex min-h-[420px] flex-col items-start justify-center gap-5 rounded-3xl bg-card p-8 shadow-2xl shadow-brand/[0.08] sm:p-10"
             role="status"
           >
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
@@ -45,7 +49,7 @@ export function ContactForm() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="space-y-5 rounded-3xl border bg-card p-6 sm:p-10"
+            className="gradient-border relative space-y-5 rounded-3xl bg-card p-6 shadow-2xl shadow-brand/[0.08] sm:p-10"
             noValidate
           >
             <div className="grid gap-5 sm:grid-cols-2">

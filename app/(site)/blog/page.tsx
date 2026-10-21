@@ -37,7 +37,7 @@ export default async function BlogPage() {
         eyebrow="Writing"
         title={
           <>
-            Notes & essays <span className="text-muted-foreground">on building software.</span>
+            Notes & essays <span className="text-gradient">on building software.</span>
           </>
         }
         lede="Thoughts on web development, programming practices and lessons learned shipping real products."
@@ -48,7 +48,7 @@ export default async function BlogPage() {
           <Reveal>
             <Link
               href={`/blog/${featured.slug}`}
-              className="group grid overflow-hidden rounded-3xl border bg-card transition-colors hover:border-foreground/20 lg:grid-cols-2"
+              className="gradient-border group relative grid overflow-hidden rounded-3xl bg-card shadow-xl shadow-brand/[0.06] transition-shadow hover:shadow-brand/15 lg:grid-cols-2"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-muted lg:aspect-auto">
                 {featured.image_url && (
@@ -64,8 +64,8 @@ export default async function BlogPage() {
               </div>
               <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
                 <p className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                  <span className="text-brand">Featured</span>
-                  <span className="h-px w-6 bg-border" aria-hidden />
+                  <span className="text-gradient font-medium">Featured</span>
+                  <span className="h-px w-8 bg-gradient-to-r from-brand to-brand-2/0" aria-hidden />
                   {formatDate(featured.publishDate)} · {featured.readTime}
                 </p>
                 <h2 className="text-4xl leading-[1.05] tracking-tight sm:text-5xl">{featured.title}</h2>

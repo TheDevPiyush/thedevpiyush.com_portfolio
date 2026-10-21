@@ -16,19 +16,19 @@ export function ExperienceTimeline({ experience, detailed = false }: { experienc
       <motion.span
         aria-hidden
         style={{ scaleY: progress }}
-        className="absolute -left-px top-0 h-full w-px origin-top bg-brand"
+        className="absolute -left-px top-0 h-full w-0.5 origin-top bg-gradient-to-b from-brand via-brand-2 to-brand-3"
       />
       {experience.map((exp) => (
         <li key={exp.id} className="relative">
           <span
             aria-hidden
-            className="absolute -left-[37px] top-2 h-2.5 w-2.5 rounded-full border-2 border-background bg-brand ring-4 ring-brand/15 sm:-left-[53px]"
+            className="absolute -left-[37px] top-2 h-3 w-3 rounded-full border-2 border-background bg-gradient-brand shadow-[0_0_14px_hsl(var(--brand)/0.6)] ring-4 ring-brand/15 sm:-left-[53px]"
           />
           <Reveal className="grid gap-3 sm:grid-cols-[1fr_auto] sm:gap-8">
             <div className="space-y-2">
               <h3 className="text-xl font-medium tracking-tight">
                 {exp.title} <span className="text-muted-foreground">at</span>{" "}
-                <span className="text-2xl">{exp.company}</span>
+                <span className="text-gradient text-2xl">{exp.company}</span>
               </h3>
               <p className="max-w-2xl leading-relaxed text-muted-foreground">{exp.description}</p>
               {detailed && exp.achievements.length > 0 && (
@@ -44,7 +44,7 @@ export function ExperienceTimeline({ experience, detailed = false }: { experienc
               {exp.technologies.length > 0 && (
                 <ul className="flex flex-wrap gap-1.5 pt-2">
                   {exp.technologies.map((tech) => (
-                    <li key={tech} className="rounded-full bg-muted px-2.5 py-0.5 text-[11px] text-muted-foreground">
+                    <li key={tech} className="rounded-full border border-brand/20 bg-brand/[0.06] px-2.5 py-0.5 text-[11px] text-foreground/80">
                       {tech}
                     </li>
                   ))}

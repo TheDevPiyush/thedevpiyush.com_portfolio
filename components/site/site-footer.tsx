@@ -12,10 +12,13 @@ export function SiteFooter({ data }: { data: SiteChromeData | null }) {
   ].filter((link): link is { name: string; href: string } => Boolean(link.href))
 
   return (
-    <footer className="mt-12 border-t">
+    <footer className="relative isolate mt-12 overflow-hidden">
+      {/* Gradient hairline and a low glow along the top edge. */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
+      <div aria-hidden className="absolute -top-40 left-1/2 -z-10 h-72 w-[60rem] max-w-[140%] -translate-x-1/2 rounded-full bg-gradient-to-r from-brand/15 via-brand-2/15 to-brand-3/10 blur-[100px]" />
       <Container className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
         <div className="space-y-4">
-          <p className="text-3xl tracking-tight">{data?.name ?? "Piyush Choudhary"}</p>
+          <p className="text-gradient w-fit text-3xl tracking-tight">{data?.name ?? "Piyush Choudhary"}</p>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
             Full-stack developer building fast, well-crafted products on the web. Press{" "}
             <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd> to jump anywhere.

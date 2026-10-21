@@ -49,7 +49,7 @@ export function SiteHeader() {
           className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xl tracking-tight"
           aria-label="TheDevPiyush, home"
         >
-          <span className="h-2 w-2 rounded-full bg-brand" aria-hidden />
+          <span className="h-2.5 w-2.5 rounded-full bg-gradient-brand shadow-[0_0_12px_hsl(var(--brand)/0.7)]" aria-hidden />
           piyush
         </Link>
 
@@ -72,7 +72,7 @@ export function SiteHeader() {
                 {highlighted === link.href && (
                   <motion.span
                     layoutId="nav-highlight"
-                    className="absolute inset-0 rounded-full bg-accent"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-brand/15 to-brand-2/15 ring-1 ring-brand/20"
                     transition={{ type: "spring", stiffness: 400, damping: 34 }}
                   />
                 )}

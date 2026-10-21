@@ -6,13 +6,13 @@ interface TextRevealProps {
   /** Seconds before the first word starts. */
   delay?: number
   as?: "h1" | "h2" | "p" | "span"
-  /** Words from this index on are set in the muted color, e.g. the surname in the hero. */
-  mutedFrom?: number
+  /** Words from this index on get the brand gradient, e.g. the surname in the hero. */
+  accentFrom?: number
 }
 
 // Word-by-word rise for headlines, in CSS so it plays on first paint. Screen readers get the
 // whole string once via aria-label.
-export function TextReveal({ text, className, delay = 0, as: Component = "h1", mutedFrom }: TextRevealProps) {
+export function TextReveal({ text, className, delay = 0, as: Component = "h1", accentFrom }: TextRevealProps) {
   const words = text.split(" ")
 
   return (
@@ -22,7 +22,7 @@ export function TextReveal({ text, className, delay = 0, as: Component = "h1", m
           <span
             className={cn(
               "inline-block animate-rise motion-reduce:animate-none",
-              mutedFrom !== undefined && index >= mutedFrom && "text-muted-foreground",
+              accentFrom !== undefined && index >= accentFrom && "text-gradient",
             )}
             style={{ animationDelay: `${delay + index * 0.07}s` }}
           >

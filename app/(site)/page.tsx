@@ -3,7 +3,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { requirePortfolioData } from "@/lib/data/portfolio"
 import { getCachedSiteSettings } from "@/lib/data/cached"
-import { Section } from "@/components/site/section"
+import { Accent, Section } from "@/components/site/section"
 import { Hero } from "@/components/sections/hero"
 import { SelectedWork } from "@/components/sections/selected-work"
 import { AboutSnapshot } from "@/components/sections/about-snapshot"
@@ -34,7 +34,7 @@ export default async function HomePage() {
           id="work"
           index="01"
           eyebrow="Selected work"
-          title="Things I've built"
+          title={<>Things I&apos;ve <Accent>built</Accent></>}
           lede="A few projects I'm proud of, from production platforms to ready-to-ship codebases."
           action={<ViewAll href="/projects">All projects</ViewAll>}
         >
@@ -45,13 +45,13 @@ export default async function HomePage() {
       <AboutSnapshot personal={personal} stats={statList} />
 
       {experience.length > 0 && (
-        <Section index="03" eyebrow="Experience" title="Where I've worked">
+        <Section index="03" eyebrow="Experience" title={<>Where I&apos;ve <Accent>worked</Accent></>}>
           <ExperienceTimeline experience={experience} />
         </Section>
       )}
 
       {skills.length > 0 && (
-        <Section index="04" eyebrow="Toolkit" title="What I work with">
+        <Section index="04" eyebrow="Toolkit" title={<>What I <Accent>work with</Accent></>}>
           <SkillsGrid skills={skills} />
         </Section>
       )}
@@ -60,7 +60,7 @@ export default async function HomePage() {
         <Section
           index="05"
           eyebrow="Writing"
-          title="Notes & essays"
+          title={<>Notes &amp; <Accent>essays</Accent></>}
           action={<ViewAll href="/blog">All posts</ViewAll>}
         >
           <WritingList posts={blog.slice(0, 4)} />

@@ -26,7 +26,7 @@ export default async function ContactPage() {
         eyebrow="Contact"
         title={
           <>
-            Let&apos;s talk. <span className="text-muted-foreground">Say hello.</span>
+            Let&apos;s talk. <span className="text-gradient">Say hello.</span>
           </>
         }
         lede="Whether you have a project in mind, a role to fill, or just want to chat about tech, I'd love to hear from you."
@@ -66,7 +66,7 @@ export default async function ContactPage() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between rounded-xl py-2 text-2xl transition-colors hover:text-brand"
+                      className="group flex items-center justify-between rounded-xl py-2 text-2xl transition-colors hover:text-brand-2"
                     >
                       {social.label}
                       <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

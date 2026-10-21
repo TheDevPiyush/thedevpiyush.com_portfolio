@@ -77,7 +77,7 @@ export function BlogBrowser({ posts, tags }: { posts: BrowsablePost[]; tags: str
                   className={cn(
                     "rounded-full border px-3 py-1 text-xs transition-colors",
                     active
-                      ? "border-foreground bg-foreground text-background"
+                      ? "border-transparent bg-gradient-brand text-white shadow-md shadow-brand/25"
                       : "text-muted-foreground hover:border-foreground/30 hover:text-foreground",
                   )}
                 >

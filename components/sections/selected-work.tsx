@@ -30,9 +30,9 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
             <Link
               href={`/projects#project-${project.id}`}
               onPointerEnter={(event) => event.pointerType === "mouse" && setActive(project)}
-              className="group grid grid-cols-[auto_1fr_auto] items-start gap-x-5 gap-y-4 py-8 sm:gap-x-8 sm:py-10 md:grid-cols-[3rem_1fr_14rem_auto] md:items-center"
+              className="group relative grid grid-cols-[auto_1fr_auto] items-start gap-x-5 gap-y-4 py-8 before:pointer-events-none before:absolute before:inset-y-0 before:-inset-x-4 before:rounded-2xl before:bg-gradient-to-r before:from-brand/[0.07] before:via-brand-2/[0.04] before:to-transparent before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100 sm:gap-x-8 sm:py-10 md:grid-cols-[3rem_1fr_14rem_auto] md:items-center"
             >
-              <span className="pt-2 text-xs text-muted-foreground md:pt-0">
+              <span className="text-gradient pt-2 text-xs font-medium md:pt-0">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="min-w-0 space-y-2">
@@ -45,12 +45,12 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
               </div>
               <ul className="col-start-2 flex flex-wrap gap-1.5 md:col-start-auto md:justify-end">
                 {project.techStack.slice(0, 3).map((tech) => (
-                  <li key={tech} className="rounded-full border px-2.5 py-0.5 text-[11px] text-muted-foreground">
+                  <li key={tech} className="rounded-full border border-brand/20 bg-brand/[0.06] px-2.5 py-0.5 text-[11px] text-foreground/80">
                     {tech}
                   </li>
                 ))}
               </ul>
-              <span className="row-start-1 col-start-3 inline-flex h-10 w-10 items-center justify-center rounded-full border text-muted-foreground transition-all duration-300 group-hover:rotate-45 group-hover:border-foreground group-hover:bg-foreground group-hover:text-background md:col-start-4">
+              <span className="row-start-1 col-start-3 inline-flex h-10 w-10 items-center justify-center rounded-full border text-muted-foreground transition-all duration-300 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-gradient-brand group-hover:text-white group-hover:shadow-lg group-hover:shadow-brand/30 md:col-start-4">
                 <ArrowUpRight className="h-4 w-4" />
               </span>
               {project.image_url && (

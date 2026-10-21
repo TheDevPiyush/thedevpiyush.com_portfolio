@@ -49,7 +49,7 @@ export default async function PurchasesPage() {
         eyebrow="Account"
         title={
           <>
-            My purchases<span className="text-muted-foreground">.</span>
+            My purchases<span className="text-gradient">.</span>
           </>
         }
         lede={`Signed in as ${user.email ?? "you"}. Download links are generated fresh each time and expire after two minutes.`}

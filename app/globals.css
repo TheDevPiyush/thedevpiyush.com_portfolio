@@ -24,8 +24,10 @@
         --border: 240 5.9% 90%;
         --input: 240 5.9% 90%;
         --ring: 262 83% 58%;
-        /* The single brand accent. */
+        /* Brand: violet, with fuchsia and blue for gradients and glows. */
         --brand: 262 83% 58%;
+        --brand-2: 292 84% 56%;
+        --brand-3: 217 91% 60%;
         --brand-foreground: 0 0% 100%;
         --radius: 0.75rem;
         --chart-1: 262 83% 58%;
@@ -64,7 +66,9 @@
         --input: 240 3.7% 15.9%;
         --ring: 263 70% 66%;
         --brand: 263 70% 66%;
-        --brand-foreground: 240 10% 3.9%;
+        --brand-2: 292 80% 68%;
+        --brand-3: 213 94% 68%;
+        --brand-foreground: 0 0% 100%;
         --chart-1: 263 70% 66%;
         --chart-2: 160 60% 45%;
         --chart-3: 30 80% 55%;
@@ -208,4 +212,56 @@ html.lenis body {
 
 .dark .post-body [data-rehype-pretty-code-figure] span[style] {
     color: var(--shiki-dark);
+}
+
+/* Brand gradients. Text gradients stay in the violet → fuchsia range so they read on both themes. */
+@layer utilities {
+    .text-gradient {
+        background-image: linear-gradient(100deg, hsl(var(--brand)) 0%, hsl(var(--brand-2)) 70%, hsl(var(--brand-3)) 130%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .bg-gradient-brand {
+        background-image: linear-gradient(120deg, hsl(var(--brand)), hsl(var(--brand-2)));
+    }
+
+    /* Multi-stop "mesh" for large colourful panels (contact CTA). */
+    .bg-mesh {
+        background-color: hsl(var(--brand));
+        background-image:
+            radial-gradient(at 0% 0%, hsl(var(--brand-3)) 0, transparent 55%),
+            radial-gradient(at 100% 0%, hsl(var(--brand-2)) 0, transparent 55%),
+            radial-gradient(at 100% 100%, hsl(var(--brand-2) / 0.8) 0, transparent 50%),
+            radial-gradient(at 0% 100%, hsl(var(--brand)) 0, transparent 60%);
+    }
+
+    /* 1px gradient outline that follows the element's radius. Fades in on hover with .gradient-border-hover. */
+    .gradient-border {
+        position: relative;
+    }
+
+    .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, hsl(var(--brand) / 0.7), hsl(var(--brand-2) / 0.45) 45%, transparent 75%);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        transition: opacity 300ms;
+    }
+
+    .gradient-border-hover::before {
+        opacity: 0;
+    }
+
+    .gradient-border-hover:hover::before,
+    .gradient-border-hover:focus-visible::before {
+        opacity: 1;
+    }
 }

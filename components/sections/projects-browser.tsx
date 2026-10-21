@@ -31,13 +31,13 @@ export function ProjectsBrowser({ projects }: { projects: Project[] }) {
               onClick={() => setFilter(category)}
               className={cn(
                 "relative rounded-full px-4 py-1.5 text-sm transition-colors",
-                filter === category ? "text-background" : "text-muted-foreground hover:text-foreground",
+                filter === category ? "text-white" : "text-muted-foreground hover:text-foreground",
               )}
             >
               {filter === category && (
                 <motion.span
                   layoutId="project-filter"
-                  className="absolute inset-0 rounded-full bg-foreground"
+                  className="absolute inset-0 rounded-full bg-gradient-brand shadow-md shadow-brand/30"
                   transition={{ type: "spring", stiffness: 400, damping: 34 }}
                 />
               )}
@@ -78,8 +78,8 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
       className="grid scroll-mt-28 items-center gap-10 lg:grid-cols-2 lg:gap-16"
     >
       <div className={cn("group relative", flipped && "lg:order-2")}>
-        <div aria-hidden className="absolute -inset-4 rounded-[2.5rem] bg-brand/10 opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
-        <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border bg-muted">
+        <div aria-hidden className="absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-brand/25 via-brand-2/20 to-brand-3/15 opacity-40 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
+        <div className="gradient-border relative aspect-[16/10] overflow-hidden rounded-3xl bg-muted">
           {project.image_url ? (
             <Image
               src={project.image_url}
@@ -98,8 +98,8 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
 
       <div className="space-y-6">
         <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          <span className="text-brand">{String(index + 1).padStart(2, "0")}</span>
-          <span className="h-px w-6 bg-border" aria-hidden />
+          <span className="text-gradient font-medium">{String(index + 1).padStart(2, "0")}</span>
+          <span className="h-px w-8 bg-gradient-to-r from-brand to-brand-2/0" aria-hidden />
           {project.featured ? "Featured" : categoryLabel(project.category || "project")}
         </div>
         <h2 className="text-4xl leading-[1.05] tracking-tight sm:text-5xl">{project.title}</h2>
@@ -117,10 +117,10 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
         )}
 
         {stats.length > 0 && (
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-4">
+          <dl className="gradient-border grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-4">
             {stats.map(([key, value]) => (
               <div key={key} className="bg-background p-4">
-                <dd className="text-2xl">{value}</dd>
+                <dd className="text-gradient w-fit text-2xl">{value}</dd>
                 <dt className="text-xs capitalize text-muted-foreground">{key}</dt>
               </div>
             ))}
@@ -130,7 +130,7 @@ function ProjectEntry({ project, index }: { project: Project; index: number }) {
         {project.techStack.length > 0 && (
           <ul className="flex flex-wrap gap-1.5">
             {project.techStack.map((tech) => (
-              <li key={tech} className="rounded-full border px-2.5 py-0.5 text-xs text-muted-foreground">
+              <li key={tech} className="rounded-full border border-brand/20 bg-brand/[0.06] px-2.5 py-0.5 text-xs text-foreground/80">
                 {tech}
               </li>
             ))}

@@ -11,8 +11,8 @@ export function SkillsGrid({ skills }: { skills: Skill[] }) {
   return (
     <Reveal as="ul" stagger={0.05} className="grid gap-px overflow-hidden rounded-3xl border bg-border sm:grid-cols-2 lg:grid-cols-3">
       {[...groups].map(([category, items]) => (
-        <RevealItem as="li" key={category} className="space-y-4 bg-background p-6 sm:p-8">
-          <h3 className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{category}</h3>
+        <RevealItem as="li" key={category} className="gradient-border gradient-border-hover space-y-4 bg-background p-6 transition-colors hover:bg-brand/[0.03] sm:p-8">
+          <h3 className="text-gradient w-fit text-[11px] font-medium uppercase tracking-[0.18em]">{category}</h3>
           <ul className="flex flex-wrap gap-2">
             {items.map((skill) => (
               <li

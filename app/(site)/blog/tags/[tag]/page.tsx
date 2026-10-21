@@ -40,7 +40,7 @@ export default async function TagPage({ params }: TagPageProps) {
         title={
           <>
             {tag.name}{" "}
-            <span className="text-muted-foreground">
+            <span className="text-gradient">
               · {posts.length} {posts.length === 1 ? "post" : "posts"}
             </span>
           </>
